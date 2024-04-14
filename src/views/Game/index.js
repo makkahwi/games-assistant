@@ -15,6 +15,7 @@ import {
 import Game from "./Game";
 import Header from "./Header";
 import TeamsTable from "./Table";
+import ScoresTable from "./Scores";
 
 const GamePage = () => {
   const [activeTab, setActiveTab] = React.useState("gameTab");
@@ -93,6 +94,23 @@ const GamePage = () => {
                           Teams
                         </NavLink>
                       </NavItem>
+
+                      <NavItem>
+                        <NavLink
+                          className={
+                            "mb-sm-3 mb-md-0 " +
+                            (activeTab === "scoresTab"
+                              ? "active"
+                              : "text-primary")
+                          }
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setActiveTab("scoresTab");
+                          }}
+                        >
+                          Scores
+                        </NavLink>
+                      </NavItem>
                     </Nav>
                   </div>
 
@@ -105,6 +123,10 @@ const GamePage = () => {
 
                         <TabPane tabId="teamsTab" role="tabpanel">
                           <TeamsTable />
+                        </TabPane>
+
+                        <TabPane tabId="scoresTab" role="tabpanel">
+                          <ScoresTable />
                         </TabPane>
                       </TabContent>
                     </CardBody>
