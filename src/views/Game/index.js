@@ -14,7 +14,7 @@ import {
 
 import Game from "./Game";
 import Header from "./Header";
-import TeamsTable from "./Table";
+import TeamsTable from "./TeamsTable";
 import ScoresTable from "./Scores";
 
 const GamePage = () => {
