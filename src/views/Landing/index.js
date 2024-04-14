@@ -1,9 +1,6 @@
 import React from "react";
 import { Container } from "reactstrap";
 
-import DemoFooter from "components/footers/DemoFooter.js";
-import DemoNavbar from "components/navbars/DemoNavbar.js";
-
 import CreateGame from "./Create";
 import JoinGame from "./Join";
 
@@ -18,9 +15,6 @@ const Landing = () => {
   }, []);
 
   return (
-    <>
-      <DemoNavbar type="transparent" />
-
       <div className="wrapper">
         <div className="page-header bg-default">
           <div
@@ -45,9 +39,7 @@ const Landing = () => {
             </div>
           </Container>
         </div>
-        <DemoFooter />
       </div>
-    </>
   );
 };
 
