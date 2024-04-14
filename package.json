@@ -1,6 +1,6 @@
 {
-  "name": "argon-design-system-pro-react",
-  "version": "1.0.2",
+  "name": "password-game-master",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.4.0",
@@ -15,12 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-    "compile-sass": "sass src/assets/scss/argon-design-system.scss src/assets/css/argon-design-system.css",
-    "minify-sass": "sass src/assets/scss/argon-design-system.scss src/assets/css/argon-design-system.min.css --style compressed"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
