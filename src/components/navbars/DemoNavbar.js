@@ -1,24 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from "headroom.js";
+import PropTypes from "prop-types";
+import React from "react";
+import { Link } from "react-router-dom";
 // reactstrap components
-import {
-  Collapse,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  NavbarBrand,
-  Navbar,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+import { Col, Collapse, Container, DropdownItem, DropdownMenu, DropdownToggle, Media, Nav, Navbar, NavbarBrand, NavLink, Row, UncontrolledDropdown } from "reactstrap";
 
 function DemoNavbar(props) {
   const [collapseOpen, toggleCollapse] = React.useState(false);
@@ -53,7 +39,7 @@ function DemoNavbar(props) {
         id="dark-navbar-main"
       >
         <Container>
-          <NavbarBrand className="mr-lg-5" to="/index" tag={Link}>
+          <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
             <img alt="..." src={require("assets/img/brand/white.png")}></img>
           </NavbarBrand>
           <button
@@ -72,7 +58,7 @@ function DemoNavbar(props) {
             <div className="navbar-collapse-header">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <Link to="/index">
+                  <Link to="/">
                     <img
                       alt="..."
                       src={require("assets/img/brand/blue.png")}
@@ -109,7 +95,7 @@ function DemoNavbar(props) {
                   <div className="dropdown-menu-inner">
                     <Media
                       className="d-flex align-items-center"
-                      to="/index"
+                      to="/"
                       tag={Link}
                     >
                       <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">

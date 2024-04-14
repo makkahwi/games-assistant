@@ -44,7 +44,7 @@ const MenuBase = ({ type }) => {
             <div className="navbar-collapse-header">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <Link to="/index">
+                  <Link to="/">
                     <img
                       alt="..."
                       src={require("assets/img/brand/blue.png")}

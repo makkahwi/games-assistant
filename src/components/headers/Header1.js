@@ -11,7 +11,7 @@ import {
   Nav,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 // Core Components
@@ -49,7 +49,7 @@ function Header1() {
               <div className="navbar-collapse-header">
                 <Row>
                   <Col className="collapse-brand" xs="6">
-                    <Link to="/index">
+                    <Link to="/">
                       <img
                         alt="..."
                         src={require("assets/img/brand/blue.png")}
@@ -136,7 +136,7 @@ function Header1() {
             className="page-header-image"
             style={{
               backgroundImage:
-                "url(" + require("assets/img/ill/p2.svg").default + ")"
+                "url(" + require("assets/img/ill/p2.svg").default + ")",
             }}
           ></div>
           <Container>

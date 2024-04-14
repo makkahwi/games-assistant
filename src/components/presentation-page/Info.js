@@ -25,7 +25,7 @@ function Info() {
                   component. All components fit perfectly with each other and
                   can take variations in colour.
                 </p>
-                <Link className="text-primary" to="/index">
+                <Link className="text-primary" to="/">
                   More about us{" "}
                   <i className="ni ni-bold-right text-primary"></i>
                 </Link>
