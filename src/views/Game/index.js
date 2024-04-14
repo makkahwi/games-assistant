@@ -1,17 +1,7 @@
 import React, { useLayoutEffect } from "react";
-import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  TabContent,
-  TabPane,
-} from "reactstrap";
+import { Card, CardBody, Col, Container, Nav, NavItem, NavLink, Row, TabContent, TabPane } from "reactstrap";
 
+import Game from "./Game";
 import Header from "./Header";
 import TeamsTable from "./TeamsTable";
 
@@ -99,11 +89,7 @@ const GamePage = () => {
                     <CardBody>
                       <TabContent activeTab={activeTab}>
                         <TabPane tabId="gameTab" role="tabpanel">
-                          <p className="description">
-                            Raw denim you probably haven't heard of them jean
-                            shorts Austin. Nesciunt tofu stumptown aliqua, retro
-                            synth master cleanse.
-                          </p>
+                          <Game/>
                         </TabPane>
 
                         <TabPane tabId="teamsTab" role="tabpanel">
