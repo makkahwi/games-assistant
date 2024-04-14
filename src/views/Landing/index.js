@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Container } from "reactstrap";
 
 import CreateGame from "./Create";
@@ -15,31 +15,19 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className="wrapper">
-      <div className="page-header bg-default">
-        <div
-          className="page-header-image"
-          style={{
-            backgroundImage:
-              "url(" + require("assets/img/ill/register_bg.png") + ")",
-          }}
-        />
-
-        <Container>
-          {/* <div className="form-container sign-in-container">
+    <Fragment>
+      {/* <div className="form-container sign-in-container">
             <JoinGame />
           </div>
 
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-right"> */}
-          <CreateGame />
-          {/* </div>
+      <CreateGame />
+      {/* </div>
             </div>
           </div> */}
-        </Container>
-      </div>
-    </div>
+    </Fragment>
   );
 };
 
