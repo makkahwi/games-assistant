@@ -1,5 +1,16 @@
 import React, { useLayoutEffect } from "react";
-import { Card, CardBody, Col, Container, Nav, NavItem, NavLink, Row, TabContent, TabPane } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  TabContent,
+  TabPane,
+} from "reactstrap";
 
 import Game from "./Game";
 import Header from "./Header";
@@ -89,7 +100,7 @@ const GamePage = () => {
                     <CardBody>
                       <TabContent activeTab={activeTab}>
                         <TabPane tabId="gameTab" role="tabpanel">
-                          <Game/>
+                          <Game />
                         </TabPane>
 
                         <TabPane tabId="teamsTab" role="tabpanel">

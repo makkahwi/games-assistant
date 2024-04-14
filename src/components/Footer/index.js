@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Button, Col, Container, Nav, NavItem, NavLink, Row, UncontrolledTooltip } from "reactstrap";
+import { Button, Col, Container, Row, UncontrolledTooltip } from "reactstrap";
 
 const FooterComp = () => {
   const socialMediaLinks = [
@@ -70,7 +70,12 @@ const FooterComp = () => {
           <Col className="text-lg-center btn-wrapper" lg="6">
             {socialMediaLinks.map(({ icon, link, tooltip, key }, i) => (
               <Fragment key={i}>
-                <a href={link} target="_blank" className="mx-1">
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mx-1"
+                >
                   <Button
                     className="btn-icon-only rounded-circle"
                     color="primary"
