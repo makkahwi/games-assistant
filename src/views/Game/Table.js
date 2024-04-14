@@ -2,15 +2,9 @@ import { Table } from "reactstrap";
 
 const TeamsTable = ({ data }) => {
   return (
-    <Table className="align-items-center table-flush mt-5" responsive>
-      <thead>
-        <tr>
-          <th colSpan={3} className="text-white">
-            Teams
-          </th>
-        </tr>
-
-        <tr className="bg-white text-primary">
+    <Table className="align-items-center table-flush" responsive>
+      <thead className="thead-light">
+        <tr className="text-primary">
           <th />
 
           <th>Team 1</th>
