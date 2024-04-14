@@ -1,11 +1,6 @@
 import { Table } from "reactstrap";
 
-const TeamsTable = () => {
-  const teams = [
-    { name: "Team 1", members: [{ name: "Suhaib" }, { name: "Shahad" }] },
-    { name: "Team 2", members: [{ name: "Qusai" }, { name: "Eleen" }] },
-  ];
-
+const TeamsTable = ({ data }) => {
   return (
     <Table className="align-items-center table-flush mt-5" responsive>
       <thead>
@@ -28,8 +23,8 @@ const TeamsTable = () => {
         {[1, 2].map((_, i) => (
           <tr className="text-white" key={i}>
             <td>Member {i + 1}</td>
-            <td>{teams[0].members[i].name}</td>
-            <td>{teams[1].members[i].name}</td>
+            <td>{data[0].members[i].name}</td>
+            <td>{data[1].members[i].name}</td>
           </tr>
         ))}
 
