@@ -1,4 +1,4 @@
-import FormComp from "./Form";
+import FormComp from "../../components/Form";
 
 const JoinGame = () => {
   const inputs = [
@@ -11,6 +11,14 @@ const JoinGame = () => {
     {
       name: "name",
       label: "Your Name",
+      icon: "ni ni-email-83",
+      required: true,
+    },
+    {
+      name: "team",
+      label: "Your Team",
+      type: "select",
+      options: [{ name: "Team 1" }, { name: "Team 2" }],
       icon: "ni ni-email-83",
       required: true,
     },

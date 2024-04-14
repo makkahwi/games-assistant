@@ -1,4 +1,4 @@
-import FormComp from "./Form";
+import FormComp from "../../components/Form";
 
 const CreateGame = () => {
   const inputs = [
