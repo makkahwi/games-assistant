@@ -1,5 +1,3 @@
-import { Button, ButtonGroup, Col, Row } from "reactstrap";
-
 import Table from "./Table";
 
 const TeamsTable = () => {

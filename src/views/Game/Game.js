@@ -317,7 +317,7 @@ const Game = () => {
         className="text-white"
         onClick={() =>
           setTeamTurn((current) =>
-            current == "team" ? "opponent team" : "team"
+            current === "team" ? "opponent team" : "team"
           )
         }
       >
@@ -327,7 +327,7 @@ const Game = () => {
       <h5
         className="text-white"
         onClick={() =>
-          setRole((current) => (current == "Guesser" ? "Handler" : "Guesser"))
+          setRole((current) => (current === "Guesser" ? "Handler" : "Guesser"))
         }
       >
         Your now a {role}
