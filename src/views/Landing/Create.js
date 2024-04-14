@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import { setNames } from "values";
 import FormComp from "../../components/Form";
+import { useNavigate } from "react-router-dom";
 
 const CreateGame = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const inputs = [
     {
@@ -43,7 +45,10 @@ const CreateGame = () => {
       label="Create New Game"
       inputs={inputs}
       submitLabel="Create"
-      onSubmit={(values) => dispatch(setNames(values))}
+      onSubmit={(values) => {
+        dispatch(setNames(values));
+        navigate("/game");
+      }}
     />
   );
 };
