@@ -18,7 +18,7 @@ const ScoresTable = () => {
 
       <tbody className="list">
         {history
-          ?.filter(({ team }) => team === "Team 1")
+          ?.filter(({ team }) => team === "Team A")
           ?.map(({ team, point, word }, i) => (
             <tr className="text-white" key={i}>
               <td>{team}</td>
@@ -28,16 +28,16 @@ const ScoresTable = () => {
           ))}
 
         <tr className="bg-white font-weight-bolder">
-          <td colSpan={2}>Team 1 Total</td>
+          <td colSpan={2}>Team A Total</td>
           <td>
             {history
-              ?.filter(({ team }) => team === "Team 1")
+              ?.filter(({ team }) => team === "Team A")
               ?.reduce((final, { point }) => final + point, 0)}
           </td>
         </tr>
 
         {history
-          ?.filter(({ team }) => team === "Team 2")
+          ?.filter(({ team }) => team === "Team B")
           ?.map(({ team, point, word }, i) => (
             <tr className="text-white" key={i}>
               <td>{team}</td>
@@ -47,10 +47,10 @@ const ScoresTable = () => {
           ))}
 
         <tr className="bg-white font-weight-bolder">
-          <td colSpan={2}>Team 2 Total</td>
+          <td colSpan={2}>Team B Total</td>
           <td>
             {history
-              ?.filter(({ team }) => team === "Team 2")
+              ?.filter(({ team }) => team === "Team B")
               ?.reduce((final, { point }) => final + point, 0)}
           </td>
         </tr>

@@ -10,9 +10,9 @@ const TeamsTable = () => {
         <tr className="text-primary">
           <th />
 
-          <th>Team 1</th>
+          <th>Team A</th>
 
-          <th>Team 2</th>
+          <th>Team B</th>
         </tr>
       </thead>
 

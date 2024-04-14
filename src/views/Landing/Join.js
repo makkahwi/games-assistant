@@ -18,7 +18,7 @@ const JoinGame = () => {
       name: "team",
       label: "Your Team",
       type: "select",
-      options: [{ name: "Team 1" }, { name: "Team 2" }],
+      options: [{ name: "Team A" }, { name: "Team B" }],
       icon: "ni ni-email-83",
       required: true,
     },

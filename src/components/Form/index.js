@@ -30,11 +30,11 @@ const FormComp = ({
 
       {inputs.map(
         ({ name, label, icon, type = "text", required, options }, i) => (
-          <FormGroup className={"mb-3 " + inputFocuses[name]} key={i}>
+          <FormGroup className={"mb-3 w-100 " + inputFocuses[name]} key={i}>
             <InputGroup className="input-group-alternative">
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i className={icon}></i>
+                  <i className={icon} />
                 </InputGroupText>
               </InputGroupAddon>
 

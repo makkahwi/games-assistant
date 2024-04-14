@@ -82,7 +82,7 @@ const FooterComp = () => {
                     id={key}
                   >
                     <span className="btn-inner--icon">
-                      <i className={icon}></i>
+                      <i className={icon} />
                     </span>
                   </Button>
                 </a>

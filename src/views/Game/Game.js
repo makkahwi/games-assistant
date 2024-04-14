@@ -19,13 +19,13 @@ const Game = () => {
   };
 
   const [word, setWord] = useState(getRandomInt());
-  const [startingTeamTurn, setStartingTeamTurn] = useState("Team 1");
-  const [teamTurn, setTeamTurn] = useState("Team 1");
+  const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
+  const [teamTurn, setTeamTurn] = useState("Team A");
   const [guesserTurn, setGuesserTurn] = useState(0);
   const [point, setPoint] = useState(6);
 
   const changeWord = () => setWord(getRandomInt());
-  const changeTeam = (current) => (current === "Team 1" ? "Team 2" : "Team 1");
+  const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
   const changeGuesser = () =>
     setGuesserTurn((current) => (current == 0 ? 1 : 0));
 
@@ -83,7 +83,7 @@ const Game = () => {
           onClick={() => {
             dispatch(
               addScores(
-                teamTurn === "Team 1"
+                teamTurn === "Team A"
                   ? {
                       team1: point,
                       team2: 0,
