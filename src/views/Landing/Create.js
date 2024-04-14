@@ -47,7 +47,7 @@ const CreateGame = () => {
       submitLabel="Create"
       onSubmit={(values) => {
         dispatch(setNames(values));
-        navigate("/game");
+        navigate(0);
       }}
     />
   );

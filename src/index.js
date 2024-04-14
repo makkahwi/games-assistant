@@ -21,8 +21,11 @@ root.render(
       <Navbar type="transparent" />
 
       <Routes>
-        <Route path="/" exact element={<Landing />} />
-        <Route path="/game" exact element={<GamePage />} />
+        {store.getState().game.master ? (
+          <Route path="/" exact element={<GamePage />} />
+        ) : (
+          <Route path="/" exact element={<Landing />} />
+        )}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
