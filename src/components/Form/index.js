@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Button, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+} from "reactstrap";
 
 const FormComp = ({
   label,
@@ -12,7 +20,12 @@ const FormComp = ({
   const [inputValues, setInputValues] = useState({});
 
   return (
-    <Form>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(inputValues);
+      }}
+    >
       <h4 className={light ? "text-white" : "text-dark"}>{label}</h4>
 
       {inputs.map(
@@ -34,6 +47,7 @@ const FormComp = ({
                     [name]: e.target.value,
                   }))
                 }
+                required={required}
                 type={type}
                 onFocus={() =>
                   setInputFocuses((current) => ({
@@ -60,7 +74,7 @@ const FormComp = ({
       <Button
         className="mt-3"
         color={light ? "white" : "primary"}
-        onClick={() => onSubmit(inputValues)}
+        type="submit"
       >
         {submitLabel}
       </Button>
