@@ -1,8 +1,15 @@
 import { Fragment, useState } from "react";
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
 import { wordsBank } from "./WordBank";
+import { useDispatch, useSelector } from "react-redux";
+import { addScores } from "values";
 
 const Game = () => {
+  const members = useSelector((state) => state.game.members);
+  const dispatch = useDispatch();
+
+  const data = [members[0], members[1]];
+
   const words = wordsBank;
 
   const getRandomInt = (min = 0, max = words.length) => {
@@ -57,7 +64,9 @@ const Game = () => {
 
       <Row>
         <Col md="6">
-          <h4 className="text-white">Hand word to {guesserTurn}</h4>
+          <h4 className="text-white">
+            Hand word to {data[0][guesserTurn]} & {data[1][guesserTurn]}
+          </h4>
         </Col>
 
         <Col md="6">
@@ -72,6 +81,13 @@ const Game = () => {
           color="success"
           type="button"
           onClick={() => {
+            dispatch(
+              addScores(
+                teamTurn === "Team 1"
+                  ? { team1: point, team2: 0 }
+                  : { team1: 0, team2: point }
+              )
+            );
             startNew();
           }}
         >
