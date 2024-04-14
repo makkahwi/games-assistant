@@ -7,6 +7,7 @@ const initValues = {
     ["", ""],
   ],
   scores: [0, 0],
+  history: [],
 };
 
 export const gameSlice = createSlice({
@@ -25,6 +26,7 @@ export const gameSlice = createSlice({
         state.scores[0] + action.payload?.team1,
         state.scores[1] + action.payload?.team2,
       ];
+      state.history.push(action.payload?.game);
     },
     reset: (state) => {
       state = initValues;
