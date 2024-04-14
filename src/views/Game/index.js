@@ -1,20 +1,15 @@
 import React from "react";
 
-// reactstrap components
-// import {
-//
-// } from "reactstrap";
-
-// Core Components
-import DemoNavbar from "components/navbars/DemoNavbar.js";
-import DemoFooter from "components/footers/DemoFooter.js";
-import Header4 from "components/headers/Header4.js";
-import Feature6 from "components/features/Feature6.js";
-import Feature1 from "components/features/Feature1.js";
 import Blogs2 from "components/blogs/Blogs2.js";
+import Feature1 from "components/features/Feature1.js";
+import Feature6 from "components/features/Feature6.js";
+import DemoFooter from "components/footers/DemoFooter.js";
+import DemoNavbar from "components/navbars/DemoNavbar.js";
 import Pricing5 from "components/pricings/Pricing5.js";
 
-function LandingPage() {
+import Header4 from "./Header";
+
+const GamePage = () => {
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     window.scrollTo(0, 0);
@@ -23,9 +18,11 @@ function LandingPage() {
       document.body.classList.remove("landing-page");
     };
   });
+
   return (
     <>
       <DemoNavbar type="transparent" />
+
       <div className="wrapper">
         <Header4 />
         <Feature6 />
@@ -38,6 +35,6 @@ function LandingPage() {
       </div>
     </>
   );
-}
+};
 
-export default LandingPage;
+export default GamePage;
