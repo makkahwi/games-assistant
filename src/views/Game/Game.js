@@ -61,7 +61,7 @@ const Game = () => {
         </Col>
 
         <Col md="6">
-          <Button onClick={() => changeGuesser()}>Switch Member</Button>
+          <Button onClick={() => changeGuesser()}>Switch Guessers</Button>
         </Col>
       </Row>
 
