@@ -1,16 +1,9 @@
-import React from "react";
+import { useLayoutEffect } from "react";
 
-import Blogs2 from "components/blogs/Blogs2.js";
-import Feature1 from "components/features/Feature1.js";
-import Feature6 from "components/features/Feature6.js";
-import DemoFooter from "components/footers/DemoFooter.js";
-import DemoNavbar from "components/navbars/DemoNavbar.js";
-import Pricing5 from "components/pricings/Pricing5.js";
-
-import Header4 from "./Header";
+import Header from "./Header";
 
 const GamePage = () => {
-  React.useEffect(() => {
+  useLayoutEffect(() => {
     document.body.classList.add("landing-page");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -20,20 +13,9 @@ const GamePage = () => {
   });
 
   return (
-    <>
-      <DemoNavbar type="transparent" />
-
-      <div className="wrapper">
-        <Header4 />
-        <Feature6 />
-        <Feature1 />
-        <Blogs2 />
-        <br></br>
-        <br></br>
-        <Pricing5 />
-        <DemoFooter />
-      </div>
-    </>
+    <div className="wrapper">
+      <Header />
+    </div>
   );
 };
 

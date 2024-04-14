@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
@@ -18,9 +17,8 @@ import PricingPage from "views/examples/PricingPage.js";
 import ProductPage from "views/examples/ProductPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import ResetPage from "views/examples/ResetPage.js";
-import LandingPage from "views/Game";
+import GamePage from "views/Game";
 import Index from "views/Index.js";
-import RegisterPage from "views/Landing";
 import Landing from "views/Landing";
 import Presentation from "views/Presentation.js";
 import Sections from "views/Sections.js";
@@ -36,6 +34,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" exact element={<Landing />} />
+      <Route path="/game" exact element={<GamePage />} />
       <Route path="/index" exact element={<Index />} />
       <Route path="/sections/*" exact element={<Sections />} />
       <Route path="/presentation" exact element={<Presentation />} />
@@ -50,12 +49,10 @@ root.render(
       <Route path="/error" exact element={<Error />} />
       <Route path="/error-500" exact element={<Error500 />} />
       <Route path="/invoice-page" exact element={<InvoicePage />} />
-      <Route path="/landing-page" exact element={<LandingPage />} />
       <Route path="/login-page" exact element={<LoginPage />} />
       <Route path="/pricing-page" exact element={<PricingPage />} />
       <Route path="/product-page" exact element={<ProductPage />} />
       <Route path="/profile-page" exact element={<ProfilePage />} />
-      <Route path="/register-page" exact element={<RegisterPage />} />
       <Route path="/reset-page" exact element={<ResetPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
