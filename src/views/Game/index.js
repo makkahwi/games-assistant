@@ -1,18 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  TabContent,
-  TabPane,
-} from "reactstrap";
+import { Card, CardBody, Col, Container, Nav, NavItem, NavLink, Row, TabContent, TabPane } from "reactstrap";
 
 import { reset } from "values";
 
@@ -129,7 +118,7 @@ const GamePage = () => {
                   navigate(0);
                 }}
               >
-                Reset Game
+                Restart Game
               </NavLink>
             </NavItem>
           </Nav>
