@@ -1,9 +1,13 @@
+import { useDispatch } from "react-redux";
+import { setNames } from "values";
 import FormComp from "../../components/Form";
 
 const CreateGame = () => {
+  const dispatch = useDispatch();
+
   const inputs = [
     {
-      name: "name",
+      name: "master",
       label: "Your Name",
       icon: "ni ni-email-83",
       required: true,
@@ -35,7 +39,12 @@ const CreateGame = () => {
   ];
 
   return (
-    <FormComp label="Create New Game" inputs={inputs} submitLabel="Create" />
+    <FormComp
+      label="Create New Game"
+      inputs={inputs}
+      submitLabel="Create"
+      onSubmit={(values) => dispatch(setNames(values))}
+    />
   );
 };
 

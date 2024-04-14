@@ -14,18 +14,16 @@ export const gameSlice = createSlice({
   initialState: initValues,
   reducers: {
     setNames: (state, action) => {
-      state.master = action.master;
+      state.master = action.payload?.master;
       state.members = [
-        [action.team1member1],
-        [action.team1member2],
-        [action.team2member1],
-        [action.team2member2],
+        [action.payload?.team1member1, action.payload?.team1member2],
+        [action.payload?.team2member1, action.payload?.team2member2],
       ];
     },
     addScores: (state, action) => {
       state.scores = [
-        state.scores[0] + action.team1,
-        state.scores[1] + action.team2,
+        state.scores[0] + action.payload?.team1,
+        state.scores[1] + action.payload?.team2,
       ];
     },
     reset: (state) => {
