@@ -1,6 +1,10 @@
 import { Table } from "reactstrap";
+import { useSelector } from "react-redux";
 
-const TeamsTable = ({ data }) => {
+const TeamsTable = () => {
+  const members = useSelector((state) => state.game.members);
+  const scores = useSelector((state) => state.game.scores);
+
   return (
     <Table className="align-items-center table-flush" responsive>
       <thead className="thead-light">
@@ -17,15 +21,15 @@ const TeamsTable = ({ data }) => {
         {[1, 2].map((_, i) => (
           <tr className="text-white" key={i}>
             <td>Member {i + 1}</td>
-            <td>{data[0].members[i].name}</td>
-            <td>{data[1].members[i].name}</td>
+            <td>{members[0][i]}</td>
+            <td>{members[1][i]}</td>
           </tr>
         ))}
 
         <tr className="bg-white text-primary font-weight-bolder">
           <td>Scores</td>
-          <td>{31}</td>
-          <td>{25}</td>
+          <td>{scores[0]}</td>
+          <td>{scores[1]}</td>
         </tr>
       </tbody>
     </Table>

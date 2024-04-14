@@ -14,7 +14,7 @@ import {
 
 import Game from "./Game";
 import Header from "./Header";
-import TeamsTable from "./TeamsTable";
+import TeamsTable from "./Table";
 
 const GamePage = () => {
   const [activeTab, setActiveTab] = React.useState("gameTab");
