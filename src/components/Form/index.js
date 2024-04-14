@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Button, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+} from "reactstrap";
 
 const FormComp = ({
   label,
@@ -12,16 +20,21 @@ const FormComp = ({
   const [inputValues, setInputValues] = useState({});
 
   return (
-    <Form>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(inputValues);
+      }}
+    >
       <h4 className={light ? "text-white" : "text-dark"}>{label}</h4>
 
       {inputs.map(
         ({ name, label, icon, type = "text", required, options }, i) => (
-          <FormGroup className={"mb-3 " + inputFocuses[name]} key={i}>
+          <FormGroup className={"mb-3 w-100 " + inputFocuses[name]} key={i}>
             <InputGroup className="input-group-alternative">
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i className={icon}></i>
+                  <i className={icon} />
                 </InputGroupText>
               </InputGroupAddon>
 
@@ -34,6 +47,7 @@ const FormComp = ({
                     [name]: e.target.value,
                   }))
                 }
+                required={required}
                 type={type}
                 onFocus={() =>
                   setInputFocuses((current) => ({
@@ -60,7 +74,7 @@ const FormComp = ({
       <Button
         className="mt-3"
         color={light ? "white" : "primary"}
-        onClick={() => onSubmit(inputValues)}
+        type="submit"
       >
         {submitLabel}
       </Button>

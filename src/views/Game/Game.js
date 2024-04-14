@@ -1,309 +1,16 @@
 import { Fragment, useState } from "react";
-import { Button, ButtonGroup } from "reactstrap";
+import { Button, ButtonGroup, Col, Row } from "reactstrap";
+import { wordsBank } from "./WordBank";
+import { useDispatch, useSelector } from "react-redux";
+import { addScores } from "values";
 
 const Game = () => {
-  const words = [
-    "مدرسة",
-    "سيارة",
-    "سعادة",
-    "طالب",
-    "معلم",
-    "جامعة",
-    "كتاب",
-    "حاسوب",
-    "مدينة",
-    "صديق",
-    "مستشفى",
-    "فندق",
-    "بحر",
-    "سماء",
-    "شمس",
-    "قمر",
-    "غابة",
-    "مطار",
-    "محطة",
-    "قطار",
-    "ميناء",
-    "مطعم",
-    "كرسي",
-    "طاولة",
-    "سرير",
-    "مطبخ",
-    "حمام",
-    "بيت",
-    "مسجد",
-    "كنيسة",
-    "مدرسة",
-    "جامع",
-    "مركز",
-    "سوق",
-    "محل",
-    "فن",
-    "ثقافة",
-    "تاريخ",
-    "لغة",
-    "علم",
-    "رياضة",
-    "فنون",
-    "موسيقى",
-    "أدب",
-    "فيلم",
-    "مسرح",
-    "مدينة",
-    "قرية",
-    "بلد",
-    "منطقة",
-    "جبل",
-    "نهر",
-    "بحيرة",
-    "حديقة",
-    "منزل",
-    "شقة",
-    "فيلا",
-    "قصر",
-    "ساعة",
-    "نظارات",
-    "كمبيوتر",
-    "جوال",
-    "تلفاز",
-    "سماعات",
-    "ميكروفون",
-    "كاميرا",
-    "قلم",
-    "محفظة",
-    "مفتاح",
-    "حقيبة",
-    "كرة",
-    "مضرب",
-    "مثلث",
-    "مربع",
-    "دائرة",
-    "خط",
-    "نجم",
-    "قمر",
-    "كوكب",
-    "فضاء",
-    "لحم",
-    "دجاج",
-    "خضار",
-    "فاكهة",
-    "حلوى",
-    "شوربة",
-    "سلطة",
-    "خبز",
-    "حليب",
-    "ماء",
-    "عصير",
-    "قهوة",
-    "شاي",
-    "زبادي",
-    "عسل",
-    "زيت",
-    "ملح",
-    "سكر",
-    "بهارات",
-    "توابل",
-    "قرفة",
-    "زعتر",
-    "كمون",
-    "زنجبيل",
-    "فلفل",
-    "خردل",
-    "كركم",
-    "نعناع",
-    "بصل",
-    "ثوم",
-    "طماطم",
-    "خيار",
-    "فلفل",
-    "جزر",
-    "بطاطس",
-    "بصل",
-    "تفاح",
-    "موز",
-    "برتقال",
-    "تمر",
-    "فراولة",
-    "توت",
-    "ليمون",
-    "عنب",
-    "بطيخ",
-    "شمام",
-    "كرز",
-    "تين",
-    "كمثرى",
-    "تفاحة",
-    "مانجو",
-    "خوخ",
-    "مشمش",
-    "باذنجان",
-    "فول",
-    "عدس",
-    "فاصوليا",
-    "عشبة",
-    "زبدة",
-    "جبن",
-    "لبن",
-    "زبادي",
-    "زيتون",
-    "زيت",
-    "زبد",
-    "سمن",
-    "طحين",
-    "شوكولاتة",
-    "حلاوة",
-    "حليب",
-    "سكر",
-    "فستق",
-    "لوز",
-    "جوز",
-    "مكسرات",
-    "بسكويت",
-    "كعك",
-    "مافن",
-    "كعك",
-    "كيك",
-    "عصير",
-    "شراب",
-    "صلصة",
-    "صوص",
-    "مربى",
-    "جيلي",
-    "شراب",
-    "سيروب",
-    "ورد",
-    "خل",
-    "صويا",
-    "كتشب",
-    "خردل",
-    "معجون",
-    "مرقة",
-    "ملح",
-    "خل",
-    "فلفل",
-    "سكر",
-    "مايونيز",
-    "خليط",
-    "تتبيلة",
-    "تحميرة",
-    "مرق",
-    "كاتشاب",
-    "حار",
-    "جاف",
-    "مغلي",
-    "مقلي",
-    "مطبوخ",
-    "نيء",
-    "طازج",
-    "بارد",
-    "حار",
-    "مالح",
-    "حلو",
-    "مر",
-    "حامض",
-    "مر",
-    "لذيذ",
-    "طيب",
-    "رائع",
-    "لذيذ",
-    "شهي",
-    "صحي",
-    "غني",
-    "مفيد",
-    "مضر",
-    "مفيد",
-    "صحي",
-    "فيتامينات",
-    "معادن",
-    "بروتين",
-    "دهون",
-    "كربوهيدرات",
-    "سعرات",
-    "ألياف",
-    "ماء",
-    "فاكهة",
-    "خضار",
-    "لحم",
-    "بيض",
-    "حليب",
-    "أسماك",
-    "أطعمة",
-    "مشروبات",
-    "سكريات",
-    "دسم",
-    "ملح",
-    "نشويات",
-    "سكريات",
-    "زيوت",
-    "فيتامينات",
-    "معادن",
-    "أملاح",
-    "تحلية",
-    "توابل",
-    "بهارات",
-    "مذاق",
-    "ملون",
-    "مفيد",
-    "ضروري",
-    "متنوع",
-    "تغذية",
-    "تنوع",
-    "توازن",
-    "مأكولات",
-    "مطبخ",
-    "شهي",
-    "لذيذ",
-    "غني",
-    "مقبول",
-    "مرغوب",
-    "مفضل",
-    "محبوب",
-    "مطلوب",
-    "مسلي",
-    "ممتع",
-    "جميل",
-    "رائع",
-    "سعيد",
-    "فرح",
-    "بهجة",
-    "متعة",
-    "استمتاع",
-    "ترفيه",
-    "هواية",
-    "متعة",
-    "سلوك",
-    "تصرف",
-    "مكان",
-    "موقع",
-    "مرفأ",
-    "حي",
-    "قرية",
-    "مدينة",
-    "حارة",
-    "شارع",
-    "طريق",
-    "ممر",
-    "سكك",
-    "عرض",
-    "عمق",
-    "ارتفاع",
-    "طول",
-    "عرض",
-    "مسافة",
-    "قرب",
-    "بعد",
-    "سرعة",
-    "مسار",
-    "اتجاه",
-    "مقصد",
-    "وجهة",
-    "وصول",
-  ].sort(() => Math.random() - 0.5);
+  const members = useSelector((state) => state.game.members);
+  const dispatch = useDispatch();
 
-  const [word, setWord] = useState(91);
-  const [role, setRole] = useState("Guesser");
-  const [teamTurn, setTeamTurn] = useState("opponent team");
-  const [point, setPoint] = useState(6);
+  const data = [members[0], members[1]];
+
+  const words = wordsBank;
 
   const getRandomInt = (min = 0, max = words.length) => {
     const minCeiled = Math.ceil(min);
@@ -311,47 +18,102 @@ const Game = () => {
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
   };
 
+  const [word, setWord] = useState(getRandomInt());
+  const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
+  const [teamTurn, setTeamTurn] = useState("Team A");
+  const [guesserTurn, setGuesserTurn] = useState(0);
+  const [point, setPoint] = useState(6);
+
+  const changeWord = () => setWord(getRandomInt());
+  const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
+  const changeGuesser = () =>
+    setGuesserTurn((current) => (current == 0 ? 1 : 0));
+
+  const startNew = () => {
+    setPoint(6);
+    changeWord();
+    const newTeam = changeTeam(startingTeamTurn);
+    setStartingTeamTurn(newTeam);
+    changeGuesser();
+    setTeamTurn(newTeam);
+  };
+
   return (
     <Fragment>
-      <h3
-        className="text-white"
-        onClick={() =>
-          setTeamTurn((current) =>
-            current === "team" ? "opponent team" : "team"
-          )
-        }
-      >
-        It's your {teamTurn} turn
-      </h3>
+      <Row>
+        <Col md="6">
+          <h4 className="text-white">It's {teamTurn} turn</h4>
+        </Col>
 
-      <h5
-        className="text-white"
-        onClick={() =>
-          setRole((current) => (current === "Guesser" ? "Handler" : "Guesser"))
-        }
-      >
-        Your now a {role}
-      </h5>
+        <Col md="6">
+          <Button onClick={() => setTeamTurn((current) => changeTeam(current))}>
+            Switch Team
+          </Button>
+        </Col>
+      </Row>
 
-      {role === "Handler" && (
-        <h4 className="text-white my-3" onClick={() => setWord(getRandomInt())}>
-          Word your handling is {words[word]}
-        </h4>
-      )}
+      <Row className="my-3">
+        <Col md="6">
+          <h4 className="text-white">Word is {words[word]}</h4>
+        </Col>
 
-      <h5
-        className="text-white"
-        onClick={() => setPoint((current) => current - 1)}
-      >
-        Your playing for {point} points
-      </h5>
+        <Col md="6">
+          <Button onClick={() => changeWord()}>Change Word</Button>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md="6">
+          <h4 className="text-white">
+            Hand word to {data[0][guesserTurn]} & {data[1][guesserTurn]}
+          </h4>
+        </Col>
+
+        <Col md="6">
+          <Button onClick={() => changeGuesser()}>Switch Guessers</Button>
+        </Col>
+      </Row>
+
+      <h5 className="text-white">Playing for {point} points</h5>
 
       <ButtonGroup>
-        <Button color="success" type="button">
+        <Button
+          color="success"
+          type="button"
+          onClick={() => {
+            dispatch(
+              addScores(
+                teamTurn === "Team A"
+                  ? {
+                      teamA: point,
+                      teamB: 0,
+                      game: { team: teamTurn, point, word: words[word] },
+                    }
+                  : {
+                      teamA: 0,
+                      teamB: point,
+                      game: { team: teamTurn, point, word: words[word] },
+                    }
+              )
+            );
+            startNew();
+          }}
+        >
           Guessed Right
         </Button>
 
-        <Button color="danger" type="button">
+        <Button
+          color="danger"
+          type="button"
+          onClick={() => {
+            if (point > 1) {
+              setPoint((current) => current - 1);
+              setTeamTurn((current) => changeTeam(current));
+            } else {
+              startNew();
+            }
+          }}
+        >
           Guessed Wrong
         </Button>
       </ButtonGroup>

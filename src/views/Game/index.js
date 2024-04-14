@@ -15,8 +15,15 @@ import {
 import Game from "./Game";
 import Header from "./Header";
 import TeamsTable from "./TeamsTable";
+import ScoresTable from "./Scores";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { reset } from "values";
 
 const GamePage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = React.useState("gameTab");
 
   useLayoutEffect(() => {
@@ -93,6 +100,23 @@ const GamePage = () => {
                           Teams
                         </NavLink>
                       </NavItem>
+
+                      <NavItem>
+                        <NavLink
+                          className={
+                            "mb-sm-3 mb-md-0 " +
+                            (activeTab === "scoresTab"
+                              ? "active"
+                              : "text-primary")
+                          }
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setActiveTab("scoresTab");
+                          }}
+                        >
+                          Scores
+                        </NavLink>
+                      </NavItem>
                     </Nav>
                   </div>
 
@@ -106,9 +130,34 @@ const GamePage = () => {
                         <TabPane tabId="teamsTab" role="tabpanel">
                           <TeamsTable />
                         </TabPane>
+
+                        <TabPane tabId="scoresTab" role="tabpanel">
+                          <ScoresTable />
+                        </TabPane>
                       </TabContent>
                     </CardBody>
                   </Card>
+
+                  <div className="nav-wrapper">
+                    <Nav
+                      className="nav-fill flex-column flex-md-row"
+                      pills
+                      role="tablist"
+                    >
+                      <NavItem>
+                        <NavLink
+                          className="mb-sm-3 mb-md-0 bg-danger text-white"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            dispatch(reset());
+                            navigate(0);
+                          }}
+                        >
+                          Reset Game
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                  </div>
                 </Col>
               </Row>
             </Container>

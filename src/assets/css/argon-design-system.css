@@ -10431,23 +10431,6 @@ a.text-darker:hover, a.text-darker:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-/*!
-
-=========================================================
-* {{ site.product.name }} {{ site.product.name_long }} - v{{ site.product.version }}
-=========================================================
-
-* Product Page: {{ site.product.download }}
-* Copyright {{ 'now' | date: "%Y" }} {{ site.author }} ({{ site.website.url }})
-* Licensed under MIT ({{ site.product.license }})
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 iframe {
   border: 0; }
 
