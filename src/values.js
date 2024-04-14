@@ -21,8 +21,8 @@ export const gameSlice = createSlice({
     setNames: (state, action) => {
       state.master = action.payload?.master;
       state.members = [
-        [action.payload?.team1member1, action.payload?.team1member2],
-        [action.payload?.team2member1, action.payload?.team2member2],
+        [action.payload?.teamAmember1, action.payload?.teamAmember2],
+        [action.payload?.teamBmember1, action.payload?.teamBmember2],
       ];
 
       localStorage.setItem("master", state.master);
@@ -30,8 +30,8 @@ export const gameSlice = createSlice({
     },
     addScores: (state, action) => {
       state.scores = [
-        state.scores[0] + action.payload?.team1,
-        state.scores[1] + action.payload?.team2,
+        state.scores[0] + action.payload?.teamA,
+        state.scores[1] + action.payload?.teamB,
       ];
       state.history.push(action.payload?.game);
 

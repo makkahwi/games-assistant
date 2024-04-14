@@ -85,13 +85,13 @@ const Game = () => {
               addScores(
                 teamTurn === "Team A"
                   ? {
-                      team1: point,
-                      team2: 0,
+                      teamA: point,
+                      teamB: 0,
                       game: { team: teamTurn, point, word: words[word] },
                     }
                   : {
-                      team1: 0,
-                      team2: point,
+                      teamA: 0,
+                      teamB: point,
                       game: { team: teamTurn, point, word: words[word] },
                     }
               )
