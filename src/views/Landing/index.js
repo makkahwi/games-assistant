@@ -26,7 +26,17 @@ const Landing = () => {
         />
 
         <Container>
+          {/* <div className="form-container sign-in-container">
+            <JoinGame />
+          </div>
+
+          <div className="overlay-container">
+            <div className="overlay">
+              <div className="overlay-panel overlay-right"> */}
           <CreateGame />
+          {/* </div>
+            </div>
+          </div> */}
         </Container>
       </div>
     </div>

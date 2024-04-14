@@ -5,13 +5,13 @@ const JoinGame = () => {
     {
       name: "code",
       label: "Game Code",
-      icon: "ni ni-email-83",
+      icon: "fa-solid fa-code",
       required: true,
     },
     {
       name: "name",
       label: "Your Name",
-      icon: "ni ni-email-83",
+      icon: "fa-solid fa-person",
       required: true,
     },
     {
@@ -19,7 +19,7 @@ const JoinGame = () => {
       label: "Your Team",
       type: "select",
       options: [{ name: "Team A" }, { name: "Team B" }],
-      icon: "ni ni-email-83",
+      icon: "fa-solid fa-user-group",
       required: true,
     },
   ];
