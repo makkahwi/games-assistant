@@ -27,7 +27,7 @@ i18n
       //     translations: require('src/assets/locales/de.json'),
       // },
     },
-    fallbackLng: "en",
+    fallbackLng: "ar",
     debug: false,
     ns: ["translations"],
     defaultNS: "translations",
