@@ -23,7 +23,7 @@ const ScoresTable = () => {
           ?.filter(({ team }) => team === "Team A")
           ?.map(({ team, point, word }, i) => (
             <tr className="text-white" key={i}>
-              <td>{team}</td>
+              <td>{t(team)}</td>
               <td>{word}</td>
               <td>{point}</td>
             </tr>
@@ -42,7 +42,7 @@ const ScoresTable = () => {
           ?.filter(({ team }) => team === "Team B")
           ?.map(({ team, point, word }, i) => (
             <tr className="text-white" key={i}>
-              <td>{team}</td>
+              <td>{t(team)}</td>
               <td>{word}</td>
               <td>{point}</td>
             </tr>

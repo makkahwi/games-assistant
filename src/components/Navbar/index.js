@@ -32,7 +32,7 @@ const NavbarComp = () => {
         <Nav>
           <NavItem>
             <Link to="/rules">
-              <NavLink className="text-white">{t("Rules")}</NavLink>
+              <NavLink className="text-white">{t("Game Rules")}</NavLink>
             </Link>
           </NavItem>
 

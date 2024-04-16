@@ -60,7 +60,7 @@ const Game = () => {
       <Row className="my-3">
         <Col md="6">
           <h4 className="text-white">
-            {t("Password is")} {words[word]}
+            {t("Password is")} "{words[word]}"
           </h4>
         </Col>
 
@@ -72,13 +72,14 @@ const Game = () => {
       <Row>
         <Col md="6">
           <h4 className="text-white">
-            {t("Hand word to")} {data[0][guesserTurn]} & {data[1][guesserTurn]}
+            {t("Hand Password to")} {data[0][guesserTurn]} &{" "}
+            {data[1][guesserTurn]}
           </h4>
         </Col>
 
         <Col md="6">
           <Button onClick={() => changeGuesser()}>
-            {t("Switch Guessers")}
+            {t("Switch Clue Givers")}
           </Button>
         </Col>
       </Row>
