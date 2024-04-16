@@ -35,7 +35,7 @@ const RulesPage = () => {
         t(
           "If Team A guessed it wrong, it's Team B turn to try to guess, where Member A give a new clue to Member 2"
         ),
-        t("Round ends when a Member 2 guess the password right"),
+        t("Round ends when a Member 2 guess the right password"),
         t(
           "In next round, member teams switch roles, where Member 1 become the guesser, and Member 2 is clue giver"
         ),
