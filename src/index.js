@@ -6,6 +6,7 @@ import { Container } from "reactstrap";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 import GamePage from "views/Game";
+import RulesPage from "views/Rules";
 import Landing from "views/Landing";
 
 import store from "./redux";
@@ -36,6 +37,8 @@ root.render(
               ) : (
                 <Route path="/" exact element={<Landing />} />
               )}
+
+              <Route path="/rules" exact element={<RulesPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Container>
