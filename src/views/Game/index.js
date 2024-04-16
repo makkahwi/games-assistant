@@ -53,8 +53,7 @@ const GamePage = () => {
             <NavItem>
               <NavLink
                 className={
-                  "mb-sm-3 mb-md-0 " +
-                  (activeTab === "gameTab" ? "active" : "text-primary")
+                  "" + (activeTab === "gameTab" ? "active" : "text-primary")
                 }
                 onClick={(e) => {
                   e.preventDefault();
@@ -68,8 +67,7 @@ const GamePage = () => {
             <NavItem>
               <NavLink
                 className={
-                  "mb-sm-3 mb-md-0 " +
-                  (activeTab === "teamsTab" ? "active" : "text-primary")
+                  "" + (activeTab === "teamsTab" ? "active" : "text-primary")
                 }
                 onClick={(e) => {
                   e.preventDefault();
@@ -83,8 +81,7 @@ const GamePage = () => {
             <NavItem>
               <NavLink
                 className={
-                  "mb-sm-3 mb-md-0 " +
-                  (activeTab === "scoresTab" ? "active" : "text-primary")
+                  "" + (activeTab === "scoresTab" ? "active" : "text-primary")
                 }
                 onClick={(e) => {
                   e.preventDefault();
@@ -123,7 +120,7 @@ const GamePage = () => {
           >
             <NavItem>
               <NavLink
-                className="mb-sm-3 mb-md-0 bg-danger text-white"
+                className="bg-danger text-white"
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(reset());
