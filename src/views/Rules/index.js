@@ -12,7 +12,7 @@ const RulesPage = () => {
       title: t("Introduction"),
       rules: [
         t(
-          "This is a game for two teams, each team is made of two members. Let's call them Team A & Team B, and each team have Member 1 & Member 2."
+          "This is a game for two teams, each team is made of two members Let's call them Team A & Team B, and each team have Member 1 & Member 2."
         ),
         t(
           "The game is about guessing a password, one word of Arabic language, which could be a noun, verb or adjective."
@@ -21,7 +21,7 @@ const RulesPage = () => {
           "Game is made of rounds, where in each round a new password is given to be guessed."
         ),
         t(
-          "Team with most scores after certain number of rounds wins. Number of rounds should be 4 or one of its multiplies."
+          "Team with most scores after certain number of rounds wins Number of rounds should be 4 or one of its multiplies."
         ),
       ],
     },

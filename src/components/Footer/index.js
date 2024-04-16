@@ -45,7 +45,7 @@ const FooterComp = () => {
     {
       icon: "fas fa-envelope",
       link: "mailto:SuhaibAhmadAi@hotmail.com",
-      tooltip: t("SuhaibAhmadAi@hotmail.com"),
+      tooltip: t("Professional Email"),
       key: "email",
     },
     {
