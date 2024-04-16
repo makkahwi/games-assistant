@@ -54,7 +54,7 @@ const RulesPage = () => {
       <TabContent className="mt-2" activeTab={activeTab}>
         {contents.map(({ title, rules }, i) => (
           <TabPane tabId={title} key={i}>
-            <ul>
+            <ul className="pl-4">
               {rules.map((text, y) => (
                 <li
                   className="description text-primary font-weight-bold text-justify mb-3"
