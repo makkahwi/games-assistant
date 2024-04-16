@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Card,
-  Col,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  TabContent,
-  TabPane,
-} from "reactstrap";
+import { Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 
 const RulesPage = () => {
   const [activeTab, setActiveTab] = useState("Introduction");
@@ -46,47 +37,36 @@ const RulesPage = () => {
   ];
 
   return (
-    <Card className="p-4">
-      <Row>
-        <Col md="4">
-          <div className="nav-wrapper">
-            <Nav className="nav-pills-primary flex-column" pills role="tablist">
-              {contents.map(({ title }, i) => (
-                <NavItem className="p-0 text-center">
-                  <NavLink
-                    className={activeTab === title ? "active" : ""}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveTab(title);
-                    }}
-                  >
-                    {title}
-                  </NavLink>
-                </NavItem>
-              ))}
-            </Nav>
-          </div>
-        </Col>
+    <Card className="p-5">
+      <Nav className="nav-pills-primary" pills role="tablist">
+        {contents.map(({ title }, i) => (
+          <NavItem className="p-0 text-center mr-4">
+            <NavLink
+              className={activeTab === title ? "active" : ""}
+              onClick={() => setActiveTab(title)}
+            >
+              {title}
+            </NavLink>
+          </NavItem>
+        ))}
+      </Nav>
 
-        <Col md="8">
-          <Card className="card-plain">
-            <TabContent className="mt-2" activeTab={activeTab}>
-              {contents.map(({ title, rules }, i) => (
-                <TabPane tabId={title} key={i}>
-                  {rules.map((text, y) => (
-                    <p
-                      className="description text-primary font-weight-bold text-justify"
-                      key={y}
-                    >
-                      {text}
-                    </p>
-                  ))}
-                </TabPane>
+      <TabContent className="mt-2" activeTab={activeTab}>
+        {contents.map(({ title, rules }, i) => (
+          <TabPane tabId={title} key={i}>
+            <ul>
+              {rules.map((text, y) => (
+                <li
+                  className="description text-primary font-weight-bold text-justify mb-3"
+                  key={y}
+                >
+                  {text}
+                </li>
               ))}
-            </TabContent>
-          </Card>
-        </Col>
-      </Row>
+            </ul>
+          </TabPane>
+        ))}
+      </TabContent>
     </Card>
   );
 };
