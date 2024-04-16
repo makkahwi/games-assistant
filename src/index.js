@@ -25,9 +25,8 @@ root.render(
         <div
           className="page-header bg-default"
           style={{
-            backgroundImage:
-              "url(" + require("assets/img/ill/register_bg.png") + ")",
-            backgroundSize: "cover",
+            backgroundImage: "url(" + require("assets/img/bg.png") + ")",
+            backgroundSize: "100% auto",
           }}
         >
           <Container>
