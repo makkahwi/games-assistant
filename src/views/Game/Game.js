@@ -60,7 +60,7 @@ const Game = () => {
       <Row className="my-3">
         <Col md="6">
           <h4 className="text-white">
-            {t("Word is")} {words[word]}
+            {t("Password is")} {words[word]}
           </h4>
         </Col>
 

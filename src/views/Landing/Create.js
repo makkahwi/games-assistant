@@ -14,7 +14,7 @@ const CreateGame = () => {
   const inputs = [
     {
       name: "master",
-      label: t("Your Name"),
+      label: t("Game Master Name"),
       icon: "fa-solid fa-person-chalkboard",
       minLength: 4,
       required: true,

@@ -10,7 +10,7 @@ const JoinGame = () => {
     },
     {
       name: "name",
-      label: "Your Name",
+      label: "Game Master Name",
       icon: "fa-solid fa-person",
       required: true,
     },
