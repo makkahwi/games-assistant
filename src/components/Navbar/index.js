@@ -10,7 +10,13 @@ import {
 } from "reactstrap";
 
 const NavbarComp = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const languageChange = () => {
+    const otherLang = i18n.language === "en" ? "ar" : "en";
+
+    i18n.changeLanguage(otherLang);
+  };
 
   return (
     <Navbar
@@ -28,6 +34,16 @@ const NavbarComp = () => {
             <Link to="/rules">
               <NavLink className="text-white">{t("Rules")}</NavLink>
             </Link>
+          </NavItem>
+
+          <NavItem>
+            <NavLink
+              className="text-white"
+              onClick={() => languageChange()}
+              style={{ cursor: "pointer" }}
+            >
+              {i18n.language === "en" ? "ع" : "En"}
+            </NavLink>
           </NavItem>
         </Nav>
       </Container>
