@@ -1,50 +1,59 @@
 import { useDispatch } from "react-redux";
-import { setNames } from "values";
-import FormComp from "../../components/Form";
 import { useNavigate } from "react-router-dom";
+
+import { setNames } from "values";
+
+import FormComp from "../../components/Form";
+import { useTranslation } from "react-i18next";
 
 const CreateGame = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const inputs = [
     {
       name: "master",
-      label: "Your Name",
+      label: t("Game Master Name"),
       icon: "fa-solid fa-person-chalkboard",
+      minLength: 4,
       required: true,
     },
     {
       name: "teamAmember1",
-      label: "Team A Member 1 Name",
+      label: t("Team A Member 1 Name"),
       icon: "fa-solid fa-a",
+      minLength: 4,
       required: true,
     },
     {
       name: "teamAmember2",
-      label: "Team A Member 2 Name",
+      label: t("Team A Member 2 Name"),
       icon: "fa-solid fa-a",
+      minLength: 4,
       required: true,
     },
     {
       name: "teamBmember1",
-      label: "Team B Member 1 Name",
+      label: t("Team B Member 1 Name"),
       icon: "fa-solid fa-b",
+      minLength: 4,
       required: true,
     },
     {
       name: "teamBmember2",
-      label: "Team B Member 2 Name",
+      label: t("Team B Member 2 Name"),
       icon: "fa-solid fa-b",
+      minLength: 4,
       required: true,
     },
   ];
 
   return (
     <FormComp
-      label="Create New Game"
+      label={t("Create New Game")}
       inputs={inputs}
-      submitLabel="Create"
+      submitLabel={t("Create")}
       onSubmit={(values) => {
         dispatch(setNames(values));
         navigate(0);

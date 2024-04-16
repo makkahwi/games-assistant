@@ -1,54 +1,57 @@
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Col, Container, Row, UncontrolledTooltip } from "reactstrap";
 
 const FooterComp = () => {
+  const { t } = useTranslation();
+
   const socialMediaLinks = [
     {
       icon: "fas fa-globe",
       link: "https://suhaib.dev/",
-      tooltip: "Own Website",
+      tooltip: t("Own Website"),
       key: "website",
     },
     {
       icon: "fab fa-linkedin",
       link: "https://linkedin.com/in/makkahwi/",
-      tooltip: "Makkahwi @ Linkedin",
+      tooltip: t("Makkahwi @ Linkedin"),
       key: "linkedin",
     },
     {
       icon: "fab fa-facebook",
       link: "https://facebook.com/makkahwi",
-      tooltip: "Makkahwi @ Facebook",
+      tooltip: t("Makkahwi @ Facebook"),
       key: "facebook",
     },
     {
       icon: "fab fa-instagram",
       link: "https://instagram.com/makkahwi",
-      tooltip: "Makkahwi @ Instagram",
+      tooltip: t("Makkahwi @ Instagram"),
       key: "instagram",
     },
     {
       icon: "fab fa-whatsapp",
       link: "https://wasap.my/962788424973",
-      tooltip: "+962788424973 @ Whatsapp",
+      tooltip: t("+962788424973 @ Whatsapp"),
       key: "whatsapp",
     },
     {
       icon: "fab fa-telegram",
       link: "https://t.me/makkahwi",
-      tooltip: "+962788424973 @ Telegram",
+      tooltip: t("+962788424973 @ Telegram"),
       key: "telegram",
     },
     {
       icon: "fas fa-envelope",
       link: "mailto:SuhaibAhmadAi@hotmail.com",
-      tooltip: "SuhaibAhmadAi@hotmail.com",
+      tooltip: t("Professional Email"),
       key: "email",
     },
     {
       icon: "fas fa-phone",
       link: "tel:+962788424973",
-      tooltip: "+962788424973",
+      tooltip: t("+962788424973"),
       key: "phone",
     },
   ];
@@ -63,7 +66,7 @@ const FooterComp = () => {
             </h3>
 
             <h6 className="mb-0 font-weight-light">
-              This app covers the role of the game coordinator / master
+              {t("This app covers the role of the game coordinator / master")}
             </h6>
           </Col>
 
@@ -88,7 +91,7 @@ const FooterComp = () => {
                 </a>
 
                 <UncontrolledTooltip delay={0} target={key}>
-                  Follow us
+                  {tooltip}
                 </UncontrolledTooltip>
               </Fragment>
             ))}

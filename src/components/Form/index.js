@@ -29,7 +29,10 @@ const FormComp = ({
       <h4 className={light ? "text-white" : "text-dark"}>{label}</h4>
 
       {inputs.map(
-        ({ name, label, icon, type = "text", required, options }, i) => (
+        (
+          { name, label, icon, type = "text", required, options, minLength },
+          i
+        ) => (
           <FormGroup className={"mb-3 w-100 " + inputFocuses[name]} key={i}>
             <InputGroup className="input-group-alternative">
               <InputGroupAddon addonType="prepend">
@@ -47,6 +50,7 @@ const FormComp = ({
                     [name]: e.target.value,
                   }))
                 }
+                minLength={minLength}
                 required={required}
                 type={type}
                 onFocus={() =>

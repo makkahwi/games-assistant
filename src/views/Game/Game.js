@@ -3,10 +3,12 @@ import { Button, ButtonGroup, Col, Row } from "reactstrap";
 import { wordsBank } from "./WordBank";
 import { useDispatch, useSelector } from "react-redux";
 import { addScores } from "values";
+import { useTranslation } from "react-i18next";
 
 const Game = () => {
   const members = useSelector((state) => state.game.members);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const data = [members[0], members[1]];
 
@@ -19,13 +21,14 @@ const Game = () => {
   };
 
   const [word, setWord] = useState(getRandomInt());
-  const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
-  const [teamTurn, setTeamTurn] = useState("Team A");
+  const [startingTeamTurn, setStartingTeamTurn] = useState(t("Team A"));
+  const [teamTurn, setTeamTurn] = useState(t("Team A"));
   const [guesserTurn, setGuesserTurn] = useState(0);
   const [point, setPoint] = useState(6);
 
   const changeWord = () => setWord(getRandomInt());
-  const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
+  const changeTeam = (current) =>
+    current === t("Team A") ? t("Team B") : t("Team A");
   const changeGuesser = () =>
     setGuesserTurn((current) => (current == 0 ? 1 : 0));
 
@@ -42,39 +45,46 @@ const Game = () => {
     <Fragment>
       <Row>
         <Col md="6">
-          <h4 className="text-white">It's {teamTurn} turn</h4>
+          <h4 className="text-white">
+            {t("It's team turn", { team: teamTurn })}
+          </h4>
         </Col>
 
         <Col md="6">
           <Button onClick={() => setTeamTurn((current) => changeTeam(current))}>
-            Switch Team
+            {t("Switch Team")}
           </Button>
         </Col>
       </Row>
 
       <Row className="my-3">
         <Col md="6">
-          <h4 className="text-white">Word is {words[word]}</h4>
+          <h4 className="text-white">
+            {t("Password is")} "{words[word]}"
+          </h4>
         </Col>
 
         <Col md="6">
-          <Button onClick={() => changeWord()}>Change Word</Button>
+          <Button onClick={() => changeWord()}>{t("Change Word")}</Button>
         </Col>
       </Row>
 
       <Row>
         <Col md="6">
           <h4 className="text-white">
-            Hand word to {data[0][guesserTurn]} & {data[1][guesserTurn]}
+            {t("Hand Password to")} {data[0][guesserTurn]} &{" "}
+            {data[1][guesserTurn]}
           </h4>
         </Col>
 
         <Col md="6">
-          <Button onClick={() => changeGuesser()}>Switch Guessers</Button>
+          <Button onClick={() => changeGuesser()}>
+            {t("Switch Clue Givers")}
+          </Button>
         </Col>
       </Row>
 
-      <h5 className="text-white">Playing for {point} points</h5>
+      <h5 className="text-white">{t("Playing for x points", { point })}</h5>
 
       <ButtonGroup>
         <Button
@@ -83,7 +93,7 @@ const Game = () => {
           onClick={() => {
             dispatch(
               addScores(
-                teamTurn === "Team A"
+                teamTurn === t("Team A")
                   ? {
                       teamA: point,
                       teamB: 0,
@@ -99,7 +109,7 @@ const Game = () => {
             startNew();
           }}
         >
-          Guessed Right
+          {t("Guessed Right")}
         </Button>
 
         <Button
@@ -114,7 +124,7 @@ const Game = () => {
             }
           }}
         >
-          Guessed Wrong
+          {t("Guessed Wrong")}
         </Button>
       </ButtonGroup>
     </Fragment>
