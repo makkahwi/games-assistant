@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
-import { Container, Navbar, NavbarBrand } from "reactstrap";
+import {
+  Container,
+  DropdownItem,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavItem,
+  NavLink,
+} from "reactstrap";
 
 const NavbarComp = () => {
   return (
     <Navbar
-      className="navbar-main headroom bg-default navbar-dark py-4"
+      className="navbar-main headroom bg-default navbar-dark"
       expand="lg"
       sticky="top"
     >
@@ -12,6 +20,14 @@ const NavbarComp = () => {
         <NavbarBrand className="mr-lg-5 display-4" to="/" tag={Link}>
           Password
         </NavbarBrand>
+
+        <Nav>
+          <NavItem>
+            <Link to="/rules">
+              <NavLink className="text-white">Rules</NavLink>
+            </Link>
+          </NavItem>
+        </Nav>
       </Container>
     </Navbar>
   );
