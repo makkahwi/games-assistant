@@ -5,7 +5,7 @@ import { Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 const RulesPage = () => {
   const { t } = useTranslation();
 
-  const [activeTab, setActiveTab] = useState("Introduction");
+  const [activeTab, setActiveTab] = useState("Welcome");
 
   const contents = [
     {
@@ -79,6 +79,13 @@ const RulesPage = () => {
       </Nav>
 
       <TabContent className="mt-2" activeTab={activeTab}>
+        <TabPane
+          tabId="Welcome"
+          className="text-primary font-weight-bold text-justify py-4"
+        >
+          {t("This is the manual for game introduction and rules")}
+        </TabPane>
+
         {contents.map(({ title, rules }, i) => (
           <TabPane tabId={title} key={i}>
             <ul className="pl-4">
