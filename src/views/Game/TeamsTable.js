@@ -1,8 +1,10 @@
 import { Table } from "reactstrap";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const TeamsTable = () => {
   const members = useSelector((state) => state.game.members);
+  const { t } = useTranslation();
 
   return (
     <Table className="align-items-center table-flush" responsive>
@@ -10,16 +12,18 @@ const TeamsTable = () => {
         <tr className="text-primary">
           <th />
 
-          <th>Team A</th>
+          <th>{t("Team A")}</th>
 
-          <th>Team B</th>
+          <th>{t("Team B")}</th>
         </tr>
       </thead>
 
       <tbody className="list">
         {[1, 2].map((_, i) => (
           <tr className="text-white" key={i}>
-            <td>Member {i + 1}</td>
+            <td>
+              {t("Member")} {i + 1}
+            </td>
             <td>{members[0][i]}</td>
             <td>{members[1][i]}</td>
           </tr>

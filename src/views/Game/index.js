@@ -19,10 +19,12 @@ import Game from "./Game";
 import Header from "./Header";
 import ScoresTable from "./Scores";
 import TeamsTable from "./TeamsTable";
+import { useTranslation } from "react-i18next";
 
 const GamePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = React.useState("gameTab");
 
@@ -59,7 +61,7 @@ const GamePage = () => {
                   setActiveTab("gameTab");
                 }}
               >
-                Game
+                {t("Game")}
               </NavLink>
             </NavItem>
 
@@ -74,7 +76,7 @@ const GamePage = () => {
                   setActiveTab("teamsTab");
                 }}
               >
-                Teams
+                {t("Teams")}
               </NavLink>
             </NavItem>
 
@@ -89,7 +91,7 @@ const GamePage = () => {
                   setActiveTab("scoresTab");
                 }}
               >
-                Scores
+                {t("Scores")}
               </NavLink>
             </NavItem>
           </Nav>
@@ -128,7 +130,7 @@ const GamePage = () => {
                   navigate(0);
                 }}
               >
-                Create New Game
+                {t("Create New Game")}
               </NavLink>
             </NavItem>
           </Nav>

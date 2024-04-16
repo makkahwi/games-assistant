@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -9,6 +10,8 @@ import {
 } from "reactstrap";
 
 const NavbarComp = () => {
+  const { t } = useTranslation();
+
   return (
     <Navbar
       className="navbar-main headroom bg-default navbar-dark"
@@ -23,7 +26,7 @@ const NavbarComp = () => {
         <Nav>
           <NavItem>
             <Link to="/rules">
-              <NavLink className="text-white">Rules</NavLink>
+              <NavLink className="text-white">{t("Rules")}</NavLink>
             </Link>
           </NavItem>
         </Nav>

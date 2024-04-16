@@ -1,18 +1,20 @@
 import { Table } from "reactstrap";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const ScoresTable = () => {
   const history = useSelector((state) => state.game.history);
+  const { t } = useTranslation();
 
   return (
     <Table className="align-items-center table-flush" responsive>
       <thead className="thead-light">
         <tr className="text-primary">
-          <th>Team</th>
+          <th>{t("Team")}</th>
 
-          <th>PassWord</th>
+          <th>{t("PassWord")}</th>
 
-          <th>Point</th>
+          <th>{t("Point")}</th>
         </tr>
       </thead>
 
@@ -28,7 +30,7 @@ const ScoresTable = () => {
           ))}
 
         <tr className="bg-white font-weight-bolder">
-          <td colSpan={2}>Team A Total</td>
+          <td colSpan={2}>{t("Team A Total")}</td>
           <td>
             {history
               ?.filter(({ team }) => team === "Team A")
@@ -47,7 +49,7 @@ const ScoresTable = () => {
           ))}
 
         <tr className="bg-white font-weight-bolder">
-          <td colSpan={2}>Team B Total</td>
+          <td colSpan={2}>{t("Team B Total")}</td>
           <td>
             {history
               ?.filter(({ team }) => team === "Team B")
