@@ -22,7 +22,7 @@ const Game = () => {
   const [currentCategory, setCurrentCategory] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const [teamClocks, setTeamClocks] = useState([20, 20]);
+  const [teamClocks, setTeamClocks] = useState([20000, 20000]);
   const [startTurn, setStartTurn] = useState(members[0]);
   const [listingTurn, setListingTurn] = useState(members[0]);
   const [challenger, setChallenger] = useState(null);
@@ -129,7 +129,11 @@ const Game = () => {
                   startTurn === member && <CategoryChoose />
                 ) : (
                   <Fragment>
-                    <h1>{teamClocks[0]}</h1>
+                    <h1>
+                      {teamClocks[i] > 10000
+                        ? teamClocks[i] / 1000
+                        : teamClocks[i]}
+                    </h1>
 
                     <h4>
                       {t("Category is")} "{wordCategories[currentCategory]}"
