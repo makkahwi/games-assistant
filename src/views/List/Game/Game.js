@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
@@ -103,6 +103,32 @@ const Game = () => {
     setFlipButtons(tempFlipButtons);
   };
 
+  useEffect(() => {
+    if (
+      currentCategory &&
+      teamClocks.every((value, index) => value <= [20000, 19999][index]) &&
+      teamClocks.every((value) => value > 0)
+    ) {
+      const interval = setInterval(() => {
+        if (listingTurn === members[0]) {
+          setTeamClocks((current) => [current[0] - 2, current[1]]);
+        } else {
+          setTeamClocks((current) => [current[0], current[1] - 2]);
+        }
+      }, 1);
+
+      return () => clearInterval(interval);
+    }
+  }, [teamClocks]);
+
+  const switchTurn = () => {
+    if (teamClocks.every((value, index) => value === [20000, 20000][index])) {
+      setTeamClocks([20000, 19999]);
+    }
+
+    changeListingTurn();
+  };
+
   return (
     <Fragment>
       <Card>
@@ -158,7 +184,7 @@ const Game = () => {
                     <ButtonGroup>
                       <Button
                         color="success"
-                        onClick={() => changeListingTurn()}
+                        onClick={() => switchTurn()}
                         disabled={listingTurn != member}
                         className={flipButtons[i] ? "order-2" : "order-1"}
                       >
