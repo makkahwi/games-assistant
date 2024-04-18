@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 const ScoresTable = () => {
-  const history = useSelector((state) => state.game.history);
+  const history = useSelector((state) => state.password.history);
   const { t } = useTranslation();
 
   return (

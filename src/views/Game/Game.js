@@ -1,12 +1,13 @@
 import { Fragment, useState } from "react";
-import { Button, ButtonGroup, Col, Row } from "reactstrap";
-import { wordsBank } from "./WordBank";
-import { useDispatch, useSelector } from "react-redux";
-import { addScores } from "values";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, ButtonGroup, Col, Row } from "reactstrap";
+
+import { addScores } from "../../redux/password";
+import { wordsBank } from "./WordBank";
 
 const Game = () => {
-  const members = useSelector((state) => state.game.members);
+  const members = useSelector((state) => state.password.members);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 

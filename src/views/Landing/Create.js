@@ -1,10 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { setNames } from "values";
-
 import FormComp from "../../components/Form";
-import { useTranslation } from "react-i18next";
+import { setNames } from "../../redux/password";
 
 const CreateGame = () => {
   const dispatch = useDispatch();

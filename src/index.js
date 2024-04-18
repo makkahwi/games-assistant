@@ -1,19 +1,20 @@
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "assets/scss/argon-design-system.scss?v1.0.0";
-
-import Footer from "components/Footer";
-import Navbar from "components/Navbar";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import { Provider } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Container } from "reactstrap";
+
+import Footer from "components/Footer";
+import Navbar from "components/Navbar";
 import GamePage from "views/Game";
 import Landing from "views/Landing";
 import RulesPage from "views/Rules";
 
-import i18next from "./i18next";
-import store from "./redux";
+import i18next from "./redux/i18next";
+import store from "./redux/store";
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "assets/scss/argon-design-system.scss?v1.0.0";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -39,7 +40,7 @@ const App = () => {
             >
               <Container>
                 <Routes>
-                  {store.getState().game.master ? (
+                  {store.getState().password.master ? (
                     <Route path="/" exact element={<GamePage />} />
                   ) : (
                     <Route path="/" exact element={<Landing />} />

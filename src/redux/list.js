@@ -14,8 +14,8 @@ const initValues = {
     [],
 };
 
-export const gameSlice = createSlice({
-  name: "game",
+export const listSlice = createSlice({
+  name: "list",
   initialState: initValues,
   reducers: {
     setNames: (state, action) => {
@@ -33,7 +33,7 @@ export const gameSlice = createSlice({
         state.scores[0] + action.payload?.teamA,
         state.scores[1] + action.payload?.teamB,
       ];
-      state.history.push(action.payload?.game);
+      state.history.push(action.payload?.list);
 
       localStorage.setItem("scores", state.scores);
       localStorage.setItem("history", JSON.stringify(state.history));
@@ -55,6 +55,6 @@ export const gameSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setNames, addScores, reset } = gameSlice.actions;
+export const { setNames, addScores, reset } = listSlice.actions;
 
-export default gameSlice.reducer;
+export default listSlice.reducer;

@@ -1,4 +1,5 @@
 import React, { useLayoutEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,13 +14,11 @@ import {
   TabPane,
 } from "reactstrap";
 
-import { reset } from "values";
-
+import { reset } from "../../redux/password";
 import Game from "./Game";
 import Header from "./Header";
 import ScoresTable from "./Scores";
 import TeamsTable from "./TeamsTable";
-import { useTranslation } from "react-i18next";
 
 const GamePage = () => {
   const dispatch = useDispatch();
