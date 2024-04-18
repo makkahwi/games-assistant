@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 import CreateGame from "./Create";
 import JoinGame from "./Join";
 
-const Landing = () => {
+const ListWordsLanding = () => {
   React.useEffect(() => {
     document.body.classList.add("register-page");
     window.scrollTo(0, 0);
@@ -31,4 +31,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default ListWordsLanding;

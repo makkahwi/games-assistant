@@ -1,6 +1,5 @@
-import { initReactI18next } from "react-i18next";
-
 import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
 // don't want to use this?
 // have a look at the Quick start guide
@@ -18,10 +17,10 @@ i18n
   .init({
     resources: {
       en: {
-        translations: require("./assets/locales/en.json"),
+        translations: require("../assets/locales/en.json"),
       },
       ar: {
-        translations: require("./assets/locales/ar.json"),
+        translations: require("../assets/locales/ar.json"),
       },
       // de: {
       //     translations: require('src/assets/locales/de.json'),

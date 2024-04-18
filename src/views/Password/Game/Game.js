@@ -1,12 +1,13 @@
 import { Fragment, useState } from "react";
-import { Button, ButtonGroup, Col, Row } from "reactstrap";
-import { wordsBank } from "./WordBank";
-import { useDispatch, useSelector } from "react-redux";
-import { addScores } from "values";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, ButtonGroup, Col, Row } from "reactstrap";
+
+import { addScores } from "../../../redux/password";
+import { wordsBank } from "./WordBank";
 
 const Game = () => {
-  const members = useSelector((state) => state.game.members);
+  const members = useSelector((state) => state.password.members);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -60,7 +61,7 @@ const Game = () => {
       <Row className="my-3">
         <Col md="6">
           <h4 className="text-white">
-            {t("Password is")} "{words[word]}"
+            {t("PassWord is")} "{words[word]}"
           </h4>
         </Col>
 
@@ -72,7 +73,7 @@ const Game = () => {
       <Row>
         <Col md="6">
           <h4 className="text-white">
-            {t("Hand Password to")} {data[0][guesserTurn]} &{" "}
+            {t("Hand PassWord to")} {data[0][guesserTurn]} &{" "}
             {data[1][guesserTurn]}
           </h4>
         </Col>
@@ -94,16 +95,8 @@ const Game = () => {
             dispatch(
               addScores(
                 teamTurn === t("Team A")
-                  ? {
-                      teamA: point,
-                      teamB: 0,
-                      game: { team: teamTurn, point, word: words[word] },
-                    }
-                  : {
-                      teamA: 0,
-                      teamB: point,
-                      game: { team: teamTurn, point, word: words[word] },
-                    }
+                  ? { team: teamTurn, point, word: words[word] }
+                  : { team: teamTurn, point, word: words[word] }
               )
             );
             startNew();

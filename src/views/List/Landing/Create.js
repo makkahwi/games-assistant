@@ -1,10 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { setNames } from "values";
-
-import FormComp from "../../components/Form";
-import { useTranslation } from "react-i18next";
+import FormComp from "../../../components/Form";
+import { setNames } from "../../../redux/list";
 
 const CreateGame = () => {
   const dispatch = useDispatch();
@@ -16,42 +15,28 @@ const CreateGame = () => {
       name: "master",
       label: t("Game Master Name"),
       icon: "fa-solid fa-person-chalkboard",
-      minLength: 4,
+      minLength: 3,
       required: true,
     },
     {
-      name: "teamAmember1",
-      label: t("Team A Member 1 Name"),
+      name: "member1",
+      label: t("Member 1 Name"),
       icon: "fa-solid fa-a",
-      minLength: 4,
+      minLength: 3,
       required: true,
     },
     {
-      name: "teamAmember2",
-      label: t("Team A Member 2 Name"),
-      icon: "fa-solid fa-a",
-      minLength: 4,
-      required: true,
-    },
-    {
-      name: "teamBmember1",
-      label: t("Team B Member 1 Name"),
+      name: "member2",
+      label: t("Member 2 Name"),
       icon: "fa-solid fa-b",
-      minLength: 4,
-      required: true,
-    },
-    {
-      name: "teamBmember2",
-      label: t("Team B Member 2 Name"),
-      icon: "fa-solid fa-b",
-      minLength: 4,
+      minLength: 3,
       required: true,
     },
   ];
 
   return (
     <FormComp
-      label={t("Create New Game")}
+      label={t("Create New ListWords Game")}
       inputs={inputs}
       submitLabel={t("Create")}
       onSubmit={(values) => {

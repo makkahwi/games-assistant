@@ -1,3 +1,4 @@
-# Password Game
+# Multi-Game Assistant
 
-- Build players version
+- PassWord Game
+- ListWords Game

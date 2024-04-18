@@ -26,15 +26,15 @@ const NavbarComp = () => {
     >
       <Container>
         <NavbarBrand className="mr-lg-5 display-4" to="/" tag={Link}>
-          Password
+          Games Assistant
         </NavbarBrand>
 
         <Nav>
-          <NavItem>
+          {/* <NavItem>
             <Link to="/rules">
               <NavLink className="text-white">{t("Game Rules")}</NavLink>
             </Link>
-          </NavItem>
+          </NavItem> */}
 
           <NavItem>
             <NavLink

@@ -26,7 +26,9 @@ const FormComp = ({
         onSubmit(inputValues);
       }}
     >
-      <h4 className={light ? "text-white" : "text-dark"}>{label}</h4>
+      <h4 className={(light ? "text-white" : "text-primary") + " mb-4"}>
+        {label}
+      </h4>
 
       {inputs.map(
         (

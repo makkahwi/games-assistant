@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 
-const RulesPage = () => {
+const PassWordRules = () => {
   const { t } = useTranslation();
 
-  const [activeTab, setActiveTab] = useState("Welcome");
+  const [activeTab, setActiveTab] = useState("Introduction");
 
   const contents = [
     {
-      title: t("Introduction"),
+      title: "Introduction",
       rules: [
         t(
           "This is a game for two teams, each team is made of two members Let's call them Team A & Team B, and each team have Member 1 & Member 2"
@@ -26,7 +26,7 @@ const RulesPage = () => {
       ],
     },
     {
-      title: t("How To Play"),
+      title: "How To Play",
       rules: [
         t(
           "Game start with a password given to Member 1 of each team, and Team A start playing where Member 1 check the password, then gives one-word clue to Member 2 of his team to try n guess the password"
@@ -42,7 +42,7 @@ const RulesPage = () => {
       ],
     },
     {
-      title: t("Scores"),
+      title: "Scores",
       rules: [
         t(
           "Winner team is the one that collects most points of all played rounds"
@@ -65,6 +65,8 @@ const RulesPage = () => {
 
   return (
     <Card className="p-5">
+      <h4 className="text-primary mb-4">PassWord Game Rules</h4>
+
       <Nav className="nav-pills-primary" pills role="tablist">
         {contents.map(({ title }, i) => (
           <NavItem className="p-0 text-center mr-4">
@@ -72,20 +74,13 @@ const RulesPage = () => {
               className={activeTab === title ? "active" : ""}
               onClick={() => setActiveTab(title)}
             >
-              {title}
+              {t(title)}
             </NavLink>
           </NavItem>
         ))}
       </Nav>
 
       <TabContent className="mt-2" activeTab={activeTab}>
-        <TabPane
-          tabId="Welcome"
-          className="text-primary font-weight-bold text-justify py-4"
-        >
-          {t("This is the manual for game introduction and rules")}
-        </TabPane>
-
         {contents.map(({ title, rules }, i) => (
           <TabPane tabId={title} key={i}>
             <ul className="pl-4">
@@ -105,4 +100,4 @@ const RulesPage = () => {
   );
 };
 
-export default RulesPage;
+export default PassWordRules;
