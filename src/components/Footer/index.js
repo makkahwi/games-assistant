@@ -66,7 +66,9 @@ const FooterComp = () => {
             </h3>
 
             <h6 className="mb-0 font-weight-light">
-              {t("This app covers the role of the game coordinator / master")}
+              {t(
+                "This app is about helping players & game masters to track their ongoing games"
+              )}
             </h6>
           </Col>
 

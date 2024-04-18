@@ -49,7 +49,7 @@
   "Team with most scores after certain number of rounds wins Number of rounds should be 4 or one of its multiplies": "الفريق الحائز على أكبر عدد من النقاط بعد عدد معين من الجولات يفوز. ويجب أن يكون عدد الجولات 4 أو مضاعفاتها.",
   "Teams": "الفريقين",
   "The game is about guessing a password, one word of Arabic language, which could be a noun, verb or adjective": "اللعبة هي محاولة لتخمين واكتشاف كلمة واحدة من اللغة العربية (PassWord), من الممكن ان تكون اسماً أو فعلاً أو صفة.",
-  "This app covers the role of the game coordinator / master": "تقوم هذه الاداة بدور مدير اللعبة",
+  "This app is about helping players & game masters to track their ongoing games": "تقوم هذه الاداة بدور مدير اللعبة",
   "This is a game for two teams, each team is made of two members Let's call them Team A & Team B, and each team have Member 1 & Member 2": "هذه اللعبة لفريقين, يتألف كل فريق فيها من عضوين. ولنسمهم الفريق الأول والفريق الثاني, وفي كل فريق العضو الأول والعضو الثاني.",
   "This is the manual for PassWord game introduction and rules": "هذا هو دليل تقديم اللعبة وشرح قواعدها",
   "Welcome": "أهلاً بك {{name}}",
