@@ -39,9 +39,25 @@ const Game = () => {
       current === members[0] ? members[1] : members[0]
     );
 
-  const YourTurn = () => (
-    <h2 className="bg-danger text-white py-2 my-3">It's Your Turn</h2>
-  );
+  const CurrentStatus = ({ ownTurn }) =>
+    teamClocks.filter((v) => v <= 0).length
+      ? teamClocks
+          .map((v) =>
+            v <= 0 ? { time: v, lost: true } : { time: v, lost: false }
+          )
+          .map(({ lost }, i) => (
+            <h2
+              className={
+                (lost ? "bg-danger" : "bg-success") + " text-white  py-2 my-3"
+              }
+              key={i}
+            >
+              {members[i] + " " + (lost ? "lost" : "won")}
+            </h2>
+          ))
+      : ownTurn && (
+          <h2 className="bg-danger text-white py-2 my-3">It's Your Turn</h2>
+        );
 
   const CategoryChoose = () => (
     <Fragment>
@@ -157,64 +173,77 @@ const Game = () => {
             </ButtonGroup>
           </CardBody>
         ) : (
-          members.map((member, i) => (
-            <Fragment key={i}>
-              <CardBody
-                className="text-primary"
-                style={i == 0 && rotate ? { rotate: "180deg" } : {}}
-              >
-                <h6>{member}</h6>
+          members.map((member, i) => {
+            const gameEnded = teamClocks.filter((v) => v <= 0).length;
+            const disableButtons = gameEnded || listingTurn != member;
 
-                {listingTurn === member && <YourTurn />}
+            return (
+              <Fragment key={i}>
+                <CardBody
+                  className="text-primary"
+                  style={i == 0 && rotate ? { rotate: "180deg" } : {}}
+                >
+                  <h6>{member}</h6>
 
-                {currentCategory === null ? (
-                  startTurn === member && <CategoryChoose />
-                ) : (
-                  <Fragment>
-                    <h1>
-                      {teamClocks[i] > 10000
-                        ? teamClocks[i] / 1000
-                        : teamClocks[i]}
-                    </h1>
+                  <CurrentStatus ownTurn={listingTurn === member} />
 
-                    <h4>
-                      {t("Category is")} "{wordCategories[currentCategory]}"
-                    </h4>
+                  {currentCategory === null ? (
+                    startTurn === member && <CategoryChoose />
+                  ) : (
+                    <Fragment>
+                      <h1>{teamClocks[i] / 1000}</h1>
 
-                    <ButtonGroup>
+                      <h4>
+                        {t("Category is")} "{wordCategories[currentCategory]}"
+                      </h4>
+
+                      <ButtonGroup>
+                        <Button
+                          color="success"
+                          onClick={() => switchTurn()}
+                          disabled={disableButtons}
+                          className={flipButtons[i] ? "order-2" : "order-1"}
+                        >
+                          {t("Stop Clock")}
+                        </Button>
+
+                        <Button
+                          color="danger"
+                          onClick={() => setChallenger(member)}
+                          disabled={disableButtons}
+                          className={flipButtons[i] ? "order-1" : "order-2"}
+                        >
+                          {t("Challenge Pervious Answer")}
+                        </Button>
+                      </ButtonGroup>
+
                       <Button
-                        color="success"
-                        onClick={() => switchTurn()}
-                        disabled={listingTurn != member}
-                        className={flipButtons[i] ? "order-2" : "order-1"}
+                        color="warning"
+                        className="p-1 mt-2"
+                        onClick={() => doButtonsFlip(i)}
                       >
-                        {t("Stop Clock")}
+                        Flip Buttons
                       </Button>
 
-                      <Button
-                        color="danger"
-                        onClick={() => setChallenger(member)}
-                        disabled={listingTurn != member}
-                        className={flipButtons[i] ? "order-1" : "order-2"}
-                      >
-                        {t("Challenge Pervious Answer")}
-                      </Button>
-                    </ButtonGroup>
+                      {gameEnded ? (
+                        <Button
+                          color="primary"
+                          className="w-100 mt-4"
+                          onClick={() => ""}
+                        >
+                          Pick New Category
+                        </Button>
+                      ) : (
+                        ""
+                      )}
+                    </Fragment>
+                  )}
+                </CardBody>
 
-                    <Button
-                      color="warning"
-                      className="p-1 mt-2"
-                      onClick={() => doButtonsFlip(i)}
-                    >
-                      Flip Buttons
-                    </Button>
-                  </Fragment>
-                )}
-              </CardBody>
-
-              {i == 0 && <hr className="bg-dark w-100" />}
-            </Fragment>
-          ))
+                {i == 0 && <hr className="bg-dark w-100" />}
+              </Fragment>
+            );
+          })
         )}
       </Card>
     </Fragment>
