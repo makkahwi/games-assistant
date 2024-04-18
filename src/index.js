@@ -1,3 +1,5 @@
+import i18next from "./redux/i18next";
+import store from "./redux/store";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import { Provider } from "react-redux";
@@ -7,12 +9,12 @@ import { Container } from "reactstrap";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 import Landing from "views";
-import GamePage from "views/Password/Game";
-import PasswordLanding from "views/Password/Landing";
-import PasswordRules from "views/Password/Rules";
-
-import i18next from "./redux/i18next";
-import store from "./redux/store";
+import ListWordsGame from "views/List/Game";
+import ListWordsLanding from "views/List/Landing";
+import ListWordsRules from "views/List/Rules";
+import PassWordGame from "views/Password/Game";
+import PassWordLanding from "views/Password/Landing";
+import PassWordRules from "views/Password/Rules";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-design-system.scss?v1.0.0";
@@ -45,17 +47,28 @@ const App = () => {
                   <Route
                     path="/password-rules"
                     exact
-                    element={<PasswordRules />}
+                    element={<PassWordRules />}
+                  />
+                  <Route
+                    path="/list-rules"
+                    exact
+                    element={<ListWordsRules />}
                   />
 
                   {store.getState().password.master ? (
-                    <Route path="/password" exact element={<GamePage />} />
+                    <Route path="/password" exact element={<PassWordGame />} />
                   ) : (
                     <Route
                       path="/password"
                       exact
-                      element={<PasswordLanding />}
+                      element={<PassWordLanding />}
                     />
+                  )}
+
+                  {store.getState().list.master ? (
+                    <Route path="/list" exact element={<ListWordsGame />} />
+                  ) : (
+                    <Route path="/list" exact element={<ListWordsLanding />} />
                   )}
 
                   <Route path="*" element={<Navigate to="/" replace />} />
