@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initValues = {
-  master: localStorage.getItem("master") || "",
-  members: (localStorage.getItem("members") &&
-    JSON.parse(localStorage.getItem("members"))) || [
+  master: localStorage.getItem("password-master") || "",
+  members: (localStorage.getItem("password-members") &&
+    JSON.parse(localStorage.getItem("password-members"))) || [
     ["", ""],
     ["", ""],
   ],
-  scores: localStorage.getItem("scores") || [0, 0],
+  scores: localStorage.getItem("password-scores") || [0, 0],
   history:
-    (localStorage.getItem("history") &&
-      JSON.parse(localStorage.getItem("history"))) ||
+    (localStorage.getItem("password-history") &&
+      JSON.parse(localStorage.getItem("password-history"))) ||
     [],
 };
 
@@ -25,8 +25,8 @@ export const passwordSlice = createSlice({
         [action.payload?.teamBmember1, action.payload?.teamBmember2],
       ];
 
-      localStorage.setItem("master", state.master);
-      localStorage.setItem("members", JSON.stringify(state.members));
+      localStorage.setItem("password-master", state.master);
+      localStorage.setItem("password-members", JSON.stringify(state.members));
     },
     addScores: (state, action) => {
       state.scores = [
@@ -35,11 +35,11 @@ export const passwordSlice = createSlice({
       ];
       state.history.push(action.payload?.game);
 
-      localStorage.setItem("scores", state.scores);
-      localStorage.setItem("history", JSON.stringify(state.history));
+      localStorage.setItem("password-scores", state.scores);
+      localStorage.setItem("password-history", JSON.stringify(state.history));
     },
     reset: (state) => {
-      localStorage.setItem("master", "");
+      localStorage.setItem("password-master", "");
       localStorage.setItem(
         "members",
         JSON.stringify([
@@ -47,8 +47,8 @@ export const passwordSlice = createSlice({
           ["", ""],
         ])
       );
-      localStorage.setItem("scores", [0, 0]);
-      localStorage.setItem("history", JSON.stringify([]));
+      localStorage.setItem("password-scores", [0, 0]);
+      localStorage.setItem("password-history", JSON.stringify([]));
       state = initValues;
     },
   },
