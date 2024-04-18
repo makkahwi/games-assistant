@@ -62,7 +62,7 @@ const FooterComp = () => {
         <Row className="row-grid align-items-center mb-1">
           <Col lg="6">
             <h3 className="text-primary font-weight-light mb-2">
-              Password Game Master
+              Multi-Game Assistant
             </h3>
 
             <h6 className="mb-0 font-weight-light">
@@ -103,7 +103,7 @@ const FooterComp = () => {
         <Row className="align-items-center justify-content-md-between">
           <Col md="6">
             <div className="copyright">
-              Password Game Master © {new Date().getFullYear()}
+              Multi-Game Assistant © {new Date().getFullYear()}
             </div>
           </Col>
         </Row>

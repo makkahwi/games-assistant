@@ -16,14 +16,14 @@ const Landing = () => {
 
   const games = [
     {
-      title: "Password",
+      title: "PassWord",
       desc: "This is it",
       img: require("assets/img/card-bg/3.svg").default,
       url: "/password",
       rulesUrl: "password-rules",
     },
     {
-      title: "List",
+      title: "ListWords",
       desc: "This is it",
       img: require("assets/img/card-bg/2.svg").default,
       url: "/list",

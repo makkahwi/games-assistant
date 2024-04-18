@@ -1,3 +1,1 @@
-# Password Game
-
-- Build players version
+# Multi-Game Assistant

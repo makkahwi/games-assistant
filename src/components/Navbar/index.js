@@ -26,7 +26,7 @@ const NavbarComp = () => {
     >
       <Container>
         <NavbarBrand className="mr-lg-5 display-4" to="/" tag={Link}>
-          Password
+          Games Assistant
         </NavbarBrand>
 
         <Nav>

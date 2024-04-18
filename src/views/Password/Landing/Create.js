@@ -50,7 +50,7 @@ const CreateGame = () => {
 
   return (
     <FormComp
-      label={t("Create New Game")}
+      label={t("Create New PassWord Game")}
       inputs={inputs}
       submitLabel={t("Create")}
       onSubmit={(values) => {

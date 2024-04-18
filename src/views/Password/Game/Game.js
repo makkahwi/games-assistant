@@ -61,7 +61,7 @@ const Game = () => {
       <Row className="my-3">
         <Col md="6">
           <h4 className="text-white">
-            {t("Password is")} "{words[word]}"
+            {t("PassWord is")} "{words[word]}"
           </h4>
         </Col>
 
@@ -73,7 +73,7 @@ const Game = () => {
       <Row>
         <Col md="6">
           <h4 className="text-white">
-            {t("Hand Password to")} {data[0][guesserTurn]} &{" "}
+            {t("Hand PassWord to")} {data[0][guesserTurn]} &{" "}
             {data[1][guesserTurn]}
           </h4>
         </Col>

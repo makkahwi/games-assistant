@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 
-const RulesPage = () => {
+const PassWordRules = () => {
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState("Welcome");
@@ -83,7 +83,7 @@ const RulesPage = () => {
           tabId="Welcome"
           className="text-primary font-weight-bold text-justify py-4"
         >
-          {t("This is the manual for game introduction and rules")}
+          {t("This is the manual for PassWord game introduction and rules")}
         </TabPane>
 
         {contents.map(({ title, rules }, i) => (
@@ -105,4 +105,4 @@ const RulesPage = () => {
   );
 };
 
-export default RulesPage;
+export default PassWordRules;

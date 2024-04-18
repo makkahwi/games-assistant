@@ -20,7 +20,7 @@ import Header from "./Header";
 import ScoresTable from "./Scores";
 import TeamsTable from "./TeamsTable";
 
-const GamePage = () => {
+const PassWordGame = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -136,4 +136,4 @@ const GamePage = () => {
   );
 };
 
-export default GamePage;
+export default PassWordGame;
