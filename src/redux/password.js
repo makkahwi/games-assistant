@@ -33,7 +33,7 @@ export const passwordSlice = createSlice({
         state.scores[0] + action.payload?.teamA,
         state.scores[1] + action.payload?.teamB,
       ];
-      state.history.push(action.payload?.password);
+      state.history.push(action.payload?.game);
 
       localStorage.setItem("scores", state.scores);
       localStorage.setItem("history", JSON.stringify(state.history));
