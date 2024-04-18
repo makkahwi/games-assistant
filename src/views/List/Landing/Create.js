@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import FormComp from "../../../components/Form";
-import { setNames } from "../../../redux/password";
+import { setNames } from "../../../redux/list";
 
 const CreateGame = () => {
   const dispatch = useDispatch();
@@ -19,29 +19,15 @@ const CreateGame = () => {
       required: true,
     },
     {
-      name: "teamAmember1",
-      label: t("Team A Member 1 Name"),
+      name: "member1",
+      label: t("Member 1 Name"),
       icon: "fa-solid fa-a",
       minLength: 4,
       required: true,
     },
     {
-      name: "teamAmember2",
-      label: t("Team A Member 2 Name"),
-      icon: "fa-solid fa-a",
-      minLength: 4,
-      required: true,
-    },
-    {
-      name: "teamBmember1",
-      label: t("Team B Member 1 Name"),
-      icon: "fa-solid fa-b",
-      minLength: 4,
-      required: true,
-    },
-    {
-      name: "teamBmember2",
-      label: t("Team B Member 2 Name"),
+      name: "member2",
+      label: t("Member 2 Name"),
       icon: "fa-solid fa-b",
       minLength: 4,
       required: true,

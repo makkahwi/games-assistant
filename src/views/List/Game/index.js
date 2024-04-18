@@ -14,7 +14,7 @@ import {
   TabPane,
 } from "reactstrap";
 
-import { reset } from "../../../redux/password";
+import { reset } from "../../../redux/list";
 import Game from "./Game";
 import Header from "./Header";
 import ScoresTable from "./Scores";
