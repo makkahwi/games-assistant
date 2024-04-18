@@ -1,16 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initValues = {
-  master: localStorage.getItem("master") || "",
-  members: (localStorage.getItem("members") &&
-    JSON.parse(localStorage.getItem("members"))) || [
-    ["", ""],
-    ["", ""],
-  ],
-  scores: localStorage.getItem("scores") || [0, 0],
+  master: localStorage.getItem("list-master") || "",
+  members: (localStorage.getItem("list-members") &&
+    JSON.parse(localStorage.getItem("list-members"))) || ["", ""],
+  scores: localStorage.getItem("list-scores") || [0, 0],
   history:
-    (localStorage.getItem("history") &&
-      JSON.parse(localStorage.getItem("history"))) ||
+    (localStorage.getItem("list-history") &&
+      JSON.parse(localStorage.getItem("list-history"))) ||
     [],
 };
 
@@ -20,35 +17,26 @@ export const listSlice = createSlice({
   reducers: {
     setNames: (state, action) => {
       state.master = action.payload?.master;
-      state.members = [
-        [action.payload?.teamAmember1, action.payload?.teamAmember2],
-        [action.payload?.teamBmember1, action.payload?.teamBmember2],
-      ];
+      state.members = [action.payload?.member1, action.payload?.member2];
 
-      localStorage.setItem("master", state.master);
-      localStorage.setItem("members", JSON.stringify(state.members));
+      localStorage.setItem("list-master", state.master);
+      localStorage.setItem("list-members", JSON.stringify(state.members));
     },
     addScores: (state, action) => {
       state.scores = [
-        state.scores[0] + action.payload?.teamA,
-        state.scores[1] + action.payload?.teamB,
+        parseInt(state.scores[0]) + action.payload?.teamA,
+        parseInt(state.scores[1]) + action.payload?.teamB,
       ];
       state.history.push(action.payload?.game);
 
-      localStorage.setItem("scores", state.scores);
-      localStorage.setItem("history", JSON.stringify(state.history));
+      localStorage.setItem("list-scores", state.scores);
+      localStorage.setItem("list-history", JSON.stringify(state.history));
     },
     reset: (state) => {
-      localStorage.setItem("master", "");
-      localStorage.setItem(
-        "members",
-        JSON.stringify([
-          ["", ""],
-          ["", ""],
-        ])
-      );
-      localStorage.setItem("scores", [0, 0]);
-      localStorage.setItem("history", JSON.stringify([]));
+      localStorage.setItem("list-master", "");
+      localStorage.setItem("list-members", JSON.stringify(["", ""]));
+      localStorage.setItem("list-scores", [0, 0]);
+      localStorage.setItem("list-history", JSON.stringify([]));
       state = initValues;
     },
   },
