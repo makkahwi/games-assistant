@@ -4,7 +4,6 @@ const initValues = {
   master: localStorage.getItem("list-master") || "",
   members: (localStorage.getItem("list-members") &&
     JSON.parse(localStorage.getItem("list-members"))) || ["", ""],
-  scores: localStorage.getItem("list-scores") || [0, 0],
   history:
     (localStorage.getItem("list-history") &&
       JSON.parse(localStorage.getItem("list-history"))) ||
@@ -23,20 +22,14 @@ export const listSlice = createSlice({
       localStorage.setItem("list-members", JSON.stringify(state.members));
     },
     addScores: (state, action) => {
-      state.scores = [
-        parseInt(state.scores[0]) + action.payload?.teamA,
-        parseInt(state.scores[1]) + action.payload?.teamB,
-      ];
-      state.history.push(action.payload?.game);
+      state.history.push(action.payload);
 
-      localStorage.setItem("list-scores", state.scores);
       localStorage.setItem("list-history", JSON.stringify(state.history));
     },
     reset: (state) => {
-      localStorage.setItem("list-master", "");
-      localStorage.setItem("list-members", JSON.stringify(["", ""]));
-      localStorage.setItem("list-scores", [0, 0]);
-      localStorage.setItem("list-history", JSON.stringify([]));
+      localStorage.removeItem("list-master");
+      localStorage.removeItem("list-members");
+      localStorage.removeItem("list-history");
       state = initValues;
     },
   },

@@ -95,16 +95,8 @@ const Game = () => {
             dispatch(
               addScores(
                 teamTurn === t("Team A")
-                  ? {
-                      teamA: point,
-                      teamB: 0,
-                      game: { team: teamTurn, point, word: words[word] },
-                    }
-                  : {
-                      teamA: 0,
-                      teamB: point,
-                      game: { team: teamTurn, point, word: words[word] },
-                    }
+                  ? { team: teamTurn, point, word: words[word] }
+                  : { team: teamTurn, point, word: words[word] }
               )
             );
             startNew();

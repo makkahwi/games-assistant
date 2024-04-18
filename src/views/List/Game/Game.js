@@ -77,22 +77,14 @@ const Game = () => {
         (challenger === members[0] && gotIt) ||
           (challenger === members[1] && !gotIt)
           ? {
-              teamA: 1,
-              teamB: 0,
-              game: {
-                team: members[0],
-                point: 1,
-                category: currentCategory,
-              },
+              team: members[0],
+              point: 1,
+              category: currentCategory,
             }
           : {
-              teamA: 0,
-              teamB: 1,
-              game: {
-                team: members[1],
-                point: 1,
-                category: currentCategory,
-              },
+              team: members[1],
+              point: 1,
+              category: currentCategory,
             }
       )
     );

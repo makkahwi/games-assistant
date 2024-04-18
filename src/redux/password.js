@@ -7,7 +7,6 @@ const initValues = {
     ["", ""],
     ["", ""],
   ],
-  scores: localStorage.getItem("password-scores") || [0, 0],
   history:
     (localStorage.getItem("password-history") &&
       JSON.parse(localStorage.getItem("password-history"))) ||
@@ -29,26 +28,14 @@ export const passwordSlice = createSlice({
       localStorage.setItem("password-members", JSON.stringify(state.members));
     },
     addScores: (state, action) => {
-      state.scores = [
-        state.scores[0] + action.payload?.teamA,
-        state.scores[1] + action.payload?.teamB,
-      ];
-      state.history.push(action.payload?.game);
+      state.history.push(action.payload);
 
-      localStorage.setItem("password-scores", state.scores);
       localStorage.setItem("password-history", JSON.stringify(state.history));
     },
     reset: (state) => {
-      localStorage.setItem("password-master", "");
-      localStorage.setItem(
-        "members",
-        JSON.stringify([
-          ["", ""],
-          ["", ""],
-        ])
-      );
-      localStorage.setItem("password-scores", [0, 0]);
-      localStorage.setItem("password-history", JSON.stringify([]));
+      localStorage.removeItem("password-master");
+      localStorage.removeItem("members");
+      localStorage.removeItem("password-history");
       state = initValues;
     },
   },
