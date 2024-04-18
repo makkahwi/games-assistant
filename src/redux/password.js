@@ -34,7 +34,7 @@ export const passwordSlice = createSlice({
     },
     reset: (state) => {
       localStorage.removeItem("password-master");
-      localStorage.removeItem("members");
+      localStorage.removeItem("password-members");
       localStorage.removeItem("password-history");
       state = initValues;
     },
