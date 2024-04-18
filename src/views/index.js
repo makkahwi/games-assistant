@@ -19,14 +19,14 @@ const Landing = () => {
       desc: "This is it",
       img: require("assets/img/card-bg/3.svg").default,
       url: "/password",
-      rulesUrl: "password-rules",
+      rulesUrl: "/password-rules",
     },
     {
       title: "ListWords",
       desc: "This is it",
       img: require("assets/img/card-bg/2.svg").default,
-      url: "/list",
-      rulesUrl: "list-rules",
+      url: "/list-words",
+      rulesUrl: "/list-words-rules",
     },
   ];
 

@@ -1,5 +1,3 @@
-import i18next from "./redux/i18next";
-import store from "./redux/store";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import { Provider } from "react-redux";
@@ -15,6 +13,9 @@ import ListWordsRules from "views/List/Rules";
 import PassWordGame from "views/Password/Game";
 import PassWordLanding from "views/Password/Landing";
 import PassWordRules from "views/Password/Rules";
+
+import i18next from "./redux/i18next";
+import store from "./redux/store";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-design-system.scss?v1.0.0";
@@ -50,7 +51,7 @@ const App = () => {
                     element={<PassWordRules />}
                   />
                   <Route
-                    path="/list-rules"
+                    path="/list-words-rules"
                     exact
                     element={<ListWordsRules />}
                   />
@@ -66,9 +67,17 @@ const App = () => {
                   )}
 
                   {store.getState().list.master ? (
-                    <Route path="/list" exact element={<ListWordsGame />} />
+                    <Route
+                      path="/list-words"
+                      exact
+                      element={<ListWordsGame />}
+                    />
                   ) : (
-                    <Route path="/list" exact element={<ListWordsLanding />} />
+                    <Route
+                      path="/list-words"
+                      exact
+                      element={<ListWordsLanding />}
+                    />
                   )}
 
                   <Route path="*" element={<Navigate to="/" replace />} />
