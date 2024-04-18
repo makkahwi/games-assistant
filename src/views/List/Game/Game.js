@@ -8,6 +8,7 @@ import { addScores } from "../../../redux/list";
 const Game = () => {
   const dispatch = useDispatch();
   const members = useSelector((state) => state.list.members);
+  const history = useSelector((state) => state.list.history);
   const { t } = useTranslation();
 
   const wordCategories = [
@@ -20,13 +21,13 @@ const Game = () => {
   ];
 
   const [currentCategory, setCurrentCategory] = useState(null);
-  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const [teamClocks, setTeamClocks] = useState([20000, 20000]);
   const [startTurn, setStartTurn] = useState(members[0]);
   const [listingTurn, setListingTurn] = useState(members[0]);
   const [challenger, setChallenger] = useState(null);
   const [rotate, setRotate] = useState(false);
+  const [flipButtons, setFlipButtons] = useState([false, false]);
 
   const changeStartTurn = () =>
     setStartTurn((current) =>
@@ -47,27 +48,24 @@ const Game = () => {
       <h6>Choose Category Plz</h6>
 
       <Row>
-        {wordCategories.map((cat, i) => (
-          <Col className="my-2" key={i}>
-            <Button
-              disabled={selectedCategories.includes(i)}
-              color={
-                selectedCategories.includes(i)
-                  ? "secondary"
-                  : i % 2 === 0
-                  ? "warning"
-                  : "info"
-              }
-              onClick={() => {
-                setCurrentCategory(i);
-                setSelectedCategories((current) => [...current, i]);
-              }}
-              className="w-100"
-            >
-              {cat}
-            </Button>
-          </Col>
-        ))}
+        {wordCategories.map((cat, i) => {
+          const playedCat = !history.findIndex(({ category }) => category == i);
+
+          return (
+            <Col className="my-2" key={i}>
+              <Button
+                disabled={playedCat}
+                color={
+                  playedCat ? "secondary" : i % 2 === 0 ? "warning" : "info"
+                }
+                onClick={() => setCurrentCategory(i)}
+                className="w-100"
+              >
+                {cat}
+              </Button>
+            </Col>
+          );
+        })}
       </Row>
     </Fragment>
   );
@@ -95,12 +93,22 @@ const Game = () => {
     setCurrentCategory(null);
   };
 
+  const doButtonsFlip = (player) => {
+    let tempFlipButtons = [...flipButtons];
+    if (player == 0) {
+      tempFlipButtons = [!tempFlipButtons[0], tempFlipButtons[1]];
+    } else {
+      tempFlipButtons = [tempFlipButtons[0], !tempFlipButtons[1]];
+    }
+    setFlipButtons(tempFlipButtons);
+  };
+
   return (
     <Fragment>
       <Card>
         <CardBody className="text-right p-1">
           <Button
-            color="primary"
+            color="warning"
             className="p-1"
             onClick={() => setRotate((current) => !current)}
           >
@@ -152,6 +160,7 @@ const Game = () => {
                         color="success"
                         onClick={() => changeListingTurn()}
                         disabled={listingTurn != member}
+                        className={flipButtons[i] ? "order-2" : "order-1"}
                       >
                         {t("Stop Clock")}
                       </Button>
@@ -160,10 +169,19 @@ const Game = () => {
                         color="danger"
                         onClick={() => setChallenger(member)}
                         disabled={listingTurn != member}
+                        className={flipButtons[i] ? "order-1" : "order-2"}
                       >
                         {t("Challenge Pervious Answer")}
                       </Button>
                     </ButtonGroup>
+
+                    <Button
+                      color="warning"
+                      className="p-1 mt-2"
+                      onClick={() => doButtonsFlip(i)}
+                    >
+                      Flip Buttons
+                    </Button>
                   </Fragment>
                 )}
               </CardBody>
