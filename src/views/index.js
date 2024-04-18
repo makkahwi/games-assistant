@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 
 import WhiteCard from "components/cards/WhiteCard";
@@ -35,9 +34,13 @@ const Landing = () => {
     <Row>
       {games.map(({ title, desc, img, url, rulesUrl }, i) => (
         <Col md="6" key={i}>
-          <Link to={url}>
-            <WhiteCard title={title} desc={desc} bg={img} rulesUrl={rulesUrl} />
-          </Link>
+          <WhiteCard
+            title={title}
+            desc={desc}
+            bg={img}
+            gameUrl={url}
+            rulesUrl={rulesUrl}
+          />
         </Col>
       ))}
     </Row>
