@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
 
-import { addScores } from "../../redux/password";
+import { addScores } from "../../../redux/password";
 import { wordsBank } from "./WordBank";
 
 const Game = () => {

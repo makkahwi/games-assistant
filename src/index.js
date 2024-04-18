@@ -6,9 +6,10 @@ import { Container } from "reactstrap";
 
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
-import GamePage from "views/Game";
-import Landing from "views/Landing";
-import RulesPage from "views/Rules";
+import Landing from "views";
+import GamePage from "views/Password/Game";
+import PasswordLanding from "views/Password/Landing";
+import PasswordRules from "views/Password/Rules";
 
 import i18next from "./redux/i18next";
 import store from "./redux/store";
@@ -40,13 +41,20 @@ const App = () => {
             >
               <Container>
                 <Routes>
+                  <Route path="/" exact element={<Landing />} />
+                  <Route path="/password" exact element={<PasswordLanding />} />
+                  <Route
+                    path="/password-rules"
+                    exact
+                    element={<PasswordRules />}
+                  />
+
                   {store.getState().password.master ? (
                     <Route path="/" exact element={<GamePage />} />
                   ) : (
-                    <Route path="/" exact element={<Landing />} />
+                    ""
                   )}
 
-                  <Route path="/rules" exact element={<RulesPage />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </Container>

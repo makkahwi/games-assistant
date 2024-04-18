@@ -30,11 +30,11 @@ const NavbarComp = () => {
         </NavbarBrand>
 
         <Nav>
-          <NavItem>
+          {/* <NavItem>
             <Link to="/rules">
               <NavLink className="text-white">{t("Game Rules")}</NavLink>
             </Link>
-          </NavItem>
+          </NavItem> */}
 
           <NavItem>
             <NavLink
