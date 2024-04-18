@@ -42,7 +42,6 @@ const App = () => {
               <Container>
                 <Routes>
                   <Route path="/" exact element={<Landing />} />
-                  <Route path="/password" exact element={<PasswordLanding />} />
                   <Route
                     path="/password-rules"
                     exact
@@ -50,9 +49,13 @@ const App = () => {
                   />
 
                   {store.getState().password.master ? (
-                    <Route path="/" exact element={<GamePage />} />
+                    <Route path="/password" exact element={<GamePage />} />
                   ) : (
-                    ""
+                    <Route
+                      path="/password"
+                      exact
+                      element={<PasswordLanding />}
+                    />
                   )}
 
                   <Route path="*" element={<Navigate to="/" replace />} />

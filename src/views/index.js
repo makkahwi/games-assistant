@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 
+import WhiteCard from "components/cards/WhiteCard";
+
 const Landing = () => {
   React.useEffect(() => {
     document.body.classList.add("index-page");
@@ -12,15 +14,32 @@ const Landing = () => {
     };
   });
 
+  const games = [
+    {
+      title: "Password",
+      desc: "This is it",
+      img: require("assets/img/card-bg/3.svg").default,
+      url: "/password",
+      rulesUrl: "password-rules",
+    },
+    {
+      title: "List",
+      desc: "This is it",
+      img: require("assets/img/card-bg/2.svg").default,
+      url: "/list",
+      rulesUrl: "list-rules",
+    },
+  ];
+
   return (
     <Row>
-      <Col md="6">
-        <Link to="/password">Password</Link>
-      </Col>
-
-      <Col md="6">
-        <Link to="/list">List</Link>
-      </Col>
+      {games.map(({ title, desc, img, url, rulesUrl }, i) => (
+        <Col md="6" key={i}>
+          <Link to={url}>
+            <WhiteCard title={title} desc={desc} bg={img} rulesUrl={rulesUrl} />
+          </Link>
+        </Col>
+      ))}
     </Row>
   );
 };
