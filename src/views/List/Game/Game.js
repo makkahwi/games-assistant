@@ -45,16 +45,20 @@ const Game = () => {
           .map((v) =>
             v <= 0 ? { time: v, lost: true } : { time: v, lost: false }
           )
-          .map(({ lost }, i) => (
-            <h2
-              className={
-                (lost ? "bg-danger" : "bg-success") + " text-white  py-2 my-3"
-              }
-              key={i}
-            >
-              {members[i] + " " + (lost ? "lost" : "won")}
-            </h2>
-          ))
+          .map(({ lost }, i) =>
+            currentCategory ? (
+              <h2
+                className={
+                  (lost ? "bg-danger" : "bg-success") + " text-white  py-2 my-3"
+                }
+                key={i}
+              >
+                {members[i] + " " + (lost ? "lost" : "won")}
+              </h2>
+            ) : (
+              ""
+            )
+          )
       : ownTurn && (
           <h2 className="bg-danger text-white py-2 my-3">It's Your Turn</h2>
         );
@@ -86,27 +90,37 @@ const Game = () => {
     </Fragment>
   );
 
-  const startNewCategory = (gotIt) => {
-    dispatch(
-      addScores(
-        (challenger === members[0] && gotIt) ||
-          (challenger === members[1] && !gotIt)
-          ? {
-              team: members[0],
-              point: 1,
-              category: currentCategory,
-            }
-          : {
-              team: members[1],
-              point: 1,
-              category: currentCategory,
-            }
-      )
-    );
-
+  const startNewGame = () => {
     setChallenger(null);
     changeStartTurn();
     setCurrentCategory(null);
+    setTeamClocks([20000, 20000]);
+  };
+
+  const addScoreToTeam1 = () => {
+    dispatch(
+      addScores({
+        team: members[0],
+        point: 1,
+        category: currentCategory,
+      })
+    );
+  };
+
+  const addScoreToTeam2 = () => {
+    dispatch(
+      addScores({
+        team: members[1],
+        point: 1,
+        category: currentCategory,
+      })
+    );
+  };
+
+  const recordScore = (firstTeam) => {
+    firstTeam ? addScoreToTeam1() : addScoreToTeam2();
+
+    startNewGame();
   };
 
   const doButtonsFlip = (player) => {
@@ -121,7 +135,6 @@ const Game = () => {
 
   useEffect(() => {
     if (
-      currentCategory &&
       teamClocks.every((value, index) => value <= [20000, 19999][index]) &&
       teamClocks.every((value) => value > 0)
     ) {
@@ -163,18 +176,34 @@ const Game = () => {
             <h6>{challenger}</h6>
 
             <ButtonGroup>
-              <Button onClick={() => startNewCategory(true)} color="success">
+              <Button
+                onClick={() =>
+                  recordScore(
+                    (challenger === members[0] && true) ||
+                      (challenger === members[1] && false)
+                  )
+                }
+                color="success"
+              >
                 {t("Challenger is Right")}
               </Button>
 
-              <Button onClick={() => startNewCategory(false)} color="danger">
+              <Button
+                onClick={() =>
+                  recordScore(
+                    (challenger === members[0] && true) ||
+                      (challenger === members[1] && false)
+                  )
+                }
+                color="danger"
+              >
                 {t("Challenger is Wrong")}
               </Button>
             </ButtonGroup>
           </CardBody>
         ) : (
           members.map((member, i) => {
-            const gameEnded = teamClocks.filter((v) => v <= 0).length;
+            const gameEnded = teamClocks.filter((v) => v <= 0).length > 0;
             const disableButtons = gameEnded || listingTurn != member;
 
             return (
@@ -202,16 +231,27 @@ const Game = () => {
                           color="success"
                           onClick={() => switchTurn()}
                           disabled={disableButtons}
-                          className={flipButtons[i] ? "order-2" : "order-1"}
+                          className={flipButtons[i] ? "order-3" : "order-1"}
                         >
                           {t("Stop Clock")}
                         </Button>
+
+                        {teamClocks.filter((v) => v >= 19999).length === 2 &&
+                          startTurn === member && (
+                            <Button
+                              color="warning"
+                              onClick={() => setCurrentCategory(null)}
+                              className="order-2"
+                            >
+                              {t("Change Category")}
+                            </Button>
+                          )}
 
                         <Button
                           color="danger"
                           onClick={() => setChallenger(member)}
                           disabled={disableButtons}
-                          className={flipButtons[i] ? "order-1" : "order-2"}
+                          className={flipButtons[i] ? "order-1" : "order-3"}
                         >
                           {t("Challenge Pervious Answer")}
                         </Button>
@@ -229,7 +269,7 @@ const Game = () => {
                         <Button
                           color="primary"
                           className="w-100 mt-4"
-                          onClick={() => ""}
+                          onClick={() => recordScore(teamClocks[0] > 0)}
                         >
                           Pick New Category
                         </Button>
