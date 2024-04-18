@@ -26,6 +26,7 @@ const Game = () => {
   const [startTurn, setStartTurn] = useState(members[0]);
   const [listingTurn, setListingTurn] = useState(members[0]);
   const [challenger, setChallenger] = useState(null);
+  const [rotate, setRotate] = useState(false);
 
   const changeStartTurn = () =>
     setStartTurn((current) =>
@@ -97,11 +98,18 @@ const Game = () => {
   return (
     <Fragment>
       <Card>
-        {challenger ? (
-          <CardBody
-            className="text-primary"
-            //  style={{ rotate: "90deg" }}
+        <CardBody className="text-right p-1">
+          <Button
+            color="primary"
+            className="p-1"
+            onClick={() => setRotate((current) => !current)}
           >
+            Rotate
+          </Button>
+        </CardBody>
+
+        {challenger ? (
+          <CardBody className="text-primary">
             <h6>{challenger}</h6>
 
             <ButtonGroup>
@@ -119,7 +127,7 @@ const Game = () => {
             <Fragment key={i}>
               <CardBody
                 className="text-primary"
-                // style={i == 0 ? { rotate: "180deg" } : {}}
+                style={i == 0 && rotate ? { rotate: "180deg" } : {}}
               >
                 <h6>{member}</h6>
 
