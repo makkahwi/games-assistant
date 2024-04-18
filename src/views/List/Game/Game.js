@@ -1,133 +1,174 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, ButtonGroup, Col, Row } from "reactstrap";
+import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 
-import { addScores } from "../../../redux/password";
-import { wordsBank } from "./WordBank";
+import { addScores } from "../../../redux/list";
 
 const Game = () => {
-  const members = useSelector((state) => state.password.members);
   const dispatch = useDispatch();
+  const members = useSelector((state) => state.list.members);
   const { t } = useTranslation();
 
-  const data = [members[0], members[1]];
+  const wordCategories = [
+    "Animals",
+    "Colors",
+    "Names",
+    "Places",
+    "Cities",
+    "Countries",
+  ];
 
-  const words = wordsBank;
+  const [currentCategory, setCurrentCategory] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const getRandomInt = (min = 0, max = words.length) => {
-    const minCeiled = Math.ceil(min);
-    const maxFloored = Math.floor(max);
-    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
-  };
+  const [teamClocks, setTeamClocks] = useState([20, 20]);
+  const [startTurn, setStartTurn] = useState(members[0]);
+  const [listingTurn, setListingTurn] = useState(members[0]);
+  const [challenger, setChallenger] = useState(null);
 
-  const [word, setWord] = useState(getRandomInt());
-  const [startingTeamTurn, setStartingTeamTurn] = useState(t("Team A"));
-  const [teamTurn, setTeamTurn] = useState(t("Team A"));
-  const [guesserTurn, setGuesserTurn] = useState(0);
-  const [point, setPoint] = useState(6);
+  const changeStartTurn = () =>
+    setStartTurn((current) =>
+      current === members[0] ? members[1] : members[0]
+    );
 
-  const changeWord = () => setWord(getRandomInt());
-  const changeTeam = (current) =>
-    current === t("Team A") ? t("Team B") : t("Team A");
-  const changeGuesser = () =>
-    setGuesserTurn((current) => (current == 0 ? 1 : 0));
+  const changeListingTurn = () =>
+    setListingTurn((current) =>
+      current === members[0] ? members[1] : members[0]
+    );
 
-  const startNew = () => {
-    setPoint(6);
-    changeWord();
-    const newTeam = changeTeam(startingTeamTurn);
-    setStartingTeamTurn(newTeam);
-    changeGuesser();
-    setTeamTurn(newTeam);
+  const YourTurn = () => (
+    <h2 className="bg-danger text-white py-2 my-3">It's Your Turn</h2>
+  );
+
+  const CategoryChoose = () => (
+    <Fragment>
+      <h6>Choose Category Plz</h6>
+
+      <Row>
+        {wordCategories.map((cat, i) => (
+          <Col className="my-2" key={i}>
+            <Button
+              disabled={selectedCategories.includes(i)}
+              color={
+                selectedCategories.includes(i)
+                  ? "secondary"
+                  : i % 2 === 0
+                  ? "warning"
+                  : "info"
+              }
+              onClick={() => {
+                setCurrentCategory(i);
+                setSelectedCategories((current) => [...current, i]);
+              }}
+              className="w-100"
+            >
+              {cat}
+            </Button>
+          </Col>
+        ))}
+      </Row>
+    </Fragment>
+  );
+
+  const startNewCategory = (gotIt) => {
+    dispatch(
+      addScores(
+        (challenger === members[0] && gotIt) ||
+          (challenger === members[1] && !gotIt)
+          ? {
+              teamA: 1,
+              teamB: 0,
+              game: {
+                team: members[0],
+                point: 1,
+                category: currentCategory,
+              },
+            }
+          : {
+              teamA: 0,
+              teamB: 1,
+              game: {
+                team: members[1],
+                point: 1,
+                category: currentCategory,
+              },
+            }
+      )
+    );
+
+    setChallenger(null);
+    changeStartTurn();
+    setCurrentCategory(null);
   };
 
   return (
     <Fragment>
-      <Row>
-        <Col md="6">
-          <h4 className="text-white">
-            {t("It's team turn", { team: teamTurn })}
-          </h4>
-        </Col>
+      <Card>
+        {challenger ? (
+          <CardBody
+            className="text-primary"
+            //  style={{ rotate: "90deg" }}
+          >
+            <h6>{challenger}</h6>
 
-        <Col md="6">
-          <Button onClick={() => setTeamTurn((current) => changeTeam(current))}>
-            {t("Switch Team")}
-          </Button>
-        </Col>
-      </Row>
+            <ButtonGroup>
+              <Button onClick={() => startNewCategory(true)} color="success">
+                {t("Challenger is Right")}
+              </Button>
 
-      <Row className="my-3">
-        <Col md="6">
-          <h4 className="text-white">
-            {t("ListWords is")} "{words[word]}"
-          </h4>
-        </Col>
+              <Button onClick={() => startNewCategory(false)} color="danger">
+                {t("Challenger is Wrong")}
+              </Button>
+            </ButtonGroup>
+          </CardBody>
+        ) : (
+          members.map((member, i) => (
+            <Fragment key={i}>
+              <CardBody
+                className="text-primary"
+                // style={i == 0 ? { rotate: "180deg" } : {}}
+              >
+                <h6>{member}</h6>
 
-        <Col md="6">
-          <Button onClick={() => changeWord()}>{t("Change Word")}</Button>
-        </Col>
-      </Row>
+                {listingTurn === member && <YourTurn />}
 
-      <Row>
-        <Col md="6">
-          <h4 className="text-white">
-            {t("Hand ListWords to")} {data[0][guesserTurn]} &{" "}
-            {data[1][guesserTurn]}
-          </h4>
-        </Col>
+                {currentCategory === null ? (
+                  startTurn === member && <CategoryChoose />
+                ) : (
+                  <Fragment>
+                    <h1>{teamClocks[0]}</h1>
 
-        <Col md="6">
-          <Button onClick={() => changeGuesser()}>
-            {t("Switch Clue Givers")}
-          </Button>
-        </Col>
-      </Row>
+                    <h4>
+                      {t("Category is")} "{wordCategories[currentCategory]}"
+                    </h4>
 
-      <h5 className="text-white">{t("Playing for x points", { point })}</h5>
+                    <ButtonGroup>
+                      <Button
+                        color="success"
+                        onClick={() => changeListingTurn()}
+                        disabled={listingTurn != member}
+                      >
+                        {t("Stop Clock")}
+                      </Button>
 
-      <ButtonGroup>
-        <Button
-          color="success"
-          type="button"
-          onClick={() => {
-            dispatch(
-              addScores(
-                teamTurn === t("Team A")
-                  ? {
-                      teamA: point,
-                      teamB: 0,
-                      game: { team: teamTurn, point, word: words[word] },
-                    }
-                  : {
-                      teamA: 0,
-                      teamB: point,
-                      game: { team: teamTurn, point, word: words[word] },
-                    }
-              )
-            );
-            startNew();
-          }}
-        >
-          {t("Guessed Right")}
-        </Button>
+                      <Button
+                        color="danger"
+                        onClick={() => setChallenger(member)}
+                        disabled={listingTurn != member}
+                      >
+                        {t("Challenge Pervious Answer")}
+                      </Button>
+                    </ButtonGroup>
+                  </Fragment>
+                )}
+              </CardBody>
 
-        <Button
-          color="danger"
-          type="button"
-          onClick={() => {
-            if (point > 1) {
-              setPoint((current) => current - 1);
-              setTeamTurn((current) => changeTeam(current));
-            } else {
-              startNew();
-            }
-          }}
-        >
-          {t("Guessed Wrong")}
-        </Button>
-      </ButtonGroup>
+              {i == 0 && <hr className="bg-dark w-100" />}
+            </Fragment>
+          ))
+        )}
+      </Card>
     </Fragment>
   );
 };
