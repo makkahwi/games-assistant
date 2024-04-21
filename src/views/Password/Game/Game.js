@@ -13,7 +13,10 @@ const Game = () => {
 
   const data = [members[0], members[1]];
 
-  const words = wordsBank;
+  const words = wordsBank.reduce(
+    (final, { words }) => [...final, ...words],
+    []
+  );
 
   const getRandomInt = (min = 0, max = words.length) => {
     const minCeiled = Math.ceil(min);
