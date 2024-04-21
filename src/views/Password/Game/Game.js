@@ -31,7 +31,7 @@ const Game = () => {
   const changeTeam = (current) =>
     current === t("Team A") ? t("Team B") : t("Team A");
   const changeGuesser = () =>
-    setGuesserTurn((current) => (current == 0 ? 1 : 0));
+    setGuesserTurn((current) => (current == 0 ? 1 : current == 1 ? 2 : 0));
 
   const startNew = () => {
     setPoint(6);
@@ -73,8 +73,8 @@ const Game = () => {
       <Row>
         <Col md="6">
           <h4 className="text-white">
-            {t("Hand PassWord to")} {data[0][guesserTurn]} &{" "}
-            {data[1][guesserTurn]}
+            {t("Hand PassWord to")} {data[0][guesserTurn > 0 ? 1 : 0]} &{" "}
+            {data[1][guesserTurn > 0 ? 1 : 0]}
           </h4>
         </Col>
 
