@@ -16,17 +16,17 @@ const Landing = () => {
   const games = [
     {
       title: "PassWord",
-      desc: "This is it",
+      desc: "This is the game of guessing 1 given word by 1-word hints passed by teammate.",
       img: require("assets/img/card-bg/3.svg").default,
       url: "/password",
       rulesUrl: "/password-rules",
     },
     {
       title: "ListWords",
-      desc: "This is it",
+      desc: "Coming soon, Time-limited challenge to list highest number of words follow given category.",
       img: require("assets/img/card-bg/2.svg").default,
-      url: "/list-words",
-      rulesUrl: "/list-words-rules",
+      url: "/listwords",
+      rulesUrl: "/listwords-rules",
     },
   ];
 
