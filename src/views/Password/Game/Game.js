@@ -34,7 +34,7 @@ const Game = () => {
   const changeTeam = (current) =>
     current === t("Team A") ? t("Team B") : t("Team A");
   const changeGuesser = () =>
-    setGuesserTurn((current) => (current == 0 ? 1 : current == 1 ? 2 : 0));
+    setGuesserTurn((current) => (current === 0 ? 1 : current === 1 ? 2 : 0));
 
   const startNew = () => {
     setPoint(6);

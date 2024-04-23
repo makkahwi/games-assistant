@@ -67,7 +67,9 @@ const Game = () => {
 
       <Row>
         {wordCategories.map((cat, i) => {
-          const playedCat = !history.findIndex(({ category }) => category == i);
+          const playedCat = !history.findIndex(
+            ({ category }) => category === i
+          );
 
           return (
             <Col className="my-2" key={i}>
@@ -123,7 +125,7 @@ const Game = () => {
 
   const doButtonsFlip = (player) => {
     let tempFlipButtons = [...flipButtons];
-    if (player == 0) {
+    if (player === 0) {
       tempFlipButtons = [!tempFlipButtons[0], tempFlipButtons[1]];
     } else {
       tempFlipButtons = [tempFlipButtons[0], !tempFlipButtons[1]];
@@ -202,13 +204,13 @@ const Game = () => {
         ) : (
           members.map((member, i) => {
             const gameEnded = teamClocks.filter((v) => v <= 0).length > 0;
-            const disableButtons = gameEnded || listingTurn != member;
+            const disableButtons = gameEnded || listingTurn !== member;
 
             return (
               <Fragment key={i}>
                 <CardBody
                   className="text-primary"
-                  style={i == 0 && rotate ? { rotate: "180deg" } : {}}
+                  style={i === 0 && rotate ? { rotate: "180deg" } : {}}
                 >
                   <h6>{member}</h6>
 
@@ -278,7 +280,7 @@ const Game = () => {
                   )}
                 </CardBody>
 
-                {i == 0 && <hr className="bg-dark w-100" />}
+                {i === 0 && <hr className="bg-dark w-100" />}
               </Fragment>
             );
           })
