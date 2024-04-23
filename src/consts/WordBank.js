@@ -276,6 +276,7 @@ export const wordsBank = [
       "نمر",
       "فهد",
       "أسد",
+      "ضفدع",
     ],
   },
   {
@@ -284,7 +285,7 @@ export const wordsBank = [
   },
   {
     category: "Instects",
-    words: ["ناموس", "نحلة"],
+    words: ["ناموس", "نحلة", "خنفساء"],
   },
   {
     category: "Birds",
@@ -414,7 +415,17 @@ export const wordsBank = [
   },
   {
     category: "Geogrphy",
-    words: ["نهر", "بحيرة", "نبع", "تل", "هضبة", "جبل"],
+    words: [
+      "نهر",
+      "شلال",
+      "بحيرة",
+      "نبع",
+      "تل",
+      "هضبة",
+      "جبل",
+      "بركان",
+      "زلزال",
+    ],
   },
   {
     category: "Weather",
@@ -457,7 +468,7 @@ export const wordsBank = [
   },
   {
     category: "Dieses",
-    words: ["صداع", "مغص", "إسهال"],
+    words: ["صداع", "مغص", "إسهال", "سكري"],
   },
   {
     category: "Days",
@@ -507,7 +518,6 @@ export const wordsBank = [
       "جري",
       "غوص",
       "تسلّق",
-      "تزحلق / تزلّق",
     ],
   },
   {
@@ -561,7 +571,18 @@ export const wordsBank = [
   },
   {
     category: "Professions",
-    words: ["محامي", "طبيب", "مذيع", "مدير", "طالب", "حارس", "معلم"],
+    words: [
+      "مهرج",
+      "محامي",
+      "طبيب",
+      "مذيع",
+      "مدير",
+      "طالب",
+      "حارس",
+      "معلم",
+      "نشال",
+      "شيخ",
+    ],
   },
   {
     category: "Sciences",
@@ -587,7 +608,7 @@ export const wordsBank = [
   },
   {
     category: "Myths",
-    words: ["شبح", "تنين", "فضائي", "مستذئب", "حورية", "ديناصور"],
+    words: ["شبح", "تنين", "فضائي", "مستذئب", "حورية", "ديناصور", "فرعون"],
   },
   {
     category: "Musical Instruments",
@@ -595,6 +616,6 @@ export const wordsBank = [
   },
   {
     category: "Objects",
-    words: ["مفتاح", "طوبة", "ميدالية", "منديل", "صحيفة"],
+    words: ["مفتاح", "طوبة", "ميدالية", "منديل", "صحيفة", "حصالة"],
   },
 ].sort(() => Math.random() - 0.5);
