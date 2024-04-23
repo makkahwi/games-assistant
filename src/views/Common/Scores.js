@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Table } from "reactstrap";
 
-const ScoresTableView = ({ wordType, wordsList, members, history }) => {
+const ScoresTableView = ({ wordType, members, history }) => {
   const { t } = useTranslation();
 
   return (

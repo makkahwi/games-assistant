@@ -9,7 +9,7 @@ const ScoresTable = () => {
 
   return (
     <ScoresTableView
-      wordType={t("Category")}
+      wordType={t("PassWord")}
       members={["Team A", "Team B"]}
       history={history}
     />
