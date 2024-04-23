@@ -11,17 +11,16 @@ const ListWordsRules = () => {
     {
       title: "Introduction",
       rules: [
+        t("This is a game for two players Let's call them A & B"),
         t(
-          "This is a game for two teams, each team is made of two members Let's call them Team A & Team B, and each team have Member 1 & Member 2"
+          "The game is about picking a category, then start listing words that fall below the category"
         ),
         t(
-          "The game is about guessing a password, one word of Arabic language, which could be a noun, verb or adjective"
+          "Each player have a countdown clock of 20 seconds, where it goes down on their turn, and stop on other player's turn"
         ),
+        t("The game is made of rounds, each worth 1 point"),
         t(
-          "Game is made of rounds, where in each round a new password is given to be guessed"
-        ),
-        t(
-          "Team with most scores after certain number of rounds wins Number of rounds should be 4 or one of its multiplies"
+          "Player with most points after certain number of rounds wins Number of rounds should be 2 or one of its multiplies"
         ),
       ],
     },
@@ -29,35 +28,26 @@ const ListWordsRules = () => {
       title: "How To Play",
       rules: [
         t(
-          "Game start with a password given to Member 1 of each team, and Team A start playing where Member 1 check the password, then gives one-word clue to Member 2 of his team to try n guess the password"
-        ),
-        t("Clues can't be same or part of the password to guess"),
-        t(
-          "If Team A guessed it wrong, it's Team B turn to try to guess, where Member A give a new clue to Member 2"
-        ),
-        t("Round ends when a Member 2 guess the right password"),
-        t(
-          "In next round, member teams switch roles, where Member 1 become the guesser, and Member 2 is clue giver"
-        ),
-      ],
-    },
-    {
-      title: "Scores",
-      rules: [
-        t(
-          "Winner team is the one that collects most points of all played rounds"
+          "Game start with player A selecting a category, listing first word then clicking the clock button so player B clock start counting down"
         ),
         t(
-          "Each round start with 6 points as possible points to earn, and it goes down with each new clue given after the first one"
+          "Player B state 1 word within the category then click clock button so player A's clock resume counting down instead of his"
         ),
         t(
-          "So if password is guessed with only 1 clue given, that's 6 points to guessing team"
+          "The player that their countdown clock run out first loses the round"
         ),
         t(
-          "If it's guessed after 2 clues are given, that's 5 points, and so on"
+          "There is a challenge function where it's to be activated upon either of two events"
+        ),
+        t("First is when given word is not within selected category"),
+        t(
+          "Second is when a player duplicates a word that already was said within the category"
         ),
         t(
-          "If no one guessed it after 7 clues, that's the end of the round without any one earning points"
+          "When a player list wrong or duplicated word, other player can challenge, and they would get the score of the round if they're right, else challenged player get the point"
+        ),
+        t(
+          "Once someone's clock run out of time, or a challenge was made and settled, the new round starts with player B picking different category"
         ),
       ],
     },
