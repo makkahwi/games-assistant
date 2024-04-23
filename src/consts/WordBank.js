@@ -618,4 +618,4 @@ export const wordsBank = [
     category: "Objects",
     words: ["مفتاح", "طوبة", "ميدالية", "منديل", "صحيفة", "حصالة"],
   },
-].sort(() => Math.random() - 0.5);
+];

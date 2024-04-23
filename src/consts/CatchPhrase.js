@@ -284,4 +284,4 @@ export const phrasesBank = [
     category: "Others",
     words: ["الصراط المستقيم"],
   },
-].sort(() => Math.random() - 0.5);
+];

@@ -6,6 +6,7 @@ import { Button, ButtonGroup, Col, Row } from "reactstrap";
 import { wordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/password";
+import { randomSort } from "consts/functions";
 
 const Game = () => {
   const members = useSelector((state) => state.password.members);
@@ -14,9 +15,8 @@ const Game = () => {
 
   const data = [members[0], members[1]];
 
-  const words = wordsBank.reduce(
-    (final, { words }) => [...final, ...words],
-    []
+  const words = randomSort(
+    wordsBank.reduce((final, { words }) => [...final, ...words], [])
   );
 
   const getRandomInt = (min = 0, max = words.length) => {

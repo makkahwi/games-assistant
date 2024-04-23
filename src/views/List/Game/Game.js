@@ -6,6 +6,7 @@ import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 import { wordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/list";
+import { randomSort } from "consts/functions";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -13,10 +14,11 @@ const Game = () => {
   const history = useSelector((state) => state.list.history);
   const { t } = useTranslation();
 
-  const wordCategories = wordsBank
-    .filter(({ words }) => words.length > 5)
-    .map(({ category }) => category)
-    .slice(0, 7);
+  const wordCategories = randomSort(
+    wordsBank
+      .filter(({ words }) => words.length > 5)
+      .map(({ category }) => category)
+  ).slice(0, 7);
 
   const [currentCategory, setCurrentCategory] = useState(null);
 
