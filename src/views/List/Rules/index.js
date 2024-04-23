@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+
+import GameRules from "views/Common/GameRules";
 
 const ListWordsRules = () => {
   const { t } = useTranslation();
-
-  const [activeTab, setActiveTab] = useState("Introduction");
 
   const contents = [
     {
@@ -44,7 +42,7 @@ const ListWordsRules = () => {
           "Second is when a player duplicates a word that already was said within the category"
         ),
         t(
-          "When a player list wrong or duplicated word, other player can challenge, and they would get the score of the round if they're right, else challenged player get the point"
+          "When a player list wrong or duplicated word, other player can challenge, and they would get the point of the round if they're right, else challenged player get it"
         ),
         t(
           "Once someone's clock run out of time, or a challenge was made and settled, the new round starts with player B picking different category"
@@ -53,41 +51,7 @@ const ListWordsRules = () => {
     },
   ];
 
-  return (
-    <Card className="p-5">
-      <h4 className="text-primary mb-4">ListWords Game Rules</h4>
-
-      <Nav className="nav-pills-primary" pills role="tablist">
-        {contents.map(({ title }, i) => (
-          <NavItem className="p-0 text-center mr-4">
-            <NavLink
-              className={activeTab === title ? "active" : ""}
-              onClick={() => setActiveTab(title)}
-            >
-              {t(title)}
-            </NavLink>
-          </NavItem>
-        ))}
-      </Nav>
-
-      <TabContent className="mt-2" activeTab={activeTab}>
-        {contents.map(({ title, rules }, i) => (
-          <TabPane tabId={title} key={i}>
-            <ul className="pl-4">
-              {rules.map((text, y) => (
-                <li
-                  className="description text-primary font-weight-bold text-justify mb-3"
-                  key={y}
-                >
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </TabPane>
-        ))}
-      </TabContent>
-    </Card>
-  );
+  return <GameRules gameName="ListWords" rules={contents} />;
 };
 
 export default ListWordsRules;
