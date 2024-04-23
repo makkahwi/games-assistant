@@ -23,31 +23,27 @@ const Landing = () => {
     },
     {
       title: "ListWords",
-      desc: "Coming soon, Time-limited challenge to list highest number of words follow given category.",
+      desc: "Time-limited challenge to list highest number of words follow given category.",
+      comingSoon: true,
       img: require("assets/img/card-bg/2.svg").default,
-      url: "/listwords",
-      rulesUrl: "/listwords-rules",
+      url: "/list-words",
+      rulesUrl: "/list-words-rules",
     },
     {
       title: "CatchPhrase",
-      desc: "Coming soon, Time-limited challenge to give hints & guess given phrases.",
+      desc: "Time-limited challenge to give hints & guess given phrases.",
+      comingSoon: true,
       img: require("assets/img/card-bg/8.svg").default,
-      url: "/catchphrase",
-      rulesUrl: "/catchphrase-rules",
+      url: "/catch-phrase",
+      rulesUrl: "/catch-phrase-rules",
     },
   ];
 
   return (
     <Row>
-      {games.map(({ title, desc, img, url, rulesUrl }, i) => (
+      {games.map(({ img, url, ...rest }, i) => (
         <Col md="6" key={i}>
-          <WhiteCard
-            title={title}
-            desc={desc}
-            bg={img}
-            gameUrl={url}
-            rulesUrl={rulesUrl}
-          />
+          <WhiteCard bg={img} gameUrl={url} {...rest} />
         </Col>
       ))}
     </Row>
