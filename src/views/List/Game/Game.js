@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 
+import { wordsBank } from "views/Password/Game/WordBank";
+
 import { addScores } from "../../../redux/list";
 
 const Game = () => {
@@ -11,14 +13,10 @@ const Game = () => {
   const history = useSelector((state) => state.list.history);
   const { t } = useTranslation();
 
-  const wordCategories = [
-    "Animals",
-    "Colors",
-    "Names",
-    "Places",
-    "Cities",
-    "Countries",
-  ];
+  const wordCategories = wordsBank
+    .filter(({ words }) => words.length > 5)
+    .map(({ category }) => category)
+    .slice(0, 7);
 
   const [currentCategory, setCurrentCategory] = useState(null);
 
