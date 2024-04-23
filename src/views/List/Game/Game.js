@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 
+import { randomSort } from "consts/functions";
 import { wordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/list";
-import { randomSort } from "consts/functions";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -69,9 +69,7 @@ const Game = () => {
 
       <Row>
         {wordCategories.map((cat, i) => {
-          const playedCat = !history.findIndex(
-            ({ category }) => category === i
-          );
+          const playedCat = !history.findIndex((category) => category === cat);
 
           return (
             <Col className="my-2" key={i}>
@@ -104,7 +102,7 @@ const Game = () => {
       addScores({
         team: members[0],
         point: 1,
-        category: currentCategory,
+        category: wordCategories[currentCategory],
       })
     );
   };
@@ -114,7 +112,7 @@ const Game = () => {
       addScores({
         team: members[1],
         point: 1,
-        category: currentCategory,
+        category: wordCategories[currentCategory],
       })
     );
   };
