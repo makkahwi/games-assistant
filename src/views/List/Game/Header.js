@@ -1,11 +1,11 @@
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+
+import GameHeader from "views/Common/Header";
 
 const Header = () => {
   const master = useSelector((state) => state.list.master);
-  const { t } = useTranslation();
 
-  return <h1 className="text-white">{t("Welcome", { name: master })}</h1>;
+  return <GameHeader name={master} />;
 };
 
 export default Header;
