@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "reactstrap";
 
-const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl }) => {
+const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
   const navigate = useNavigate();
 
   return (
@@ -21,19 +21,25 @@ const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl }) => {
 
         <CardText className="mt-2 mb-4">{desc}</CardText>
 
-        <ButtonGroup>
-          <Button color="primary" onClick={() => navigate(gameUrl)}>
-            Start Game
+        {comingSoon ? (
+          <Button color="danger" disabled>
+            Coming Soon
           </Button>
+        ) : (
+          <ButtonGroup>
+            <Button color="primary" onClick={() => navigate(gameUrl)}>
+              Start Game
+            </Button>
 
-          <Button
-            color="light"
-            className="text-dark"
-            onClick={() => navigate(rulesUrl)}
-          >
-            Game Rules
-          </Button>
-        </ButtonGroup>
+            <Button
+              color="light"
+              className="text-dark"
+              onClick={() => navigate(rulesUrl)}
+            >
+              Game Rules
+            </Button>
+          </ButtonGroup>
+        )}
       </CardBody>
     </Card>
   );

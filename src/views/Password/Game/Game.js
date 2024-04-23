@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
 
+import { wordsBank } from "consts/WordBank";
+
 import { addScores } from "../../../redux/password";
-import { wordsBank } from "./WordBank";
+import { randomSort } from "consts/functions";
 
 const Game = () => {
   const members = useSelector((state) => state.password.members);
@@ -13,9 +15,8 @@ const Game = () => {
 
   const data = [members[0], members[1]];
 
-  const words = wordsBank.reduce(
-    (final, { words }) => [...final, ...words],
-    []
+  const words = randomSort(
+    wordsBank.reduce((final, { words }) => [...final, ...words], [])
   );
 
   const getRandomInt = (min = 0, max = words.length) => {
@@ -34,7 +35,7 @@ const Game = () => {
   const changeTeam = (current) =>
     current === t("Team A") ? t("Team B") : t("Team A");
   const changeGuesser = () =>
-    setGuesserTurn((current) => (current == 0 ? 1 : current == 1 ? 2 : 0));
+    setGuesserTurn((current) => (current === 0 ? 1 : current === 1 ? 2 : 0));
 
   const startNew = () => {
     setPoint(6);
