@@ -28,6 +28,13 @@ const Landing = () => {
       url: "/listwords",
       rulesUrl: "/listwords-rules",
     },
+    {
+      title: "CatchPhrase",
+      desc: "Coming soon, Time-limited challenge to give hints & guess given phrases.",
+      img: require("assets/img/card-bg/8.svg").default,
+      url: "/catchphrase",
+      rulesUrl: "/catchphrase-rules",
+    },
   ];
 
   return (
