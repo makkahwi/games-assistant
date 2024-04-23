@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 
-import { wordsBank } from "views/Password/Game/WordBank";
+import { wordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/list";
 
