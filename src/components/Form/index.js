@@ -1,13 +1,7 @@
 import { useState } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-} from "reactstrap";
+import { Button, ButtonGroup, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
+
+import BackButton from "components/Buttons/BackButton";
 
 const FormComp = ({
   label,
@@ -77,13 +71,17 @@ const FormComp = ({
         )
       )}
 
-      <Button
-        className="mt-3"
-        color={light ? "white" : "primary"}
-        type="submit"
-      >
-        {submitLabel}
-      </Button>
+      <ButtonGroup>
+        <Button
+          className="my-3"
+          color={light ? "white" : "primary"}
+          type="submit"
+        >
+          {submitLabel}
+        </Button>
+
+        <BackButton />
+      </ButtonGroup>
     </Form>
   );
 };
