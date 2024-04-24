@@ -9,8 +9,8 @@ import { wordsBank } from "consts/WordBank";
 import { addScores } from "../../../redux/password";
 
 const words = randomSort(
-    wordsBank.reduce((final, { words }) => [...final, ...words], [])
-  );
+  wordsBank.reduce((final, { words }) => [...final, ...words], [])
+);
 
 const Game = () => {
   const members = useSelector((state) => state.password.members);
@@ -26,8 +26,8 @@ const Game = () => {
   };
 
   const [word, setWord] = useState(getRandomInt());
-  const [startingTeamTurn, setStartingTeamTurn] = useState(t("Team A"));
-  const [teamTurn, setTeamTurn] = useState(t("Team A"));
+  const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
+  const [teamTurn, setTeamTurn] = useState("Team A");
   const [guesserTurn, setGuesserTurn] = useState(0);
   const [point, setPoint] = useState(6);
 
@@ -51,7 +51,7 @@ const Game = () => {
       <Row>
         <Col md="6">
           <h4 className="text-white">
-            {t("It's team turn", { team: teamTurn })}
+            {t("It's team turn", { team: t(teamTurn) })}
           </h4>
         </Col>
 
@@ -98,7 +98,7 @@ const Game = () => {
           onClick={() => {
             dispatch(
               addScores(
-                teamTurn === t("Team A")
+                teamTurn === "Team A"
                   ? { team: teamTurn, point, word: words[word] }
                   : { team: teamTurn, point, word: words[word] }
               )

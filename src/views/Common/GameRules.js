@@ -11,11 +11,11 @@ const GameRules = ({ gameName, rules }) => {
 
   return (
     <Card className="p-5">
-      <h4 className="text-primary mb-4">{gameName} Game Rules</h4>
+      <h4 className="text-primary mb-4">{t("X Game Rules", { gameName })}</h4>
 
       <Nav className="nav-pills-primary" pills role="tablist">
         {rules.map(({ title }, i) => (
-          <NavItem className="p-0 text-center mr-4">
+          <NavItem className="p-0 text-center mr-4" key={i}>
             <NavLink
               className={activeTab === title ? "active" : ""}
               onClick={() => setActiveTab(title)}

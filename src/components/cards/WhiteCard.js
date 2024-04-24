@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -11,6 +12,7 @@ import {
 
 const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Card className="card-blog" data-header="pattern">
@@ -23,12 +25,12 @@ const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
 
         {comingSoon ? (
           <Button color="danger" disabled>
-            Coming Soon
+            {t("Coming Soon")}
           </Button>
         ) : (
           <ButtonGroup>
             <Button color="primary" onClick={() => navigate(gameUrl)}>
-              Start Game
+              {t("Start Game")}
             </Button>
 
             <Button
@@ -36,7 +38,7 @@ const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
               className="text-dark"
               onClick={() => navigate(rulesUrl)}
             >
-              Game Rules
+              {t("Game Rules")}
             </Button>
           </ButtonGroup>
         )}

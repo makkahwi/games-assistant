@@ -28,7 +28,7 @@ const ScoresTableView = ({ wordType, members, history }) => {
           ))}
 
         <tr className="bg-white font-weight-bolder">
-          <td colSpan={2}>{t("X Total", { member: members[0] })}</td>
+          <td colSpan={2}>{t("X Total", { member: t(members[0]) })}</td>
           <td>
             {history
               ?.filter(({ team }) => team === members[0])
@@ -47,7 +47,7 @@ const ScoresTableView = ({ wordType, members, history }) => {
           ))}
 
         <tr className="bg-white font-weight-bolder">
-          <td colSpan={2}>{t("X Total", { member: members[0] })}</td>
+          <td colSpan={2}>{t("X Total", { member: t(members[0]) })}</td>
           <td>
             {history
               ?.filter(({ team }) => team === members[1])

@@ -62,7 +62,7 @@ const FooterComp = () => {
         <Row className="row-grid align-items-center mb-1">
           <Col lg="6">
             <h3 className="text-primary font-weight-light mb-2">
-              Multi-Game Assistant
+              {t("Multi-Game Assistant")}
             </h3>
 
             <h6 className="mb-0 font-weight-light">

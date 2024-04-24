@@ -20,14 +20,14 @@ const CreateGame = () => {
     },
     {
       name: "member1",
-      label: t("Member 1 Name"),
+      label: t("Player 1 Name"),
       icon: "fa-solid fa-a",
       minLength: 3,
       required: true,
     },
     {
       name: "member2",
-      label: t("Member 2 Name"),
+      label: t("Player 2 Name"),
       icon: "fa-solid fa-b",
       minLength: 3,
       required: true,
