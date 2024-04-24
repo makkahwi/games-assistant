@@ -6,7 +6,6 @@ import {
   FormGroup,
   Input,
   InputGroup,
-  InputGroupAddon,
   InputGroupText,
 } from "reactstrap";
 
@@ -40,11 +39,9 @@ const FormComp = ({
         ) => (
           <FormGroup className={"mb-3 w-100 " + inputFocuses[name]} key={i}>
             <InputGroup className="input-group-alternative">
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>
-                  <i className={icon} />
-                </InputGroupText>
-              </InputGroupAddon>
+              <InputGroupText>
+                <i className={icon} />
+              </InputGroupText>
 
               <Input
                 placeholder={label + (required ? " *" : "")}
