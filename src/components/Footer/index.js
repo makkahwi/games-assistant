@@ -73,6 +73,8 @@ const FooterComp = () => {
           </Col>
 
           <Col className="text-lg-center btn-wrapper" lg="6">
+            <h5>{t("Developer Contacts")}</h5>
+
             {socialMediaLinks.map(({ icon, link, tooltip, key }, i) => (
               <Fragment key={i}>
                 <a
@@ -105,7 +107,7 @@ const FooterComp = () => {
         <Row className="align-items-center justify-content-md-between">
           <Col md="6">
             <div className="copyright">
-              Multi-Game Assistant © {new Date().getFullYear()}
+              {t("Multi-Game Assistant")} © {new Date().getFullYear()}
             </div>
           </Col>
         </Row>
