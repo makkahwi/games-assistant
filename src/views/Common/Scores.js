@@ -19,10 +19,10 @@ const ScoresTableView = ({ wordType, members, history }) => {
       <tbody className="list">
         {history
           ?.filter(({ team }) => team === members[0])
-          ?.map(({ team, point, category }, i) => (
+          ?.map(({ team, point, word }, i) => (
             <tr className="text-white" key={i}>
               <td>{t(team)}</td>
-              <td>{category}</td>
+              <td>{word}</td>
               <td>{point}</td>
             </tr>
           ))}
@@ -38,10 +38,10 @@ const ScoresTableView = ({ wordType, members, history }) => {
 
         {history
           ?.filter(({ team }) => team === members[1])
-          ?.map(({ team, point, category }, i) => (
+          ?.map(({ team, point, word }, i) => (
             <tr className="text-white" key={i}>
               <td>{t(team)}</td>
-              <td>{category}</td>
+              <td>{word}</td>
               <td>{point}</td>
             </tr>
           ))}

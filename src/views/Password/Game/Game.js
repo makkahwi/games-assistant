@@ -3,10 +3,14 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
 
+import { randomSort } from "consts/functions";
 import { wordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/password";
-import { randomSort } from "consts/functions";
+
+const words = randomSort(
+    wordsBank.reduce((final, { words }) => [...final, ...words], [])
+  );
 
 const Game = () => {
   const members = useSelector((state) => state.password.members);
@@ -14,10 +18,6 @@ const Game = () => {
   const { t } = useTranslation();
 
   const data = [members[0], members[1]];
-
-  const words = randomSort(
-    wordsBank.reduce((final, { words }) => [...final, ...words], [])
-  );
 
   const getRandomInt = (min = 0, max = words.length) => {
     const minCeiled = Math.ceil(min);

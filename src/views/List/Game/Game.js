@@ -8,17 +8,17 @@ import { wordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/list";
 
+const wordCategories = randomSort(
+  wordsBank
+    .filter(({ words }) => words.length > 5)
+    .map(({ category }) => category)
+).slice(0, 7);
+
 const Game = () => {
   const dispatch = useDispatch();
   const members = useSelector((state) => state.list.members);
   const history = useSelector((state) => state.list.history);
   const { t } = useTranslation();
-
-  const wordCategories = randomSort(
-    wordsBank
-      .filter(({ words }) => words.length > 5)
-      .map(({ category }) => category)
-  ).slice(0, 7);
 
   const [currentCategory, setCurrentCategory] = useState(null);
 
@@ -102,7 +102,7 @@ const Game = () => {
       addScores({
         team: members[0],
         point: 1,
-        category: wordCategories[currentCategory],
+        word: wordCategories[currentCategory],
       })
     );
   };
@@ -112,7 +112,7 @@ const Game = () => {
       addScores({
         team: members[1],
         point: 1,
-        category: wordCategories[currentCategory],
+        word: wordCategories[currentCategory],
       })
     );
   };
