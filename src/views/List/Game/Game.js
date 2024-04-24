@@ -69,7 +69,7 @@ const Game = () => {
 
       <Row>
         {wordCategories.map((cat, i) => {
-          const playedCat = !history.findIndex((category) => category === cat);
+          const playedCat = history.findIndex(({ word }) => word === cat) >= 0;
 
           return (
             <Col className="my-2" key={i}>
