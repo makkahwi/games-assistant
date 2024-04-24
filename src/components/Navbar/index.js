@@ -29,12 +29,12 @@ const NavbarComp = () => {
           Games Assistant
         </NavbarBrand>
 
-        <Nav>
-          {/* <NavItem>
+        {/* <Nav>
+          <NavItem>
             <Link to="/rules">
               <NavLink className="text-white">{t("Game Rules")}</NavLink>
             </Link>
-          </NavItem> */}
+          </NavItem>
 
           <NavItem>
             <NavLink
@@ -45,7 +45,7 @@ const NavbarComp = () => {
               {i18n.language === "en" ? "ع" : "En"}
             </NavLink>
           </NavItem>
-        </Nav>
+        </Nav> */}
       </Container>
     </Navbar>
   );
