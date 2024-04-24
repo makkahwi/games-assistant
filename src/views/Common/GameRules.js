@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Button, Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+import { Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 
 import BackButton from "components/Buttons/BackButton";
 
 const GameRules = ({ gameName, rules }) => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState("Introduction");
@@ -45,7 +43,7 @@ const GameRules = ({ gameName, rules }) => {
         ))}
       </TabContent>
 
-      <BackButton/>
+      <BackButton />
     </Card>
   );
 };
