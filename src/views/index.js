@@ -34,8 +34,8 @@ const Landing = () => {
       desc: "Time-limited challenge to give hints & guess given phrases.",
       comingSoon: true,
       img: require("assets/img/card-bg/8.svg").default,
-      url: "/catch-phrase",
-      rulesUrl: "/catch-phrase-rules",
+      url: "/catchphrase",
+      rulesUrl: "/catchphrase-rules",
     },
   ];
 

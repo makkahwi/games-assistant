@@ -3,13 +3,16 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 import { Provider } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Container } from "reactstrap";
-import ListWordsGame from "views/ListWords/Game";
-import ListWordsLanding from "views/ListWords/Landing";
-import ListWordsRules from "views/ListWords/Rules";
 
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 import Landing from "views";
+import CatchPhraseGame from "views/CatchPhrase/Game";
+import CatchPhraseLanding from "views/CatchPhrase/Landing";
+import CatchPhraseRules from "views/CatchPhrase/Rules";
+import ListWordsGame from "views/ListWords/Game";
+import ListWordsLanding from "views/ListWords/Landing";
+import ListWordsRules from "views/ListWords/Rules";
 import PassWordGame from "views/Password/Game";
 import PassWordLanding from "views/Password/Landing";
 import PassWordRules from "views/Password/Rules";
@@ -55,6 +58,11 @@ const App = () => {
                     exact
                     element={<ListWordsRules />}
                   />
+                  <Route
+                    path="/catchphrase-rules"
+                    exact
+                    element={<CatchPhraseRules />}
+                  />
 
                   {store.getState().password.master ? (
                     <Route path="/password" exact element={<PassWordGame />} />
@@ -77,6 +85,20 @@ const App = () => {
                       path="/listwords"
                       exact
                       element={<ListWordsLanding />}
+                    />
+                  )}
+
+                  {store.getState().catchphrase.master ? (
+                    <Route
+                      path="/catchphrase"
+                      exact
+                      element={<CatchPhraseGame />}
+                    />
+                  ) : (
+                    <Route
+                      path="/catchphrase"
+                      exact
+                      element={<CatchPhraseLanding />}
                     />
                   )}
 
