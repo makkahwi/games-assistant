@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
-import { Container } from "reactstrap";
 
 import CreateGame from "./Create";
-import JoinGame from "./Join";
 
 const PassWordLanding = () => {
   React.useEffect(() => {

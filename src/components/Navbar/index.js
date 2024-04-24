@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 
 const NavbarComp = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const languageChange = () => {
     const otherLang = i18n.language === "en" ? "ar" : "en";
