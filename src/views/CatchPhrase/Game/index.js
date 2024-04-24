@@ -1,12 +1,12 @@
 import GameView from "views/Common/GameView";
 
-import { reset } from "../../../redux/password";
+import { reset } from "../../../redux/catchphrase";
 import Game from "./Game";
 import Header from "./Header";
 import ScoresTable from "./Scores";
 import TeamsTable from "./TeamsTable";
 
-const PassWordGame = () => {
+const CatchPhraseGame = () => {
   return (
     <GameView
       header={<Header />}
@@ -18,4 +18,4 @@ const PassWordGame = () => {
   );
 };
 
-export default PassWordGame;
+export default CatchPhraseGame;

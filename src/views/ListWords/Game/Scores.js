@@ -4,13 +4,14 @@ import { useSelector } from "react-redux";
 import ScoresTableView from "views/Common/Scores";
 
 const ScoresTable = () => {
-  const history = useSelector((state) => state.password.history);
+  const members = useSelector((state) => state.listwords.members);
+  const history = useSelector((state) => state.listwords.history);
   const { t } = useTranslation();
 
   return (
     <ScoresTableView
-      wordType={t("PassWord")}
-      members={["Team A", "Team B"]}
+      wordType={t("Category")}
+      members={members}
       history={history}
     />
   );

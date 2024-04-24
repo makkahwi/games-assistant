@@ -26,16 +26,16 @@ const Landing = () => {
       desc: "Time-limited challenge to list highest number of words follow given category.",
       comingSoon: true,
       img: require("assets/img/card-bg/2.svg").default,
-      url: "/list-words",
-      rulesUrl: "/list-words-rules",
+      url: "/listwords",
+      rulesUrl: "/listwords-rules",
     },
     {
       title: "CatchPhrase",
       desc: "Time-limited challenge to give hints & guess given phrases.",
       comingSoon: true,
       img: require("assets/img/card-bg/8.svg").default,
-      url: "/catch-phrase",
-      rulesUrl: "/catch-phrase-rules",
+      url: "/catchphrase",
+      rulesUrl: "/catchphrase-rules",
     },
   ];
 

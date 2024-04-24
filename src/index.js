@@ -7,9 +7,12 @@ import { Container } from "reactstrap";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 import Landing from "views";
-import ListWordsGame from "views/List/Game";
-import ListWordsLanding from "views/List/Landing";
-import ListWordsRules from "views/List/Rules";
+import CatchPhraseGame from "views/CatchPhrase/Game";
+import CatchPhraseLanding from "views/CatchPhrase/Landing";
+import CatchPhraseRules from "views/CatchPhrase/Rules";
+import ListWordsGame from "views/ListWords/Game";
+import ListWordsLanding from "views/ListWords/Landing";
+import ListWordsRules from "views/ListWords/Rules";
 import PassWordGame from "views/Password/Game";
 import PassWordLanding from "views/Password/Landing";
 import PassWordRules from "views/Password/Rules";
@@ -51,9 +54,14 @@ const App = () => {
                     element={<PassWordRules />}
                   />
                   <Route
-                    path="/list-words-rules"
+                    path="/listwords-rules"
                     exact
                     element={<ListWordsRules />}
+                  />
+                  <Route
+                    path="/catchphrase-rules"
+                    exact
+                    element={<CatchPhraseRules />}
                   />
 
                   {store.getState().password.master ? (
@@ -66,17 +74,31 @@ const App = () => {
                     />
                   )}
 
-                  {store.getState().list.master ? (
+                  {store.getState().listwords.master ? (
                     <Route
-                      path="/list-words"
+                      path="/listwords"
                       exact
                       element={<ListWordsGame />}
                     />
                   ) : (
                     <Route
-                      path="/list-words"
+                      path="/listwords"
                       exact
                       element={<ListWordsLanding />}
+                    />
+                  )}
+
+                  {store.getState().catchphrase.master ? (
+                    <Route
+                      path="/catchphrase"
+                      exact
+                      element={<CatchPhraseGame />}
+                    />
+                  ) : (
+                    <Route
+                      path="/catchphrase"
+                      exact
+                      element={<CatchPhraseLanding />}
                     />
                   )}
 

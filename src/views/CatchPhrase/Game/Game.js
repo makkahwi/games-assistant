@@ -3,22 +3,22 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 
+import { randomSort } from "consts/functions";
 import { wordsBank } from "consts/WordBank";
 
-import { addScores } from "../../../redux/list";
-import { randomSort } from "consts/functions";
+import { addScores } from "../../../redux/catchphrase";
+
+const wordCategories = randomSort(
+  wordsBank
+    .filter(({ words }) => words.length > 5)
+    .map(({ category }) => category)
+).slice(0, 7);
 
 const Game = () => {
   const dispatch = useDispatch();
-  const members = useSelector((state) => state.list.members);
-  const history = useSelector((state) => state.list.history);
+  const members = useSelector((state) => state.catchphrase.members);
+  const history = useSelector((state) => state.catchphrase.history);
   const { t } = useTranslation();
-
-  const wordCategories = randomSort(
-    wordsBank
-      .filter(({ words }) => words.length > 5)
-      .map(({ category }) => category)
-  ).slice(0, 7);
 
   const [currentCategory, setCurrentCategory] = useState(null);
 
@@ -69,9 +69,7 @@ const Game = () => {
 
       <Row>
         {wordCategories.map((cat, i) => {
-          const playedCat = !history.findIndex(
-            ({ category }) => category === i
-          );
+          const playedCat = history.findIndex(({ word }) => word === cat) >= 0;
 
           return (
             <Col className="my-2" key={i}>
@@ -104,7 +102,7 @@ const Game = () => {
       addScores({
         team: members[0],
         point: 1,
-        category: currentCategory,
+        word: wordCategories[currentCategory],
       })
     );
   };
@@ -114,7 +112,7 @@ const Game = () => {
       addScores({
         team: members[1],
         point: 1,
-        category: currentCategory,
+        word: wordCategories[currentCategory],
       })
     );
   };

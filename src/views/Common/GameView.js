@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,18 +14,12 @@ import {
   TabPane,
 } from "reactstrap";
 
-import { reset } from "../../../redux/list";
-import Game from "./Game";
-import Header from "./Header";
-import ScoresTable from "./Scores";
-import TeamsTable from "./TeamsTable";
-
-const ListWordsGame = () => {
+const GameView = ({ header, game, teams, scores, reset }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [activeTab, setActiveTab] = React.useState("gameTab");
+  const [activeTab, setActiveTab] = useState("gameTab");
 
   useLayoutEffect(() => {
     document.body.classList.add("landing-page");
@@ -39,7 +33,7 @@ const ListWordsGame = () => {
   return (
     <Row className="text-center">
       <Col className="mx-auto text-white" lg="7">
-        <Header />
+        {header}
       </Col>
 
       <Col className="mx-auto text-white" lg="7">
@@ -97,15 +91,15 @@ const ListWordsGame = () => {
           <CardBody>
             <TabContent activeTab={activeTab}>
               <TabPane tabId="gameTab" role="tabpanel">
-                <Game />
+                {game}
               </TabPane>
 
               <TabPane tabId="teamsTab" role="tabpanel">
-                <TeamsTable />
+                {teams}
               </TabPane>
 
               <TabPane tabId="scoresTab" role="tabpanel">
-                <ScoresTable />
+                {scores}
               </TabPane>
             </TabContent>
           </CardBody>
@@ -136,4 +130,4 @@ const ListWordsGame = () => {
   );
 };
 
-export default ListWordsGame;
+export default GameView;
