@@ -6,7 +6,7 @@ import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 import { randomSort } from "consts/functions";
 import { wordsBank } from "consts/WordBank";
 
-import { addScores } from "../../../redux/list";
+import { addScores } from "../../../redux/listwords";
 
 const wordCategories = randomSort(
   wordsBank
@@ -16,8 +16,8 @@ const wordCategories = randomSort(
 
 const Game = () => {
   const dispatch = useDispatch();
-  const members = useSelector((state) => state.list.members);
-  const history = useSelector((state) => state.list.history);
+  const members = useSelector((state) => state.listwords.members);
+  const history = useSelector((state) => state.listwords.history);
   const { t } = useTranslation();
 
   const [currentCategory, setCurrentCategory] = useState(null);

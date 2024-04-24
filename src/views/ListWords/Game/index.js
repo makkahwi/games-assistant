@@ -1,6 +1,6 @@
 import GameView from "views/Common/GameView";
 
-import { reset } from "../../../redux/list";
+import { reset } from "../../../redux/listwords";
 import Game from "./Game";
 import Header from "./Header";
 import ScoresTable from "./Scores";

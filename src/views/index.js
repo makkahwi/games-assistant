@@ -26,8 +26,8 @@ const Landing = () => {
       desc: "Time-limited challenge to list highest number of words follow given category.",
       comingSoon: true,
       img: require("assets/img/card-bg/2.svg").default,
-      url: "/list-words",
-      rulesUrl: "/list-words-rules",
+      url: "/listwords",
+      rulesUrl: "/listwords-rules",
     },
     {
       title: "CatchPhrase",
