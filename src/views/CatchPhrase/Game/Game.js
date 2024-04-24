@@ -271,7 +271,7 @@ const Game = () => {
                           className="w-100 mt-4"
                           onClick={() => recordScore(teamClocks[0] > 0)}
                         >
-                          Pick New Category
+                          Save Round Point
                         </Button>
                       ) : (
                         ""

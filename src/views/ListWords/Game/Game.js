@@ -53,19 +53,21 @@ const Game = () => {
                 }
                 key={i}
               >
-                {members[i] + " " + (lost ? "lost" : "won")}
+                {members[i] + " " + (lost ? t("lost") : t("won"))}
               </h2>
             ) : (
               ""
             )
           )
       : ownTurn && (
-          <h2 className="bg-danger text-white py-2 my-3">It's Your Turn</h2>
+          <h2 className="bg-danger text-white py-2 my-3">
+            {t("It's Your Turn")}
+          </h2>
         );
 
   const CategoryChoose = () => (
     <Fragment>
-      <h6>Choose Category Plz</h6>
+      <h6>{t("Choose Category Plz")}</h6>
 
       <Row>
         {wordCategories.map((cat, i) => {
@@ -167,7 +169,7 @@ const Game = () => {
             className="p-1"
             onClick={() => setRotate((current) => !current)}
           >
-            Rotate
+            {t("Rotate")}
           </Button>
         </CardBody>
 
@@ -262,7 +264,7 @@ const Game = () => {
                         className="p-1 mt-2"
                         onClick={() => doButtonsFlip(i)}
                       >
-                        Flip Buttons
+                        {t("Flip Buttons")}
                       </Button>
 
                       {gameEnded ? (
@@ -271,7 +273,7 @@ const Game = () => {
                           className="w-100 mt-4"
                           onClick={() => recordScore(teamClocks[0] > 0)}
                         >
-                          Pick New Category
+                          {t("Save Round Point")}
                         </Button>
                       ) : (
                         ""
