@@ -44,12 +44,14 @@ export const phrasesBank = [
     words: ["دجاج مقلي", "بيض مقلي", "بطاطا مقلية"],
   },
   {
-    category: "Tastes",
-    words: [],
-  },
-  {
     category: "Drinks",
-    words: ["شاي مثلج", "زجاج مياه", "خل التفاح", "شاي أخضر"],
+    words: [
+      "شاي مثلج",
+      "زجاج مياه",
+      "خل التفاح",
+      "شاي أخضر",
+      "حليب بالشوكولاتة",
+    ],
   },
   {
     category: "Foods / Not Meals",
@@ -61,11 +63,11 @@ export const phrasesBank = [
   },
   {
     category: "Nuts",
-    words: [],
+    words: ["فستق حلبي"],
   },
   {
     category: "Sweets",
-    words: [],
+    words: ["وربات بالقشطة"],
   },
   {
     category: "Fruits",
@@ -77,7 +79,7 @@ export const phrasesBank = [
   },
   {
     category: "Grains",
-    words: [],
+    words: ["فول أخضر"],
   },
   {
     category: "Herbs",
@@ -109,7 +111,7 @@ export const phrasesBank = [
   },
   {
     category: "Animals",
-    words: [],
+    words: ["كلب بوليسي"],
   },
   {
     category: "Baby Animals",
