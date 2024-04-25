@@ -42,9 +42,10 @@ const App = () => {
             style={{
               backgroundImage: "url(" + require("assets/img/bg.png") + ")",
               backgroundSize: "100% auto",
+              minHeight: "90vh",
             }}
           >
-            <div className="container">
+            <div className="container my-auto">
               <Routes>
                 <Route path="/" exact element={<Landing />} />
                 <Route
