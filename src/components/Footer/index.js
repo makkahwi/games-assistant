@@ -64,6 +64,7 @@ const FooterComp = () => {
             <a
               href={link}
               target="_blank"
+              rel="noreferrer"
               className="mx-2 text-primary"
               key={i}
             >
