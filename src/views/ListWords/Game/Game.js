@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, ButtonGroup, Card, CardBody, Col, Row } from "reactstrap";
 
 import { randomSort } from "consts/functions";
 import { wordsBank } from "consts/WordBank";
@@ -69,26 +68,25 @@ const Game = () => {
     <Fragment>
       <h6>{t("Choose Category Plz")}</h6>
 
-      <Row>
+      <div className="row">
         {wordCategories.map((cat, i) => {
           const playedCat = history.findIndex(({ word }) => word === cat) >= 0;
 
           return (
-            <Col className="my-2" key={i}>
-              <Button
+            <div className="col my-2" key={i}>
+              <button
                 disabled={playedCat}
-                color={
-                  playedCat ? "secondary" : i % 2 === 0 ? "warning" : "info"
-                }
                 onClick={() => setCurrentCategory(i)}
-                className="w-100"
+                className={`btn btn-${
+                  playedCat ? "secondary" : i % 2 === 0 ? "warning" : "info"
+                } w-100`}
               >
                 {cat}
-              </Button>
-            </Col>
+              </button>
+            </div>
           );
         })}
-      </Row>
+      </div>
     </Fragment>
   );
 
@@ -162,47 +160,46 @@ const Game = () => {
 
   return (
     <Fragment>
-      <Card>
-        <CardBody className="text-right p-1">
-          <Button
-            color="warning"
-            className="p-1"
+      <div className="card">
+        <div className="card-body text-right p-1">
+          <button
+            className="btn btn-warning p-1 float-start"
             onClick={() => setRotate((current) => !current)}
           >
             {t("Rotate")}
-          </Button>
-        </CardBody>
+          </button>
+        </div>
 
         {challenger ? (
-          <CardBody className="text-primary">
+          <div className="card-body text-primary">
             <h6>{challenger}</h6>
 
-            <ButtonGroup>
-              <Button
+            <div className="btn-group">
+              <button
                 onClick={() =>
                   recordScore(
                     (challenger === members[0] && true) ||
                       (challenger === members[1] && false)
                   )
                 }
-                color="success"
+                className="btn btn-success"
               >
                 {t("Challenger is Right")}
-              </Button>
+              </button>
 
-              <Button
+              <button
                 onClick={() =>
                   recordScore(
                     (challenger === members[0] && true) ||
                       (challenger === members[1] && false)
                   )
                 }
-                color="danger"
+                className="btn btn-danger"
               >
                 {t("Challenger is Wrong")}
-              </Button>
-            </ButtonGroup>
-          </CardBody>
+              </button>
+            </div>
+          </div>
         ) : (
           members.map((member, i) => {
             const gameEnded = teamClocks.filter((v) => v <= 0).length > 0;
@@ -210,8 +207,8 @@ const Game = () => {
 
             return (
               <Fragment key={i}>
-                <CardBody
-                  className="text-primary"
+                <div
+                  className="card-body text-primary"
                   style={i === 0 && rotate ? { rotate: "180deg" } : {}}
                 >
                   <h6>{member}</h6>
@@ -228,66 +225,69 @@ const Game = () => {
                         {t("Category is")} "{wordCategories[currentCategory]}"
                       </h4>
 
-                      <ButtonGroup>
-                        <Button
-                          color="success"
+                      <div className="btn-group">
+                        <button
                           onClick={() => switchTurn()}
                           disabled={disableButtons}
-                          className={flipButtons[i] ? "order-3" : "order-1"}
+                          className={
+                            "btn btn-success " +
+                            (flipButtons[i] ? "order-3" : "order-1")
+                          }
                         >
                           {t("Stop Clock")}
-                        </Button>
+                        </button>
 
                         {teamClocks.filter((v) => v >= 19999).length === 2 &&
                           startTurn === member && (
-                            <Button
-                              color="warning"
+                            <button
                               onClick={() => setCurrentCategory(null)}
-                              className="order-2"
+                              className="btn btn-warning order-2"
                             >
                               {t("Change Category")}
-                            </Button>
+                            </button>
                           )}
 
-                        <Button
-                          color="danger"
+                        <button
                           onClick={() => setChallenger(member)}
                           disabled={disableButtons}
-                          className={flipButtons[i] ? "order-1" : "order-3"}
+                          className={
+                            "btn btn-danger " +
+                            (flipButtons[i] ? "order-1" : "order-3")
+                          }
                         >
                           {t("Challenge Pervious Answer")}
-                        </Button>
-                      </ButtonGroup>
+                        </button>
+                      </div>
 
-                      <Button
-                        color="warning"
-                        className="p-1 mt-2"
-                        onClick={() => doButtonsFlip(i)}
-                      >
-                        {t("Flip Buttons")}
-                      </Button>
+                      <div>
+                        <button
+                          className="btn btn-warning p-1 mt-2"
+                          onClick={() => doButtonsFlip(i)}
+                        >
+                          {t("Flip Buttons")}
+                        </button>
+                      </div>
 
                       {gameEnded ? (
-                        <Button
-                          color="primary"
-                          className="w-100 mt-4"
+                        <button
+                          className="btn btn-primary w-100 mt-4"
                           onClick={() => recordScore(teamClocks[0] > 0)}
                         >
                           {t("Save Round Point")}
-                        </Button>
+                        </button>
                       ) : (
                         ""
                       )}
                     </Fragment>
                   )}
-                </CardBody>
+                </div>
 
                 {i === 0 && <hr className="bg-dark w-100" />}
               </Fragment>
             );
           })
         )}
-      </Card>
+      </div>
     </Fragment>
   );
 };

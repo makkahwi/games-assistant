@@ -1,25 +1,24 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { Table } from "reactstrap";
 
 const TeamsTable = () => {
   const members = useSelector((state) => state.listwords.members);
   const { t } = useTranslation();
 
   return (
-    <Table className="align-items-center table-flush" responsive>
+    <table className="table table-responsive align-items-center table-flush">
       <tbody className="list">
         <tr>
           <td className="bg-white text-primary">{t("Team A")}</td>
-          <td className="text-white">{members[0]}</td>
+          <td>{members[0]}</td>
         </tr>
 
         <tr>
           <td className="bg-white text-primary">{t("Team B")}</td>
-          <td className="text-white">{members[1]}</td>
+          <td>{members[1]}</td>
         </tr>
       </tbody>
-    </Table>
+    </table>
   );
 };
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Card, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 
 import BackButton from "components/Buttons/BackButton";
 
@@ -10,41 +9,47 @@ const GameRules = ({ gameName, rules }) => {
   const [activeTab, setActiveTab] = useState("Introduction");
 
   return (
-    <Card className="p-5">
+    <div className="card p-5">
       <h4 className="text-primary mb-4">{t("X Game Rules", { gameName })}</h4>
 
-      <Nav className="nav-pills-primary" pills role="tablist">
+      <ul className="nav nav-tabs" role="tablist">
         {rules.map(({ title }, i) => (
-          <NavItem className="p-0 text-center mr-4" key={i}>
-            <NavLink
-              className={activeTab === title ? "active" : ""}
-              onClick={() => setActiveTab(title)}
+          <li
+            className="nav-item p-0 text-center mr-4"
+            onClick={() => setActiveTab(title)}
+            key={i}
+          >
+            <div
+              className={"nav-link " + (activeTab === title ? "active" : "")}
             >
               {t(title)}
-            </NavLink>
-          </NavItem>
+            </div>
+          </li>
         ))}
-      </Nav>
+      </ul>
 
-      <TabContent className="mt-2" activeTab={activeTab}>
+      <div className="tab-content py-4">
         {rules.map(({ title, rules }, i) => (
-          <TabPane tabId={title} key={i}>
-            <ul className="pl-4">
+          <div
+            className={`tab-pane ${activeTab === title ? "active" : ""}`}
+            key={i}
+          >
+            <ul class="list-group list-group-flush">
               {rules.map((text, y) => (
                 <li
-                  className="description text-primary font-weight-bold text-justify mb-3"
+                  className="description text-primary font-weight-bold text-justify py-3 list-group-item"
                   key={y}
                 >
                   {text}
                 </li>
               ))}
             </ul>
-          </TabPane>
+          </div>
         ))}
-      </TabContent>
+      </div>
 
       <BackButton />
-    </Card>
+    </div>
   );
 };
 

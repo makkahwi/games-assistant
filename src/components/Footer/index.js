@@ -1,6 +1,4 @@
-import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Col, Container, Row, UncontrolledTooltip } from "reactstrap";
 
 const FooterComp = () => {
   const { t } = useTranslation();
@@ -57,61 +55,27 @@ const FooterComp = () => {
   ];
 
   return (
-    <footer className="footer bg-transparent">
-      <Container>
-        <Row className="row-grid align-items-center mb-1">
-          <Col lg="6">
-            <h3 className="text-primary font-weight-light mb-2">
-              {t("Multi-Game Assistant")}
-            </h3>
+    <footer className="text-center text-lg-start bg-transparent text-muted">
+      <section className="container d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        <h5 className="text-primary">{t("Developer Contacts")}</h5>
 
-            <h6 className="mb-0 font-weight-light">
-              {t(
-                "This app is about helping players & game masters to track their ongoing games"
-              )}
-            </h6>
-          </Col>
+        <div>
+          {socialMediaLinks.map(({ icon, link, tooltip, key }, i) => (
+            <a
+              href={link}
+              target="_blank"
+              className="mx-2 text-primary"
+              key={i}
+            >
+              <i className={icon} />
+            </a>
+          ))}
+        </div>
+      </section>
 
-          <Col className="text-lg-center btn-wrapper" lg="6">
-            <h5>{t("Developer Contacts")}</h5>
-
-            {socialMediaLinks.map(({ icon, link, tooltip, key }, i) => (
-              <Fragment key={i}>
-                <a
-                  href={link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mx-1"
-                >
-                  <Button
-                    className="btn-icon-only rounded-circle"
-                    color="primary"
-                    id={key}
-                  >
-                    <span className="btn-inner--icon">
-                      <i className={icon} />
-                    </span>
-                  </Button>
-                </a>
-
-                <UncontrolledTooltip delay={0} target={key}>
-                  {tooltip}
-                </UncontrolledTooltip>
-              </Fragment>
-            ))}
-          </Col>
-        </Row>
-
-        <hr />
-
-        <Row className="align-items-center justify-content-md-between">
-          <Col md="6">
-            <div className="copyright">
-              {t("Multi-Game Assistant")} © {new Date().getFullYear()}
-            </div>
-          </Col>
-        </Row>
-      </Container>
+      <div className="text-center p-4">
+        {t("Multi-Game Assistant")} © {new Date().getFullYear()}
+      </div>
     </footer>
   );
 };

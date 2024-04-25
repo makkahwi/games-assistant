@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Table } from "reactstrap";
 
 const ScoresTableView = ({ wordType, members, history }) => {
   const { t } = useTranslation();
 
   return (
-    <Table className="align-items-center table-flush" responsive>
-      <thead className="thead-light">
+    <table className="table table-striped table-responsive w-100">
+      <thead>
         <tr className="text-primary">
           <th>{t("Team")}</th>
 
@@ -27,7 +26,7 @@ const ScoresTableView = ({ wordType, members, history }) => {
             </tr>
           ))}
 
-        <tr className="bg-white font-weight-bolder">
+        <tr className="fw-bolder">
           <td colSpan={2}>{t("X Total", { member: t(members[0]) })}</td>
           <td>
             {history
@@ -46,8 +45,8 @@ const ScoresTableView = ({ wordType, members, history }) => {
             </tr>
           ))}
 
-        <tr className="bg-white font-weight-bolder">
-          <td colSpan={2}>{t("X Total", { member: t(members[0]) })}</td>
+        <tr className="fw-bolder">
+          <td colSpan={2}>{t("X Total", { member: t(members[1]) })}</td>
           <td>
             {history
               ?.filter(({ team }) => team === members[1])
@@ -55,7 +54,7 @@ const ScoresTableView = ({ wordType, members, history }) => {
           </td>
         </tr>
       </tbody>
-    </Table>
+    </table>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
 
 import WhiteCard from "components/cards/WhiteCard";
 import { useTranslation } from "react-i18next";
@@ -47,13 +46,13 @@ const Landing = () => {
   ];
 
   return (
-    <Row>
+    <div className="row g-5">
       {games.map(({ img, url, ...rest }, i) => (
-        <Col md="6" key={i}>
+        <div className="col-md-6" key={i}>
           <WhiteCard bg={img} gameUrl={url} {...rest} />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };
 
