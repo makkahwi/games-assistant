@@ -1,47 +1,44 @@
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardImg,
-  CardText,
-  CardTitle,
-} from "reactstrap";
 
 const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
-    <Card className="card-blog" data-header="pattern">
-      <CardImg alt="..." className="img pattern rounded" src={bg} top />
+    <div className="card card-blog">
+      <div style={{ height: "30vh", overflowY: "hidden" }}>
+        <img className="img pattern rounded" src={bg} width="100%" />
+      </div>
 
-      <CardBody>
-        <CardTitle className="h5 mb-0">{title}</CardTitle>
+      <div className="card-body">
+        <div className="card-title h5 mb-0">{title}</div>
 
-        <CardText className="mt-2 mb-4">{desc}</CardText>
+        <div className="card-text mt-2 mb-4">{desc}</div>
 
         {comingSoon ? (
-          <Button color="danger" disabled>
-            Coming Soon
-          </Button>
+          <button className="btn btn-danger rounded-2" disabled>
+            {t("Coming Soon")}
+          </button>
         ) : (
-          <ButtonGroup>
-            <Button color="primary" onClick={() => navigate(gameUrl)}>
-              Start Game
-            </Button>
+          <div className="btn-group">
+            <button
+              className="btn btn-primary rounded-start"
+              onClick={() => navigate(gameUrl)}
+            >
+              {t("Start Game")}
+            </button>
 
-            <Button
-              color="light"
-              className="text-dark"
+            <button
+              className="btn btn-light text-dark rounded-end"
               onClick={() => navigate(rulesUrl)}
             >
-              Game Rules
-            </Button>
-          </ButtonGroup>
+              {t("Game Rules")}
+            </button>
+          </div>
         )}
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 };
 

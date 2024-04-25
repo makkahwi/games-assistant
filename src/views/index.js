@@ -1,9 +1,11 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
 
 import WhiteCard from "components/cards/WhiteCard";
+import { useTranslation } from "react-i18next";
 
 const Landing = () => {
+  const { t } = useTranslation();
+
   React.useEffect(() => {
     document.body.classList.add("index-page");
     window.scrollTo(0, 0);
@@ -16,14 +18,18 @@ const Landing = () => {
   const games = [
     {
       title: "PassWord",
-      desc: "This is the game of guessing 1 given word by 1-word hints passed by teammate.",
+      desc: t(
+        "This is the game of guessing 1 given word by 1-word hints passed by teammate"
+      ),
       img: require("assets/img/card-bg/3.svg").default,
       url: "/password",
       rulesUrl: "/password-rules",
     },
     {
       title: "ListWords",
-      desc: "Time-limited challenge to list highest number of words follow given category.",
+      desc: t(
+        "Time-limited challenge to list highest number of words follow given category"
+      ),
       comingSoon: true,
       img: require("assets/img/card-bg/2.svg").default,
       url: "/listwords",
@@ -31,7 +37,7 @@ const Landing = () => {
     },
     {
       title: "CatchPhrase",
-      desc: "Time-limited challenge to give hints & guess given phrases.",
+      desc: t("Time-limited challenge to give hints & guess given phrases"),
       comingSoon: true,
       img: require("assets/img/card-bg/8.svg").default,
       url: "/catchphrase",
@@ -40,13 +46,13 @@ const Landing = () => {
   ];
 
   return (
-    <Row>
+    <div className="row g-5">
       {games.map(({ img, url, ...rest }, i) => (
-        <Col md="6" key={i}>
+        <div className="col-md-6" key={i}>
           <WhiteCard bg={img} gameUrl={url} {...rest} />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };
 

@@ -1,7 +1,6 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, ButtonGroup, Col, Row } from "reactstrap";
 
 import { randomSort } from "consts/functions";
 import { wordsBank } from "consts/WordBank";
@@ -9,8 +8,8 @@ import { wordsBank } from "consts/WordBank";
 import { addScores } from "../../../redux/password";
 
 const words = randomSort(
-    wordsBank.reduce((final, { words }) => [...final, ...words], [])
-  );
+  wordsBank.reduce((final, { words }) => [...final, ...words], [])
+);
 
 const Game = () => {
   const members = useSelector((state) => state.password.members);
@@ -26,8 +25,8 @@ const Game = () => {
   };
 
   const [word, setWord] = useState(getRandomInt());
-  const [startingTeamTurn, setStartingTeamTurn] = useState(t("Team A"));
-  const [teamTurn, setTeamTurn] = useState(t("Team A"));
+  const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
+  const [teamTurn, setTeamTurn] = useState("Team A");
   const [guesserTurn, setGuesserTurn] = useState(0);
   const [point, setPoint] = useState(6);
 
@@ -48,57 +47,62 @@ const Game = () => {
 
   return (
     <Fragment>
-      <Row>
-        <Col md="6">
+      <div className="row">
+        <div className="col-md-6">
           <h4 className="text-white">
-            {t("It's team turn", { team: teamTurn })}
+            {t("It's team turn", { team: t(teamTurn) })}
           </h4>
-        </Col>
+        </div>
 
-        <Col md="6">
-          <Button onClick={() => setTeamTurn((current) => changeTeam(current))}>
+        <div className="col-md-6">
+          <button
+            className="btn btn-light"
+            onClick={() => setTeamTurn((current) => changeTeam(current))}
+          >
             {t("Switch Team")}
-          </Button>
-        </Col>
-      </Row>
+          </button>
+        </div>
+      </div>
 
-      <Row className="my-3">
-        <Col md="6">
+      <div className="row my-3">
+        <div className="col-md-6">
           <h4 className="text-white">
             {t("PassWord is")} "{words[word]}"
           </h4>
-        </Col>
+        </div>
 
-        <Col md="6">
-          <Button onClick={() => changeWord()}>{t("Change Word")}</Button>
-        </Col>
-      </Row>
+        <div className="col-md-6">
+          <button className="btn btn-light" onClick={() => changeWord()}>
+            {t("Change Word")}
+          </button>
+        </div>
+      </div>
 
-      <Row>
-        <Col md="6">
+      <div className="row">
+        <div className="col-md-6">
           <h4 className="text-white">
             {t("Hand PassWord to")} {data[0][guesserTurn > 0 ? 1 : 0]} &{" "}
             {data[1][guesserTurn > 0 ? 1 : 0]}
           </h4>
-        </Col>
+        </div>
 
-        <Col md="6">
-          <Button onClick={() => changeGuesser()}>
+        <div className="col-md-6">
+          <button className="btn btn-light" onClick={() => changeGuesser()}>
             {t("Switch Clue Givers")}
-          </Button>
-        </Col>
-      </Row>
+          </button>
+        </div>
+      </div>
 
       <h5 className="text-white">{t("Playing for x points", { point })}</h5>
 
-      <ButtonGroup>
-        <Button
-          color="success"
+      <div className="btn-group">
+        <button
+          className="btn btn-success"
           type="button"
           onClick={() => {
             dispatch(
               addScores(
-                teamTurn === t("Team A")
+                teamTurn === "Team A"
                   ? { team: teamTurn, point, word: words[word] }
                   : { team: teamTurn, point, word: words[word] }
               )
@@ -107,10 +111,10 @@ const Game = () => {
           }}
         >
           {t("Guessed Right")}
-        </Button>
+        </button>
 
-        <Button
-          color="danger"
+        <button
+          className="btn btn-danger"
           type="button"
           onClick={() => {
             if (point > 1) {
@@ -122,8 +126,8 @@ const Game = () => {
           }}
         >
           {t("Guessed Wrong")}
-        </Button>
-      </ButtonGroup>
+        </button>
+      </div>
     </Fragment>
   );
 };

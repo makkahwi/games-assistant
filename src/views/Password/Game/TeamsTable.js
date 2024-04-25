@@ -1,13 +1,12 @@
-import { Table } from "reactstrap";
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const TeamsTable = () => {
   const members = useSelector((state) => state.password.members);
   const { t } = useTranslation();
 
   return (
-    <Table className="align-items-center table-flush" responsive>
+    <table className="table table-striped table-responsive w-100">
       <thead className="thead-light">
         <tr className="text-primary">
           <th />
@@ -29,7 +28,7 @@ const TeamsTable = () => {
           </tr>
         ))}
       </tbody>
-    </Table>
+    </table>
   );
 };
 

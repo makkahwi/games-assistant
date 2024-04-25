@@ -1,41 +1,41 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initValues = {
-  master: localStorage.getItem("list-master") || "",
-  members: (localStorage.getItem("list-members") &&
-    JSON.parse(localStorage.getItem("list-members"))) || ["", ""],
+  master: localStorage.getItem("listwords-master") || "",
+  members: (localStorage.getItem("listwords-members") &&
+    JSON.parse(localStorage.getItem("listwords-members"))) || ["", ""],
   history:
-    (localStorage.getItem("list-history") &&
-      JSON.parse(localStorage.getItem("list-history"))) ||
+    (localStorage.getItem("listwords-history") &&
+      JSON.parse(localStorage.getItem("listwords-history"))) ||
     [],
 };
 
-export const listSlice = createSlice({
-  name: "list",
+export const listwordsSlice = createSlice({
+  name: "listwords",
   initialState: initValues,
   reducers: {
     setNames: (state, action) => {
       state.master = action.payload?.master;
       state.members = [action.payload?.member1, action.payload?.member2];
 
-      localStorage.setItem("list-master", state.master);
-      localStorage.setItem("list-members", JSON.stringify(state.members));
+      localStorage.setItem("listwords-master", state.master);
+      localStorage.setItem("listwords-members", JSON.stringify(state.members));
     },
     addScores: (state, action) => {
       state.history.push(action.payload);
 
-      localStorage.setItem("list-history", JSON.stringify(state.history));
+      localStorage.setItem("listwords-history", JSON.stringify(state.history));
     },
     reset: (state) => {
-      localStorage.removeItem("list-master");
-      localStorage.removeItem("list-members");
-      localStorage.removeItem("list-history");
+      localStorage.removeItem("listwords-master");
+      localStorage.removeItem("listwords-members");
+      localStorage.removeItem("listwords-history");
       state = initValues;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setNames, addScores, reset } = listSlice.actions;
+export const { setNames, addScores, reset } = listwordsSlice.actions;
 
-export default listSlice.reducer;
+export default listwordsSlice.reducer;

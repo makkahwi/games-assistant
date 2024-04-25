@@ -2,3 +2,4 @@
 
 - PassWord Game
 - ListWords Game
+- CatchPhrase Game

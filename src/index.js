@@ -2,7 +2,6 @@ import ReactDOM from "react-dom/client";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import { Provider } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Container } from "reactstrap";
 
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
@@ -21,7 +20,8 @@ import i18next from "./redux/i18next";
 import store from "./redux/store";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "assets/scss/argon-design-system.scss?v1.0.0";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.rtl.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -35,76 +35,66 @@ const App = () => {
     <Provider store={store}>
       <I18nextProvider i18n={i18next}>
         <BrowserRouter>
-          <Navbar type="transparent" />
+          <Navbar />
 
-          <div className="wrapper">
-            <div
-              className="page-header bg-default"
-              style={{
-                backgroundImage: "url(" + require("assets/img/bg.png") + ")",
-                backgroundSize: "100% auto",
-              }}
-            >
-              <Container>
-                <Routes>
-                  <Route path="/" exact element={<Landing />} />
+          <div
+            className="py-5 mt-5 bg-primary"
+            style={{
+              backgroundImage: "url(" + require("assets/img/bg.png") + ")",
+              backgroundSize: "100% auto",
+            }}
+          >
+            <div className="container">
+              <Routes>
+                <Route path="/" exact element={<Landing />} />
+                <Route
+                  path="/password-rules"
+                  exact
+                  element={<PassWordRules />}
+                />
+                <Route
+                  path="/listwords-rules"
+                  exact
+                  element={<ListWordsRules />}
+                />
+                <Route
+                  path="/catchphrase-rules"
+                  exact
+                  element={<CatchPhraseRules />}
+                />
+
+                {store.getState().password.master ? (
+                  <Route path="/password" exact element={<PassWordGame />} />
+                ) : (
+                  <Route path="/password" exact element={<PassWordLanding />} />
+                )}
+
+                {store.getState().listwords.master ? (
+                  <Route path="/listwords" exact element={<ListWordsGame />} />
+                ) : (
                   <Route
-                    path="/password-rules"
+                    path="/listwords"
                     exact
-                    element={<PassWordRules />}
+                    element={<ListWordsLanding />}
                   />
+                )}
+
+                {store.getState().catchphrase.master ? (
                   <Route
-                    path="/listwords-rules"
+                    path="/catchphrase"
                     exact
-                    element={<ListWordsRules />}
+                    element={<CatchPhraseGame />}
                   />
+                ) : (
                   <Route
-                    path="/catchphrase-rules"
+                    path="/catchphrase"
                     exact
-                    element={<CatchPhraseRules />}
+                    element={<CatchPhraseLanding />}
                   />
+                )}
 
-                  {store.getState().password.master ? (
-                    <Route path="/password" exact element={<PassWordGame />} />
-                  ) : (
-                    <Route
-                      path="/password"
-                      exact
-                      element={<PassWordLanding />}
-                    />
-                  )}
-
-                  {store.getState().listwords.master ? (
-                    <Route
-                      path="/listwords"
-                      exact
-                      element={<ListWordsGame />}
-                    />
-                  ) : (
-                    <Route
-                      path="/listwords"
-                      exact
-                      element={<ListWordsLanding />}
-                    />
-                  )}
-
-                  {store.getState().catchphrase.master ? (
-                    <Route
-                      path="/catchphrase"
-                      exact
-                      element={<CatchPhraseGame />}
-                    />
-                  ) : (
-                    <Route
-                      path="/catchphrase"
-                      exact
-                      element={<CatchPhraseLanding />}
-                    />
-                  )}
-
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </Container>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
             </div>
           </div>
 

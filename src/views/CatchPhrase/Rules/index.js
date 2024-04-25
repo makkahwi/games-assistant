@@ -35,7 +35,7 @@ const CatchPhraseRules = () => {
           "The player that their countdown clock run out first loses the round"
         ),
         t(
-          "There is a challenge function where it's to be activated upon either of two events"
+          "There is a challenge feature where it's to be activated upon either of two events"
         ),
         t("First is when given word is not within selected category"),
         t(
