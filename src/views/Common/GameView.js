@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,15 +9,6 @@ const GameView = ({ header, game, teams, scores, reset }) => {
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState("gameTab");
-
-  useLayoutEffect(() => {
-    document.body.classList.add("landing-page");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("landing-page");
-    };
-  });
 
   return (
     <div className="row text-center">

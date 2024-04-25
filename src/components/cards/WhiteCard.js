@@ -8,7 +8,7 @@ const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
   return (
     <div className="card card-blog">
       <div style={{ height: "30vh", overflowY: "hidden" }}>
-        <img className="img pattern rounded" src={bg} width="100%" />
+        <img alt="..." className="img pattern rounded" src={bg} width="100%" />
       </div>
 
       <div className="card-body">

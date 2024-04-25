@@ -1,19 +1,8 @@
-import React from "react";
-
 import WhiteCard from "components/cards/WhiteCard";
 import { useTranslation } from "react-i18next";
 
 const Landing = () => {
   const { t } = useTranslation();
-
-  React.useEffect(() => {
-    document.body.classList.add("index-page");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("index-page");
-    };
-  });
 
   const games = [
     {
