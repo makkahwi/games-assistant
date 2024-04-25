@@ -89,7 +89,7 @@
   "Welcome": "أهلاً بك {{name}}",
   "When a player list wrong or duplicated word, other player can challenge, and they would get the point of the round if they're right, else challenged player get it": "عندما يذكر أحد اللاعبين كلمة من غير ضمن الفئة أو كلمة مكررة, يستطيع اللاعب الآخر تحديه وسيحصل على نقطة الجولة إذا كان محقاً, أو يحصل على النقطة اللاعب الآخر إذا كان مخطئاً.",
   "Winner team is the one that collects most points of all played rounds": "الفريق الفائز هو الذي يجمع أكبر عدد من النقاط بعد كل الجولات.",
-  "X Game Rules": "{{gameName}} قواعد لعبة",
+  "X Game Rules": "قواعد لعبة {{gameName}}",
   "X Total": "مجموع نقاط {{member}}",
   "lost": "فاز",
   "won": "خسر"
