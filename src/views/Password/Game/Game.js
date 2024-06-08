@@ -31,8 +31,7 @@ const Game = () => {
   const [point, setPoint] = useState(6);
 
   const changeWord = () => setWord(getRandomInt());
-  const changeTeam = (current) =>
-    current === t("Team A") ? t("Team B") : t("Team A");
+  const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
   const changeGuesser = () =>
     setGuesserTurn((current) => (current === 0 ? 1 : current === 1 ? 2 : 0));
 

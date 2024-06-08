@@ -1,17 +1,8 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 
 import CreateGame from "./Create";
 
 const PassWordLanding = () => {
-  React.useEffect(() => {
-    document.body.classList.add("register-page");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("register-page");
-    };
-  }, []);
-
   return (
     <Fragment>
       {/* <div className="form-container sign-in-container">

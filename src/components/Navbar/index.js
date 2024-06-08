@@ -19,13 +19,13 @@ const NavbarComp = () => {
 
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a
+            <span
               className="nav-link text-white"
               onClick={() => languageChange()}
               role="button"
             >
               {i18n.language === "en" ? "ع" : "En"}
-            </a>
+            </span>
           </li>
         </ul>
       </div>
