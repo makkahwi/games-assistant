@@ -66,7 +66,7 @@ const Game = () => {
       </div>
 
       <div className="row my-3">
-        <div className="col-md-6 my-4">
+        <div className="col-md-6 mt-4 mb-2">
           <h4 className="text-white">
             {t("PassWord is")}
             <br />
@@ -81,7 +81,9 @@ const Game = () => {
               <span className="h1">"{words[word]}"</span>
             )}
           </h4>
+        </div>
 
+        <div className="col-md-6 mb-4">
           <button className="btn btn-light mt-3" onClick={() => changeWord()}>
             {t("Change Word")}
           </button>
