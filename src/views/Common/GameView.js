@@ -96,7 +96,7 @@ const GameView = ({ header, game, teams, scores, reset }) => {
         </div>
 
         <button
-          className="btn btn-danger text-white mt-4 w-100"
+          className="btn btn-danger text-white mt-4 btn-sm float-end"
           onClick={(e) => {
             e.preventDefault();
             dispatch(reset());
