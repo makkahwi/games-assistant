@@ -29,6 +29,7 @@ const Game = () => {
   const [teamTurn, setTeamTurn] = useState("Team A");
   const [guesserTurn, setGuesserTurn] = useState(0);
   const [point, setPoint] = useState(6);
+  const [hide, setHide] = useState(true);
 
   const changeWord = () => setWord(getRandomInt());
   const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
@@ -37,6 +38,7 @@ const Game = () => {
 
   const startNew = () => {
     setPoint(6);
+    setHide(true);
     changeWord();
     const newTeam = changeTeam(startingTeamTurn);
     setStartingTeamTurn(newTeam);
@@ -64,14 +66,25 @@ const Game = () => {
       </div>
 
       <div className="row my-3">
-        <div className="col-md-6">
+        <div className="col-md-6 mt-4 mb-2">
           <h4 className="text-white">
-            {t("PassWord is")} "{words[word]}"
+            {t("PassWord is")}
+            <br />
+            {hide ? (
+              <button
+                className="btn btn-danger my-2"
+                onClick={() => setHide(false)}
+              >
+                {t("Show")}
+              </button>
+            ) : (
+              <span className="h1">"{words[word]}"</span>
+            )}
           </h4>
         </div>
 
-        <div className="col-md-6">
-          <button className="btn btn-light" onClick={() => changeWord()}>
+        <div className="col-md-6 mb-4">
+          <button className="btn btn-light mt-3" onClick={() => changeWord()}>
             {t("Change Word")}
           </button>
         </div>
@@ -80,12 +93,19 @@ const Game = () => {
       <div className="row">
         <div className="col-md-6">
           <h4 className="text-white">
-            {t("Hand PassWord to")} {data[0][guesserTurn > 0 ? 1 : 0]} &{" "}
-            {data[1][guesserTurn > 0 ? 1 : 0]}
+            {t("Hand PassWord to")}
+            <br />
+            <span className="text-decoration-underline">
+              {data[0][guesserTurn > 0 ? 1 : 0]}
+            </span>{" "}
+            &{" "}
+            <span className="text-decoration-underline">
+              {data[1][guesserTurn > 0 ? 1 : 0]}
+            </span>
           </h4>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-6 my-3">
           <button className="btn btn-light" onClick={() => changeGuesser()}>
             {t("Switch Clue Givers")}
           </button>
@@ -98,6 +118,7 @@ const Game = () => {
         <button
           className="btn btn-success"
           type="button"
+          disabled={hide}
           onClick={() => {
             dispatch(
               addScores(
@@ -115,6 +136,7 @@ const Game = () => {
         <button
           className="btn btn-danger"
           type="button"
+          disabled={hide}
           onClick={() => {
             if (point > 1) {
               setPoint((current) => current - 1);
