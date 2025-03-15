@@ -1,5 +1,6 @@
-import WhiteCard from "components/cards/WhiteCard";
 import { useTranslation } from "react-i18next";
+
+import WhiteCard from "components/cards/WhiteCard";
 
 const Landing = () => {
   const { t } = useTranslation();
@@ -13,6 +14,15 @@ const Landing = () => {
       img: require("assets/img/card-bg/3.svg").default,
       url: "/password",
       rulesUrl: "/password-rules",
+    },
+    {
+      title: "Pictionary",
+      desc: t(
+        "This is the game of guessing 1 given word by drawing hints passed by teammate"
+      ),
+      img: require("assets/img/card-bg/5.svg").default,
+      url: "/pictionary",
+      rulesUrl: "/pictionary-rules",
     },
     {
       title: "ListWords",

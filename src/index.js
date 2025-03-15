@@ -15,6 +15,9 @@ import ListWordsRules from "views/ListWords/Rules";
 import PassWordGame from "views/Password/Game";
 import PassWordLanding from "views/Password/Landing";
 import PassWordRules from "views/Password/Rules";
+import PictionaryGame from "views/Pictionary/Game";
+import PictionaryLanding from "views/Pictionary/Landing";
+import PictionaryRules from "views/Pictionary/Rules";
 
 import i18next from "./redux/i18next";
 import store from "./redux/store";
@@ -54,6 +57,11 @@ const App = () => {
                   element={<PassWordRules />}
                 />
                 <Route
+                  path="/pictionary-rules"
+                  exact
+                  element={<PictionaryRules />}
+                />
+                <Route
                   path="/listwords-rules"
                   exact
                   element={<ListWordsRules />}
@@ -68,6 +76,20 @@ const App = () => {
                   <Route path="/password" exact element={<PassWordGame />} />
                 ) : (
                   <Route path="/password" exact element={<PassWordLanding />} />
+                )}
+
+                {store.getState().pictionary.master ? (
+                  <Route
+                    path="/pictionary"
+                    exact
+                    element={<PictionaryGame />}
+                  />
+                ) : (
+                  <Route
+                    path="/pictionary"
+                    exact
+                    element={<PictionaryLanding />}
+                  />
                 )}
 
                 {store.getState().listwords.master ? (
