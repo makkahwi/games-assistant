@@ -3,16 +3,16 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import { randomSort } from "consts/functions";
-import { wordsBank } from "consts/WordBank";
+import { wordsBank } from "consts/Pictionary";
 
-import { addScores } from "../../../redux/password";
+import { addScores } from "../../../redux/pictionary";
 
 const words = randomSort(
   wordsBank.reduce((final, { words }) => [...final, ...words], [])
 );
 
 const Game = () => {
-  const members = useSelector((state) => state.password.members);
+  const members = useSelector((state) => state.pictionary.members);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -25,61 +25,25 @@ const Game = () => {
   };
 
   const [word, setWord] = useState(getRandomInt());
-  const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
-  const [teamTurn, setTeamTurn] = useState("Team A");
   const [guesserTurn, setGuesserTurn] = useState(0);
-  const [point, setPoint] = useState(6);
-  const [hide, setHide] = useState(true);
 
   const changeWord = () => setWord(getRandomInt());
-  const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
   const changeGuesser = () =>
     setGuesserTurn((current) => (current === 0 ? 1 : current === 1 ? 2 : 0));
 
   const startNew = () => {
-    setPoint(6);
-    setHide(true);
     changeWord();
-    const newTeam = changeTeam(startingTeamTurn);
-    setStartingTeamTurn(newTeam);
     changeGuesser();
-    setTeamTurn(newTeam);
   };
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-md-6">
-          <h4 className="text-white">
-            {t("It's team turn", { team: t(teamTurn) })}
-          </h4>
-        </div>
-
-        <div className="col-md-6">
-          <button
-            className="btn btn-light"
-            onClick={() => setTeamTurn((current) => changeTeam(current))}
-          >
-            {t("Switch Team")}
-          </button>
-        </div>
-      </div>
-
       <div className="row my-3">
         <div className="col-md-6 mt-4 mb-2">
           <h4 className="text-white">
-            {t("Pictionary is")}
+            {t("Pictionary word is")}
             <br />
-            {hide ? (
-              <button
-                className="btn btn-danger my-2"
-                onClick={() => setHide(false)}
-              >
-                {t("Show")}
-              </button>
-            ) : (
-              <span className="h1">"{words[word]}"</span>
-            )}
+            <span className="h1">"{words[word]}"</span>
           </h4>
         </div>
 
@@ -112,41 +76,31 @@ const Game = () => {
         </div>
       </div>
 
-      <h5 className="text-white">{t("Playing for x points", { point })}</h5>
-
       <div className="btn-group">
         <button
           className="btn btn-success"
           type="button"
-          disabled={hide}
           onClick={() => {
             dispatch(
-              addScores(
-                teamTurn === "Team A"
-                  ? { team: teamTurn, point, word: words[word] }
-                  : { team: teamTurn, point, word: words[word] }
-              )
+              addScores({ team: "Team A", point: 1, word: words[word] })
             );
             startNew();
           }}
         >
-          {t("Guessed Right")}
+          {t("Team A Guessed")}
         </button>
 
         <button
           className="btn btn-danger"
           type="button"
-          disabled={hide}
           onClick={() => {
-            if (point > 1) {
-              setPoint((current) => current - 1);
-              setTeamTurn((current) => changeTeam(current));
-            } else {
-              startNew();
-            }
+            dispatch(
+              addScores({ team: "Team B", point: 1, word: words[word] })
+            );
+            startNew();
           }}
         >
-          {t("Guessed Wrong")}
+          {t("Team B Guessed")}
         </button>
       </div>
     </Fragment>

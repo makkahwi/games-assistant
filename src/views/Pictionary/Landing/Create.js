@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import FormComp from "../../../components/Form";
-import { setNames } from "../../../redux/password";
+import { setNames } from "../../../redux/pictionary";
 
 const CreateGame = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 const TeamsTable = () => {
-  const members = useSelector((state) => state.password.members);
+  const members = useSelector((state) => state.pictionary.members);
   const { t } = useTranslation();
 
   return (

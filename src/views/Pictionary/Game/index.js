@@ -1,6 +1,6 @@
 import GameView from "views/Common/GameView";
 
-import { reset } from "../../../redux/password";
+import { reset } from "../../../redux/pictionary";
 import Game from "./Game";
 import Header from "./Header";
 import ScoresTable from "./Scores";
