@@ -22,6 +22,10 @@ export const wordsBank = [
     ],
   },
   {
+    category: "Western Meals",
+    words: ["بروستد", "دونت"],
+  },
+  {
     category: "Fast Food",
     words: [
       "شاورما",
@@ -302,7 +306,7 @@ export const wordsBank = [
   },
   {
     category: "Sea Animals",
-    words: ["دولفين", "سمك", "جمبري", "قرش", "صدفة", "فقمة"],
+    words: ["دولفين", "سمك", "جمبري", "قرش", "صدفة", "فقمة", "سلحفاة"],
   },
   {
     category: "Animal Parts",
@@ -312,6 +316,7 @@ export const wordsBank = [
     category: "Clothes",
     words: [
       "بدلة",
+      "فستان",
       "غرافة",
       "معطف",
       "نقاب",
@@ -617,5 +622,13 @@ export const wordsBank = [
   {
     category: "Objects",
     words: ["مفتاح", "طوبة", "ميدالية", "منديل", "صحيفة", "حصالة"],
+  },
+  {
+    category: "Occupation",
+    words: ["مغني", "عازف", "قرصان"],
+  },
+  {
+    category: "Event",
+    words: ["عيد", "الحج"],
   },
 ];

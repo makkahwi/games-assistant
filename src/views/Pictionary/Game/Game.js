@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import { randomSort } from "consts/functions";
-import { wordsBank } from "consts/Pictionary";
+import { phrasesBank } from "consts/CatchPhrase";
 
 import { addScores } from "../../../redux/pictionary";
 
 const words = randomSort(
-  wordsBank.reduce((final, { words }) => [...final, ...words], [])
+  phrasesBank.reduce((final, { words }) => [...final, ...words], [])
 );
 
 const Game = () => {
@@ -41,7 +41,7 @@ const Game = () => {
       <div className="row my-3">
         <div className="col-md-6 mt-4 mb-2">
           <h4 className="text-white">
-            {t("Pictionary word is")}
+            {t("Pictionary Phrase is")}
             <br />
             <span className="h1">"{words[word]}"</span>
           </h4>

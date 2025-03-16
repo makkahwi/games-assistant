@@ -1,7 +1,7 @@
 export const phrasesBank = [
   {
     category: "Phrases",
-    words: ["اسبح مع التيار", "بيني وبينك"],
+    words: ["اسبح مع التيار", "بيني وبينك", "رأساً على عقب"],
   },
   {
     category: "Sayings",
@@ -41,7 +41,7 @@ export const phrasesBank = [
   },
   {
     category: "Fast Food",
-    words: ["دجاج مقلي", "بيض مقلي", "بطاطا مقلية"],
+    words: ["دجاج مقلي", "بيض مقلي", "بطاطا مقلية", "وجبات سريعة"],
   },
   {
     category: "Drinks",
@@ -134,8 +134,16 @@ export const phrasesBank = [
     words: [],
   },
   {
+    category: "Event",
+    words: ["عيد الأم", "طوفان الأقصى"],
+  },
+  {
+    category: "Machines",
+    words: ["مقلاة هوائية"],
+  },
+  {
     category: "Clothes",
-    words: [],
+    words: ["فستان عرس"],
   },
   {
     category: "Cartoons",
