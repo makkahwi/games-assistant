@@ -12,6 +12,9 @@ import CatchPhraseRules from "views/CatchPhrase/Rules";
 import ListWordsGame from "views/ListWords/Game";
 import ListWordsLanding from "views/ListWords/Landing";
 import ListWordsRules from "views/ListWords/Rules";
+import MafiaGame from "views/Mafia/Game";
+import MafiaLanding from "views/Mafia/Landing";
+import MafiaRules from "views/Mafia/Rules";
 import PassWordGame from "views/Password/Game";
 import PassWordLanding from "views/Password/Landing";
 import PassWordRules from "views/Password/Rules";
@@ -56,6 +59,7 @@ const App = () => {
                   exact
                   element={<PassWordRules />}
                 />
+                <Route path="/mafia-rules" exact element={<MafiaRules />} />
                 <Route
                   path="/pictionary-rules"
                   exact
@@ -76,6 +80,12 @@ const App = () => {
                   <Route path="/password" exact element={<PassWordGame />} />
                 ) : (
                   <Route path="/password" exact element={<PassWordLanding />} />
+                )}
+
+                {store.getState().mafia.master ? (
+                  <Route path="/mafia" exact element={<MafiaGame />} />
+                ) : (
+                  <Route path="/mafia" exact element={<MafiaLanding />} />
                 )}
 
                 {store.getState().pictionary.master ? (

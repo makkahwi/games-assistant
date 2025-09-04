@@ -25,6 +25,15 @@ const Landing = () => {
       rulesUrl: "/pictionary-rules",
     },
     {
+      title: "Mafia",
+      desc: t(
+        "This is the game of mafia, with killers, citizens, judges, nurses, and drowner."
+      ),
+      img: require("assets/img/card-bg/6.svg").default,
+      url: "/mafia",
+      rulesUrl: "/mafia-rules",
+    },
+    {
       title: "ListWords",
       desc: t(
         "Time-limited challenge to list highest number of words follow given category"

@@ -31,35 +31,43 @@ const GameView = ({ header, game, teams, scores, reset }) => {
             </div>
           </div>
 
-          <div className="nav-item">
-            <div
-              className={
-                "nav-link " +
-                (activeTab === "teamsTab" ? "active" : "text-white bg-primary")
-              }
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveTab("teamsTab");
-              }}
-            >
-              {t("Teams")}
+          {teams && (
+            <div className="nav-item">
+              <div
+                className={
+                  "nav-link " +
+                  (activeTab === "teamsTab"
+                    ? "active"
+                    : "text-white bg-primary")
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveTab("teamsTab");
+                }}
+              >
+                {t("Teams")}
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="nav-item">
-            <div
-              className={
-                "nav-link " +
-                (activeTab === "scoresTab" ? "active" : "text-white bg-primary")
-              }
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveTab("scoresTab");
-              }}
-            >
-              {t("Scores")}
+          {scores && (
+            <div className="nav-item">
+              <div
+                className={
+                  "nav-link " +
+                  (activeTab === "scoresTab"
+                    ? "active"
+                    : "text-white bg-primary")
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveTab("scoresTab");
+                }}
+              >
+                {t("Scores")}
+              </div>
             </div>
-          </div>
+          )}
         </ul>
 
         <div className="card shadow bg-primary">
@@ -74,29 +82,34 @@ const GameView = ({ header, game, teams, scores, reset }) => {
                 {game}
               </div>
 
-              <div
-                className={`tab-pane p-5 ${
-                  activeTab === "teamsTab" ? "active" : ""
-                }`}
-                tabId="teamsTab"
-              >
-                {teams}
-              </div>
+              {teams && (
+                <div
+                  teams
+                  className={`tab-pane p-5 ${
+                    activeTab === "teamsTab" ? "active" : ""
+                  }`}
+                  tabId="teamsTab"
+                >
+                  {teams}
+                </div>
+              )}
 
-              <div
-                className={`tab-pane p-5 ${
-                  activeTab === "scoresTab" ? "active" : ""
-                }`}
-                tabId="scoresTab"
-              >
-                {scores}
-              </div>
+              {scores && (
+                <div
+                  className={`tab-pane p-5 ${
+                    activeTab === "scoresTab" ? "active" : ""
+                  }`}
+                  tabId="scoresTab"
+                >
+                  {scores}
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         <button
-          className="btn btn-danger text-white mt-4 btn-sm float-end"
+          className="btn btn-danger text-white mt-4 btn-sm float-end w-100"
           onClick={(e) => {
             e.preventDefault();
             dispatch(reset());
