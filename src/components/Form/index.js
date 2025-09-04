@@ -10,7 +10,15 @@ const FormComp = ({
   light,
 }) => {
   const [inputFocuses, setInputFocuses] = useState({});
-  const [inputValues, setInputValues] = useState({});
+  const [inputValues, setInputValues] = useState(
+    inputs.reduce((final, current) => {
+      if (current.defaultValue) {
+        return { ...final, [current.name]: current.defaultValue };
+      }
+
+      return final;
+    }, {})
+  );
 
   return (
     <form
@@ -30,7 +38,17 @@ const FormComp = ({
 
       {inputs.map(
         (
-          { name, label, icon, type = "text", required, options, minLength },
+          {
+            name,
+            label,
+            icon,
+            type = "text",
+            required,
+            options,
+            minLength,
+            note,
+            ...rest
+          },
           i
         ) => {
           const props = {
@@ -52,6 +70,7 @@ const FormComp = ({
             onBlur: () =>
               setInputFocuses((current) => ({ ...current, [name]: "" })),
             className: "form-control",
+            ...rest,
           };
 
           return (
@@ -60,7 +79,7 @@ const FormComp = ({
               key={i}
             >
               <div className="input-group-text">
-                <i className={icon} />
+                <i className={icon + " me-2"} /> {label}
               </div>
 
               {type === "select" ? (
@@ -72,9 +91,17 @@ const FormComp = ({
                     </option>
                   ))}
                 </select>
+              ) : type === "boolean" ? (
+                <select {...props}>
+                  <option placeholder="true">{"Select " + label}</option>
+                  <option defaultValue="Yes">Yes</option>
+                  <option defaultValue="No">No</option>
+                </select>
               ) : (
                 <input {...props} />
               )}
+
+              {note && <div className="input-group-text">{note}</div>}
             </div>
           );
         }
