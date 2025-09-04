@@ -33,7 +33,9 @@ const CreateGame = () => {
       label: t("Citizens Count"),
       icon: "fa-solid fa-c",
       min: 1,
-      note: "Remember that there are Judge & Nurse, and don't count downer here.",
+      note: t(
+        "Remember that there are Judge & Nurse, and don't count downer here"
+      ),
       type: "number",
       required: true,
     },

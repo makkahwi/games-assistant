@@ -22,7 +22,7 @@ const generateRandomNumberInRange = (min = 1, max = 9, exclusions = []) => {
 
 const Game = () => {
   const roles = useSelector((state) => state.mafia.roles);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [availableRoles, setAvailableRoles] = useState([]);
   const [takenRoles, setTakenRoles] = useState([]);
@@ -42,23 +42,23 @@ const Game = () => {
   useEffect(() => {
     const { killers, citizens, drowner } = roles;
 
-    const final = ["Judge", "Nurse"];
+    const final = [t("Judge"), t("Nurse")];
 
     if (drowner === "Yes") {
-      final.push("Drowner");
+      final.push(t("Drowner"));
     }
 
     for (let i = 0; i < killers; i++) {
-      final.push("Mafia");
+      final.push(t("Mafia"));
     }
 
     for (let i = 0; i < citizens; i++) {
-      final.push("Citizen");
+      final.push(t("Citizen"));
     }
 
     setAvailableRoles(final);
     generateRandomNumber(final.length);
-  }, [roles]);
+  }, [roles, i18n.language]);
 
   const onHide = () => {
     setHide(true);
@@ -70,20 +70,24 @@ const Game = () => {
       <div className="row my-3">
         <div className="col-md-12 mt-4 mb-2">
           <h4 className="text-white">
-            Total Number of Players {availableRoles.length}
+            {t("Total Number of Players")} {availableRoles.length}
             <br />
             <br />
             {t("Available roles are")}
             <br />
             <br />
-            {JSON.stringify(
-              availableRoles.reduce((final, current) => {
-                if (final[current]) {
-                  return { ...final, [current]: final[current] + 1 };
-                }
-                return { ...final, [current]: 1 };
-              }, {})
-            )}
+            <pre>
+              {JSON.stringify(
+                availableRoles.reduce((final, current) => {
+                  if (final[current]) {
+                    return { ...final, [current]: final[current] + 1 };
+                  }
+                  return { ...final, [current]: 1 };
+                }, {}),
+                null,
+                2
+              )}
+            </pre>
           </h4>
         </div>
 
