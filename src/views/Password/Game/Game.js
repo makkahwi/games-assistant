@@ -3,17 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import { randomSort } from "consts/functions";
-import { wordsBank, newWordsBank } from "consts/WordBank";
 import { isPasswordHistorySyncEnabled } from "services/passwordHistory";
+import {
+  isPasswordWordBankEnabled,
+  loadPasswordWordBank,
+} from "services/passwordWordBank";
 
 import { addScores, loadHistory, syncHistory } from "../../../redux/password";
-
-const wordBank = randomSort(
-  [...wordsBank, ...newWordsBank].reduce(
-    (final, { words }) => [...final, ...words],
-    [],
-  ),
-);
 
 const Game = () => {
   const members = useSelector((state) => state.password.members);
@@ -26,6 +22,9 @@ const Game = () => {
   const { t } = useTranslation();
 
   const data = [members[0], members[1]];
+  const [wordBank, setWordBank] = useState([]);
+  const [wordBankStatus, setWordBankStatus] = useState("idle");
+  const [wordBankError, setWordBankError] = useState("");
   const words = useMemo(() => {
     const playedWords = new Set(
       [...playedHistory, ...history].map(({ word }) => word),
@@ -33,15 +32,19 @@ const Game = () => {
     const availableWords = wordBank.filter((word) => !playedWords.has(word));
 
     return availableWords.length ? availableWords : wordBank;
-  }, [history, playedHistory]);
+  }, [history, playedHistory, wordBank]);
 
   const getRandomInt = useCallback((min = 0, max = words.length) => {
+    if (max <= min) {
+      return 0;
+    }
+
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
   }, [words.length]);
 
-  const [word, setWord] = useState(getRandomInt());
+  const [word, setWord] = useState(0);
   const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
   const [teamTurn, setTeamTurn] = useState("Team A");
   const [guesserTurn, setGuesserTurn] = useState(0);
@@ -53,6 +56,40 @@ const Game = () => {
       dispatch(loadHistory());
     }
   }, [dispatch, gameId]);
+
+  useEffect(() => {
+    let ignore = false;
+
+    const loadWords = async () => {
+      if (!isPasswordWordBankEnabled) {
+        setWordBankStatus("disabled");
+        return;
+      }
+
+      setWordBankStatus("loading");
+      setWordBankError("");
+
+      try {
+        const remoteWordBank = await loadPasswordWordBank();
+
+        if (!ignore) {
+          setWordBank(randomSort(remoteWordBank));
+          setWordBankStatus("loaded");
+        }
+      } catch (error) {
+        if (!ignore) {
+          setWordBankError(error.message || "Word bank sync failed");
+          setWordBankStatus("error");
+        }
+      }
+    };
+
+    loadWords();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (word >= words.length) {
@@ -102,23 +139,42 @@ const Game = () => {
             {hide ? (
               <button
                 className="btn btn-danger my-2"
+                disabled={!words.length}
                 onClick={() => setHide(false)}
               >
                 {t("Show")}
               </button>
             ) : (
-              <span className="h1">"{words[word]}"</span>
+              <span className="h1">"{words[word] || ""}"</span>
             )}
           </h4>
         </div>
 
         <div className="col-md-6 mb-4">
-          <button className="btn btn-light mt-3" onClick={() => changeWord()}>
+          <button
+            className="btn btn-light mt-3"
+            disabled={!words.length}
+            onClick={() => changeWord()}
+          >
             {t("Change Word")}
           </button>
         </div>
 
+        {wordBankStatus === "loaded" && !words.length && (
+          <div className="col-12">
+            <small className="text-warning">
+              Password word bank is empty in Firebase.
+            </small>
+          </div>
+        )}
+
         {historyStatus === "loading" && (
+          <div className="col-12">
+            <small className="text-white">{t("Loading")}</small>
+          </div>
+        )}
+
+        {wordBankStatus === "loading" && (
           <div className="col-12">
             <small className="text-white">{t("Loading")}</small>
           </div>
@@ -127,6 +183,12 @@ const Game = () => {
         {historyError && (
           <div className="col-12">
             <small className="text-warning">{historyError}</small>
+          </div>
+        )}
+
+        {wordBankError && (
+          <div className="col-12">
+            <small className="text-warning">{wordBankError}</small>
           </div>
         )}
       </div>
@@ -161,9 +223,11 @@ const Game = () => {
           type="button"
           disabled={hide}
           onClick={() => {
-            dispatch(addScores({ team: teamTurn, point, word: words[word] }));
-            dispatch(syncHistory());
-            startNew();
+            if (words.length) {
+              dispatch(addScores({ team: teamTurn, point, word: words[word] }));
+              dispatch(syncHistory());
+              startNew();
+            }
           }}
         >
           {t("Guessed Right")}

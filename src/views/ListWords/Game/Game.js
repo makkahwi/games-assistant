@@ -148,7 +148,7 @@ const Game = () => {
 
       return () => clearInterval(interval);
     }
-  }, [teamClocks]);
+  }, [listingTurn, members, teamClocks]);
 
   const switchTurn = () => {
     if (teamClocks.every((value, index) => value === [20000, 20000][index])) {

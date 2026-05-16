@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
@@ -29,7 +29,7 @@ const Game = () => {
   const [randomNumber, setRandomNumber] = useState(0);
   const [hide, setHide] = useState(true);
 
-  const generateRandomNumber = (length = 0) => {
+  const generateRandomNumber = useCallback((length = 0) => {
     const newRandomNumber = generateRandomNumberInRange(
       0,
       length - 1,
@@ -37,7 +37,7 @@ const Game = () => {
     );
     setRandomNumber(newRandomNumber);
     setTakenRoles((current) => [...current, newRandomNumber]);
-  };
+  }, [takenRoles]);
 
   useEffect(() => {
     const { killers, citizens, drowner } = roles;
@@ -57,8 +57,11 @@ const Game = () => {
     }
 
     setAvailableRoles(final);
-    generateRandomNumber(final.length);
-  }, [roles, i18n.language]);
+    const firstRandomNumber = generateRandomNumberInRange(0, final.length - 1);
+
+    setRandomNumber(firstRandomNumber);
+    setTakenRoles([firstRandomNumber]);
+  }, [roles, t, i18n.language]);
 
   const onHide = () => {
     setHide(true);
