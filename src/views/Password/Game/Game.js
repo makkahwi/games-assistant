@@ -1,13 +1,14 @@
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import { randomSort } from "consts/functions";
 import { wordsBank, newWordsBank } from "consts/WordBank";
+import { isPasswordHistorySyncEnabled } from "services/passwordHistory";
 
-import { addScores } from "../../../redux/password";
+import { addScores, loadHistory, syncHistory } from "../../../redux/password";
 
-const words = randomSort(
+const wordBank = randomSort(
   [...wordsBank, ...newWordsBank].reduce(
     (final, { words }) => [...final, ...words],
     [],
@@ -16,16 +17,29 @@ const words = randomSort(
 
 const Game = () => {
   const members = useSelector((state) => state.password.members);
+  const gameId = useSelector((state) => state.password.gameId);
+  const history = useSelector((state) => state.password.history);
+  const playedHistory = useSelector((state) => state.password.playedHistory);
+  const historyStatus = useSelector((state) => state.password.historyStatus);
+  const historyError = useSelector((state) => state.password.historyError);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const data = [members[0], members[1]];
+  const words = useMemo(() => {
+    const playedWords = new Set(
+      [...playedHistory, ...history].map(({ word }) => word),
+    );
+    const availableWords = wordBank.filter((word) => !playedWords.has(word));
 
-  const getRandomInt = (min = 0, max = words.length) => {
+    return availableWords.length ? availableWords : wordBank;
+  }, [history, playedHistory]);
+
+  const getRandomInt = useCallback((min = 0, max = words.length) => {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
-  };
+  }, [words.length]);
 
   const [word, setWord] = useState(getRandomInt());
   const [startingTeamTurn, setStartingTeamTurn] = useState("Team A");
@@ -33,6 +47,18 @@ const Game = () => {
   const [guesserTurn, setGuesserTurn] = useState(0);
   const [point, setPoint] = useState(6);
   const [hide, setHide] = useState(true);
+
+  useEffect(() => {
+    if (gameId && isPasswordHistorySyncEnabled) {
+      dispatch(loadHistory());
+    }
+  }, [dispatch, gameId]);
+
+  useEffect(() => {
+    if (word >= words.length) {
+      setWord(getRandomInt(0, words.length));
+    }
+  }, [getRandomInt, word, words.length]);
 
   const changeWord = () => setWord(getRandomInt());
   const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
@@ -91,6 +117,18 @@ const Game = () => {
             {t("Change Word")}
           </button>
         </div>
+
+        {historyStatus === "loading" && (
+          <div className="col-12">
+            <small className="text-white">{t("Loading")}</small>
+          </div>
+        )}
+
+        {historyError && (
+          <div className="col-12">
+            <small className="text-warning">{historyError}</small>
+          </div>
+        )}
       </div>
 
       <div className="row">
@@ -123,13 +161,8 @@ const Game = () => {
           type="button"
           disabled={hide}
           onClick={() => {
-            dispatch(
-              addScores(
-                teamTurn === "Team A"
-                  ? { team: teamTurn, point, word: words[word] }
-                  : { team: teamTurn, point, word: words[word] },
-              ),
-            );
+            dispatch(addScores({ team: teamTurn, point, word: words[word] }));
+            dispatch(syncHistory());
             startNew();
           }}
         >
