@@ -3,12 +3,15 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import { randomSort } from "consts/functions";
-import { wordsBank } from "consts/WordBank";
+import { wordsBank, newWordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/password";
 
 const words = randomSort(
-  wordsBank.reduce((final, { words }) => [...final, ...words], [])
+  [...wordsBank, ...newWordsBank].reduce(
+    (final, { words }) => [...final, ...words],
+    [],
+  ),
 );
 
 const Game = () => {
@@ -124,8 +127,8 @@ const Game = () => {
               addScores(
                 teamTurn === "Team A"
                   ? { team: teamTurn, point, word: words[word] }
-                  : { team: teamTurn, point, word: words[word] }
-              )
+                  : { team: teamTurn, point, word: words[word] },
+              ),
             );
             startNew();
           }}
