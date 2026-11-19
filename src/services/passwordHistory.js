@@ -1,4 +1,4 @@
-const firebaseDatabaseUrl = process.env.REACT_APP_FIREBASE_DATABASE_URL;
+const firebaseDatabaseUrl = import.meta.env.VITE_FIREBASE_DATABASE_URL;
 
 const normalizeDatabaseUrl = (url) => url?.replace(/\/$/, "");
 

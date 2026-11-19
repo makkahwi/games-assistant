@@ -1,3 +1,4 @@
+import { roundRoles } from "../../../utils/competition";
 import { useRef, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +14,8 @@ import { addScores, loadHistory, syncHistory } from "../../../redux/password";
 const Game = ({ onExit }) => {
   const master = useSelector((state) => state.password.master);
   const members = useSelector((state) => state.password.members);
+  const format = useSelector((state) => state.password.format);
+  const solo = format === "1v1";
   const gameId = useSelector((state) => state.password.gameId);
   const history = useSelector((state) => state.password.history);
   const playedHistory = useSelector((state) => state.password.playedHistory);
@@ -131,7 +134,7 @@ const Game = ({ onExit }) => {
   const changeWord = () => { setPhase("hidden"); setWord(getRandomInt()); };
   const changeTeam = (current) => (current === "Team A" ? "Team B" : "Team A");
   const changeGuesser = () =>
-    setGuesserTurn((current) => (current === 0 ? 1 : 0));
+    setGuesserTurn((current) => current + 1);
 
   const startNew = () => {
     setPoint(6);
@@ -155,6 +158,8 @@ const Game = ({ onExit }) => {
       setTeamTurn((current) => changeTeam(current));
     } else startNew();
   };
+
+  const teamLabel = (team) => solo ? members[team === "Team A" ? 0 : 1][0] : t(team);
 
   const renderWordArea = () => (
             <div className="table-word-area">
@@ -181,17 +186,17 @@ const Game = ({ onExit }) => {
       </div>
       <div className="desktop-round-info" aria-live="polite">
         <span>{t("Round")} {history.length + 1} · {t("Game Master Name")}: {master}</span>
-        <h1>{t("It's team turn", { team: t(teamTurn) })}</h1>
+        <h1>{t("It's team turn", { team: teamLabel(teamTurn) })}</h1>
         <strong>{t("Playing for x points", { point })}</strong>
       </div>
       <div className="table-halves">
         <div className="desktop-word">{renderWordArea()}</div>
         {["Team B", "Team A"].map((team, index) => (
-          <section key={team} className={`table-team ${index === 0 ? "table-team-opposite" : ""} ${teamTurn === team ? "team-active" : ""}`} aria-label={t(team)}>
-            <header><strong>{t(team)}</strong><span>{t(teamTurn === team ? "Your turn" : "Other team's turn")} · {t("Playing for x points", { point })}</span></header>
+          <section key={team} className={`table-team ${index === 0 ? "table-team-opposite" : ""} ${teamTurn === team ? "team-active" : ""}`} aria-label={teamLabel(team)}>
+            <header><strong>{teamLabel(team)}</strong><span>{t(teamTurn === team ? "Your turn" : "Other team's turn")} · {t("Playing for x points", { point })}</span></header>
             <div className="table-player-info">
-              <span>{t("Guesser")}: <strong>{members[team === "Team A" ? 0 : 1][1 - guesserTurn]}</strong></span>
-              <span>{t("Clue giver")}: <strong>{members[team === "Team A" ? 0 : 1][guesserTurn]}</strong></span>
+              <span>{t("Guesser")}: <strong>{roundRoles(members[team === "Team A" ? 0 : 1], guesserTurn, master).guessers.join(", ")}</strong></span>
+              <span>{t("Clue giver")}: <strong>{roundRoles(members[team === "Team A" ? 0 : 1], guesserTurn, master).clueGiver}</strong></span>
               <small>{t("Score")}: {history.filter((score) => score.team === team).reduce((total, score) => total + score.point, 0)}</small>
             </div>
             {renderWordArea()}
@@ -204,7 +209,7 @@ const Game = ({ onExit }) => {
       </div>
       <div className="table-bottom-tools">
         <button onClick={changeWord} disabled={!words.length}>{t("Change Word")}</button>
-        <button onClick={() => { changeGuesser(); setPhase("hidden"); }}>{t("Switch Clue Givers")}</button>
+        {!solo && <button onClick={() => { changeGuesser(); setPhase("hidden"); }}>{t("Switch Clue Givers")}</button>}
         <button onClick={() => setTeamTurn((current) => changeTeam(current))}>{t("Switch Team")}</button>
       </div>
       {(historyError || wordBankError || historyStatus === "loading") && <small className="table-sync" role="status">{t(historyError || wordBankError ? "Sync unavailable. Continue playing locally." : "Loading")}</small>}

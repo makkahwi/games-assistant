@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
+const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon, format, groupOnly }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -16,7 +16,7 @@ const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
 
         <div className="card-text mt-2 mb-4">{desc}</div>
 
-        {comingSoon ? (
+        {groupOnly && format !== "teams" ? <p className="group-only-note">{t("Mafia needs a group. Choose Team vs team to play.")}</p> : comingSoon ? (
           <button className="btn btn-danger rounded-2" disabled>
             {t("Coming Soon")}
           </button>
@@ -24,14 +24,14 @@ const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
           <div className="btn-group">
             <button
               className="btn btn-primary rounded-start"
-              onClick={() => navigate(gameUrl)}
+              onClick={() => navigate(`${gameUrl}?format=${format}`)}
             >
               {t("Start Game")}
             </button>
 
             <button
               className="btn btn-light text-dark rounded-end"
-              onClick={() => navigate(rulesUrl)}
+              onClick={() => navigate(`${rulesUrl}?format=${format}`)}
             >
               {t("Game Rules")}
             </button>

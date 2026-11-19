@@ -57,7 +57,7 @@ const FooterComp = () => {
   return (
     <footer className="text-center text-lg-start bg-transparent text-muted">
       <section className="container d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <h5 className="text-primary">{t("Developer Contacts")}</h5>
+        <h5 className="text-primary">{t("Good breaks make better workdays.")}</h5>
 
         <div>
           {socialMediaLinks.map(({ icon, link, tooltip, key }, i) => (
@@ -77,7 +77,7 @@ const FooterComp = () => {
       </section>
 
       <div className="text-center p-4">
-        {t("Multi-Game Assistant")} © {new Date().getFullYear()}
+        {t("Yalla Break")} © {new Date().getFullYear()}
       </div>
     </footer>
   );

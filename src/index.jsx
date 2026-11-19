@@ -1,3 +1,6 @@
+import GameRoute from "components/Competition/GameRoute";
+import { reset as resetPassword } from "./redux/password";
+import { reset as resetPictionary } from "./redux/pictionary";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import { Provider } from "react-redux";
@@ -5,7 +8,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
-import Landing from "views";
+import Landing from "./views";
 import CatchPhraseGame from "views/CatchPhrase/Game";
 import CatchPhraseLanding from "views/CatchPhrase/Landing";
 import CatchPhraseRules from "views/CatchPhrase/Rules";
@@ -38,8 +41,6 @@ const App = () => {
   document.lang = i18n.language;
 
   return (
-    <Provider store={store}>
-      <I18nextProvider i18n={i18next}>
         <BrowserRouter>
           <Navbar />
 
@@ -69,11 +70,7 @@ const App = () => {
                   element={<CatchPhraseRules />}
                 />
 
-                {store.getState().password.master ? (
-                  <Route path="/password" exact element={<PassWordGame />} />
-                ) : (
-                  <Route path="/password" exact element={<PassWordLanding />} />
-                )}
+                <Route path="/password" element={<GameRoute name="password" reset={resetPassword} game={<PassWordGame />} setup={<PassWordLanding />} />} />
 
                 {store.getState().mafia.master ? (
                   <Route path="/mafia" exact element={<MafiaGame />} />
@@ -81,19 +78,7 @@ const App = () => {
                   <Route path="/mafia" exact element={<MafiaLanding />} />
                 )}
 
-                {store.getState().pictionary.master ? (
-                  <Route
-                    path="/pictionary"
-                    exact
-                    element={<PictionaryGame />}
-                  />
-                ) : (
-                  <Route
-                    path="/pictionary"
-                    exact
-                    element={<PictionaryLanding />}
-                  />
-                )}
+                <Route path="/pictionary" element={<GameRoute name="pictionary" reset={resetPictionary} game={<PictionaryGame />} setup={<PictionaryLanding />} />} />
 
                 {store.getState().listwords.master ? (
                   <Route path="/listwords" exact element={<ListWordsGame />} />
@@ -126,9 +111,8 @@ const App = () => {
 
           <Footer />
         </BrowserRouter>
-      </I18nextProvider>
-    </Provider>
+
   );
 };
 
-root.render(<App />);
+root.render(<Provider store={store}><I18nextProvider i18n={i18next}><App /></I18nextProvider></Provider>);

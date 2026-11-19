@@ -70,6 +70,7 @@ const storedGameId = getStoredGameId();
 
 const initValues = {
   gameId: storedGameId,
+  format: localStorage.getItem("password-format") || "teams",
   master: localStorage.getItem("password-master") || "",
   members: (localStorage.getItem("password-members") &&
     JSON.parse(localStorage.getItem("password-members"))) || [
@@ -112,7 +113,8 @@ export const passwordSlice = createSlice({
 
       state.gameId = gameId;
       state.master = action.payload?.master;
-      state.members = [
+      state.format = action.payload?.format || "teams";
+      state.members = action.payload?.members || [
         [action.payload?.teamAmember1, action.payload?.teamAmember2],
         [action.payload?.teamBmember1, action.payload?.teamBmember2],
       ];
@@ -121,6 +123,7 @@ export const passwordSlice = createSlice({
       state.historyStatus = "idle";
       state.historyError = "";
 
+      localStorage.setItem("password-format", state.format);
       localStorage.setItem(gameIdKey, gameId);
       localStorage.setItem("password-master", state.master);
       localStorage.setItem("password-members", JSON.stringify(state.members));
@@ -140,6 +143,7 @@ export const passwordSlice = createSlice({
     reset: (state) => {
       const gameId = state.gameId;
 
+      localStorage.removeItem("password-format");
       localStorage.removeItem(gameIdKey);
       localStorage.removeItem("password-master");
       localStorage.removeItem("password-members");
@@ -149,6 +153,7 @@ export const passwordSlice = createSlice({
         localStorage.removeItem(getHistoryKey(gameId));
       }
 
+      state.format = "teams";
       state.gameId = "";
       state.master = "";
       state.members = [

@@ -54,6 +54,7 @@ const FormComp = ({
           i
         ) => {
           const props = {
+            name,
             placeholder: label + (required ? " *" : ""),
             value: inputValues[name] || "",
             "aria-label": label,

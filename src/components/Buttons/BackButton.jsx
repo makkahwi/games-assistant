@@ -7,7 +7,7 @@ const BackButton = () => {
 
   return (
     <button
-      outline
+      type="button"
       onClick={() => navigate(-1)}
       className="btn btn-outline-primary my-3"
     >

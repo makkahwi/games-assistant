@@ -1,3 +1,5 @@
+import en from "../assets/locales/en.json";
+import ar from "../assets/locales/ar.json";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -32,14 +34,11 @@ i18n
     supportedLngs: ["en", "ar"],
     resources: {
       en: {
-        translations: require("../assets/locales/en.json"),
+        translations: en,
       },
       ar: {
-        translations: require("../assets/locales/ar.json"),
+        translations: ar,
       },
-      // de: {
-      //     translations: require('src/assets/locales/de.json'),
-      // },
     },
     fallbackLng: "en",
     debug: false,
