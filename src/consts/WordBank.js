@@ -97,6 +97,7 @@ export const wordsBank = [
       { ar: "عسل", en: "Honey" },
       { ar: "سمن", en: "Ghee" },
       { ar: "طحين", en: "Flour" },
+      { ar: "مرق", en: "Gravy" },
     ],
   },
   {
@@ -711,7 +712,8 @@ export const wordsBank = [
       { ar: "حارس", en: "Guard" },
       { ar: "معلم", en: "Teacher" },
       { ar: "نشال", en: "Pickpocket" },
-      { ar: "شيخ", en: "Sheikh" },
+      { ar: "شيخ" },
+      { en: "Mime" },
     ],
   },
   {
