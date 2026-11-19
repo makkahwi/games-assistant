@@ -1,23 +1,27 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
-import { randomSort } from "consts/functions";
+import { getLocalizedWords, randomSort } from "consts/functions";
 import { wordsBank } from "consts/WordBank";
 
 import { addScores } from "../../../redux/listwords";
-
-const wordCategories = randomSort(
-  wordsBank
-    .filter(({ words }) => words.length > 5)
-    .map(({ category }) => category)
-).slice(0, 7);
 
 const Game = () => {
   const dispatch = useDispatch();
   const members = useSelector((state) => state.listwords.members);
   const history = useSelector((state) => state.listwords.history);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "en";
+  const wordCategories = useMemo(() => randomSort(wordsBank
+    .filter(({ words }) => getLocalizedWords(words, language).length > 5)
+    .map(({ category }) => category)).slice(0, 7), [language]);
+  // A language change starts category selection again and stops the old clocks.
+  useEffect(() => {
+    setCurrentCategory(null);
+    setTeamClocks([20000, 20000]);
+    setChallenger(null);
+  }, [language]);
 
   const [currentCategory, setCurrentCategory] = useState(null);
 
@@ -45,7 +49,7 @@ const Game = () => {
             v <= 0 ? { time: v, lost: true } : { time: v, lost: false }
           )
           .map(({ lost }, i) =>
-            currentCategory ? (
+            currentCategory !== null ? (
               <h2
                 className={
                   (lost ? "bg-danger" : "bg-success") + " text-white  py-2 my-3"
@@ -68,6 +72,7 @@ const Game = () => {
     <Fragment>
       <h6>{t("Choose Category Plz")}</h6>
 
+      {!wordCategories.length && <p role="status">{t("No words available. Please try again.")}</p>}
       <div className="row">
         {wordCategories.map((cat, i) => {
           const playedCat = history.findIndex(({ word }) => word === cat) >= 0;
@@ -81,7 +86,7 @@ const Game = () => {
                   playedCat ? "secondary" : i % 2 === 0 ? "warning" : "info"
                 } w-100`}
               >
-                {cat}
+                {t(cat)}
               </button>
             </div>
           );
@@ -222,7 +227,7 @@ const Game = () => {
                       <h1>{teamClocks[i] / 1000}</h1>
 
                       <h4>
-                        {t("Category is")} "{wordCategories[currentCategory]}"
+                        {t("Category is")} "{t(wordCategories[currentCategory])}"
                       </h4>
 
                       <div className="btn-group">

@@ -12,7 +12,7 @@ const ScoresTable = () => {
     <ScoresTableView
       wordType={t("Category")}
       members={members}
-      history={history}
+      history={history.map((score) => ({ ...score, word: t(score.word) }))}
     />
   );
 };

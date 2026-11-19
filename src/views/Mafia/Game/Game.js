@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-const generateRandomNumberInRange = (min = 1, max = 9, exclusions = []) => {
+const generateRandomNumberInRange = (min = 1, max = 9, exclusions = [], onExhausted = () => {}) => {
   const range = [];
 
   for (let i = min; i <= max; i++) {
@@ -12,7 +12,7 @@ const generateRandomNumberInRange = (min = 1, max = 9, exclusions = []) => {
   }
 
   if (range.length === 0) {
-    alert("That's it, all roles have been exposed to players.");
+    onExhausted();
     return;
   }
 
@@ -22,7 +22,7 @@ const generateRandomNumberInRange = (min = 1, max = 9, exclusions = []) => {
 
 const Game = () => {
   const roles = useSelector((state) => state.mafia.roles);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [availableRoles, setAvailableRoles] = useState([]);
   const [takenRoles, setTakenRoles] = useState([]);
@@ -33,27 +33,28 @@ const Game = () => {
     const newRandomNumber = generateRandomNumberInRange(
       0,
       length - 1,
-      takenRoles
+      takenRoles,
+      () => alert(t("All roles have been shown."))
     );
     setRandomNumber(newRandomNumber);
     setTakenRoles((current) => [...current, newRandomNumber]);
-  }, [takenRoles]);
+  }, [takenRoles, t]);
 
   useEffect(() => {
     const { killers, citizens, drowner } = roles;
 
-    const final = [t("Judge"), t("Nurse")];
+    const final = ["Judge", "Nurse"];
 
     if (drowner === "Yes") {
-      final.push(t("Drowner"));
+      final.push("Drowner");
     }
 
     for (let i = 0; i < killers; i++) {
-      final.push(t("Mafia"));
+      final.push("Mafia");
     }
 
     for (let i = 0; i < citizens; i++) {
-      final.push(t("Citizen"));
+      final.push("Citizen");
     }
 
     setAvailableRoles(final);
@@ -61,7 +62,8 @@ const Game = () => {
 
     setRandomNumber(firstRandomNumber);
     setTakenRoles([firstRandomNumber]);
-  }, [roles, t, i18n.language]);
+    setHide(true);
+  }, [roles]);
 
   const onHide = () => {
     setHide(true);
@@ -82,10 +84,10 @@ const Game = () => {
             <pre>
               {JSON.stringify(
                 availableRoles.reduce((final, current) => {
-                  if (final[current]) {
-                    return { ...final, [current]: final[current] + 1 };
+                  if (final[t(current)]) {
+                    return { ...final, [t(current)]: final[t(current)] + 1 };
                   }
-                  return { ...final, [current]: 1 };
+                  return { ...final, [t(current)]: 1 };
                 }, {}),
                 null,
                 2
@@ -101,13 +103,14 @@ const Game = () => {
             {hide ? (
               <button
                 className="btn btn-danger my-2"
+                disabled={randomNumber === undefined}
                 onClick={() => setHide(false)}
               >
                 {t("Show")}
               </button>
             ) : (
               <span className="h6">
-                {availableRoles[randomNumber]}
+                {availableRoles[randomNumber] ? t(availableRoles[randomNumber]) : t("All roles have been shown.")}
                 <br />
                 <button
                   className="btn btn-danger my-2"

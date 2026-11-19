@@ -1,7 +1,8 @@
-import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
 const Game = () => {
-  return <Fragment>Coming Soon</Fragment>;
+  const { t } = useTranslation();
+  return <p>{t("Coming Soon")}</p>;
 };
 
 export default Game;
