@@ -25,7 +25,8 @@ export const mafiaSlice = createSlice({
     reset: (state) => {
       localStorage.removeItem("mafia-master");
       localStorage.removeItem("mafia-roles");
-      state = initValues;
+      state.master = "";
+      state.roles = {};
     },
   },
 });

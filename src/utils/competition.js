@@ -20,3 +20,12 @@ export const roundRoles = (members, round, host) => ({
   clueGiver: members.length === 1 ? host : members[round % members.length],
   guessers: members.length === 1 ? members : members.filter((_, index) => index !== round % members.length),
 });
+
+// Public library groups are independent of formats retained for saved games.
+export const gameGroups = [
+  { id: "2v2", label: "2 vs 2", icon: "fa-user-group", description: "Two teams. Two players on each team.", detail: "4 players + a host" },
+  { id: "group", label: "Multiplayer group", icon: "fa-people-group", description: "Everyone joins the same game with their own role.", detail: "No player limit" },
+];
+
+// Each team takes a turn before teammates exchange roles: A1, B1, A2, B2.
+export const pairedTurn = (round) => ({ teamIndex: round % 2, roleRound: Math.floor(round / 2) });

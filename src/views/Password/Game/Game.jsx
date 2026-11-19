@@ -1,4 +1,6 @@
-import { roundRoles } from "../../../utils/competition";
+import GameActions from "../../../components/GameActions";
+import ThemeToggle from "../../../components/ThemeToggle";
+import { pairedTurn, roundRoles } from "../../../utils/competition";
 import { useRef, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -172,7 +174,7 @@ const Game = ({ onExit }) => {
                 <strong className="table-secret" dir="auto">{roundWord}</strong>
                 <button className="table-reveal" onClick={() => { tapGuard.current = Date.now(); setPhase("playing"); }}>{t("Hide word & start guessing")}</button>
               </>}
-              {phase === "playing" && <div className="table-hidden"><i className="fas fa-lock" aria-hidden="true" /> {t("Word hidden. Give your clues!")}</div>}
+              {phase === "playing" && <div className="table-hidden" role="status"><i className="fas fa-lock" aria-hidden="true" /> {t("Word hidden. Give your clues!")}</div>}
               {wordBankStatus === "loading" && <small role="status">{t("Loading")}</small>}
               {wordBankStatus === "loaded" && !words.length && <small role="status">{t("No words available. Please try again.")}</small>}
             </div>
@@ -182,6 +184,8 @@ const Game = ({ onExit }) => {
     <section className="password-table" aria-label={t("PassWord")}>
       <div className="table-tools">
         <button onClick={onExit}>{t("Game menu")}</button>
+        <ThemeToggle />
+        <GameActions />
         <span role="status">{t(wakeStatus === "active" ? "Screen stays on" : wakeStatus === "pending" ? "Keeping screen on…" : "Screen lock unavailable — check display settings")}</span>
       </div>
       <div className="desktop-round-info" aria-live="polite">
@@ -195,24 +199,24 @@ const Game = ({ onExit }) => {
           <section key={team} className={`table-team ${index === 0 ? "table-team-opposite" : ""} ${teamTurn === team ? "team-active" : ""}`} aria-label={teamLabel(team)}>
             <header><strong>{teamLabel(team)}</strong><span>{t(teamTurn === team ? "Your turn" : "Other team's turn")} · {t("Playing for x points", { point })}</span></header>
             <div className="table-player-info">
-              <span>{t("Guesser")}: <strong>{roundRoles(members[team === "Team A" ? 0 : 1], guesserTurn, master).guessers.join(", ")}</strong></span>
-              <span>{t("Clue giver")}: <strong>{roundRoles(members[team === "Team A" ? 0 : 1], guesserTurn, master).clueGiver}</strong></span>
+              <span>{t("Guesser")}: <strong>{roundRoles(members[team === "Team A" ? 0 : 1], (format === "2v2" ? pairedTurn(guesserTurn).roleRound : guesserTurn), master).guessers.join(", ")}</strong></span>
+              <span>{t("Clue giver")}: <strong>{roundRoles(members[team === "Team A" ? 0 : 1], (format === "2v2" ? pairedTurn(guesserTurn).roleRound : guesserTurn), master).clueGiver}</strong></span>
               <small>{t("Score")}: {history.filter((score) => score.team === team).reduce((total, score) => total + score.point, 0)}</small>
             </div>
             {renderWordArea()}
             <div className="table-answers">
-              <button className="answer-wrong" disabled={teamTurn !== team || phase !== "playing" || !words.length} onClick={() => answer(false, team)}><span aria-hidden="true">✕</span>{t("Guessed Wrong")}</button>
-              <button className="answer-right" disabled={teamTurn !== team || phase !== "playing" || !words.length} onClick={() => answer(true, team)}><span aria-hidden="true">✓</span>{t("Guessed Right")}</button>
+              <button className="answer-wrong" disabled={teamTurn !== team || phase !== "playing" || !words.length} onClick={() => answer(false, team)}><i className="fas fa-xmark" aria-hidden="true" />{t("Guessed Wrong")}</button>
+              <button className="answer-right" disabled={teamTurn !== team || phase !== "playing" || !words.length} onClick={() => answer(true, team)}><i className="fas fa-check" aria-hidden="true" />{t("Guessed Right")}</button>
             </div>
           </section>
         ))}
       </div>
       <div className="table-bottom-tools">
         <button onClick={changeWord} disabled={!words.length}>{t("Change Word")}</button>
-        {!solo && <button onClick={() => { changeGuesser(); setPhase("hidden"); }}>{t("Switch Clue Givers")}</button>}
+        {!solo && <button onClick={() => { setGuesserTurn((current) => current + (format === "2v2" ? 2 : 1)); setPhase("hidden"); }}>{t("Switch Clue Givers")}</button>}
         <button onClick={() => setTeamTurn((current) => changeTeam(current))}>{t("Switch Team")}</button>
       </div>
-      {(historyError || wordBankError || historyStatus === "loading") && <small className="table-sync" role="status">{t(historyError || wordBankError ? "Sync unavailable. Continue playing locally." : "Loading")}</small>}
+      {(historyError || wordBankError || historyStatus === "loading") && <small className={`table-sync ${historyError || wordBankError ? "is-error" : ""}`} role="status">{t(historyError || wordBankError ? "Sync unavailable. Continue playing locally." : "Loading")}</small>}
     </section>
   );
 };

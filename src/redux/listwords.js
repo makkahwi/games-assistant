@@ -17,6 +17,8 @@ export const listwordsSlice = createSlice({
     setNames: (state, action) => {
       state.master = action.payload?.master;
       state.members = [action.payload?.member1, action.payload?.member2];
+      state.history = [];
+      localStorage.setItem("listwords-history", "[]");
 
       localStorage.setItem("listwords-master", state.master);
       localStorage.setItem("listwords-members", JSON.stringify(state.members));
@@ -30,7 +32,9 @@ export const listwordsSlice = createSlice({
       localStorage.removeItem("listwords-master");
       localStorage.removeItem("listwords-members");
       localStorage.removeItem("listwords-history");
-      state = initValues;
+      state.master = "";
+      state.members = ["", ""];
+      state.history = [];
     },
   },
 });

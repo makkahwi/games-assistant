@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import BackButton from "components/Buttons/BackButton";
@@ -11,6 +11,7 @@ const FormComp = ({
   light,
 }) => {
   const { t } = useTranslation();
+  const formId = useId();
   const [inputFocuses, setInputFocuses] = useState({});
   const [inputValues, setInputValues] = useState(
     inputs.reduce((final, current) => {
@@ -54,6 +55,8 @@ const FormComp = ({
           i
         ) => {
           const props = {
+            id: `${formId}-${name}`,
+            "aria-describedby": note ? `${formId}-${name}-note` : undefined,
             name,
             placeholder: label + (required ? " *" : ""),
             value: inputValues[name] || "",
@@ -82,22 +85,22 @@ const FormComp = ({
               className={"input-group mb-3 w-100 " + inputFocuses[name]}
               key={i}
             >
-              <div className="input-group-text">
-                <i className={icon + " me-2"} /> {label}
-              </div>
+              <label className="input-group-text" htmlFor={`${formId}-${name}`}>
+                <i className={icon + " me-2"} aria-hidden="true" /> {label}{required && <span aria-hidden="true"> *</span>}
+              </label>
 
               {type === "select" ? (
                 <select {...props}>
-                  <option placeholder="true">{t("Select") + " " + label}</option>
+                  <option value="" disabled>{t("Select") + " " + label}</option>
                   {options?.map(({ name, label }, y) => (
-                    <option defaultValue={name} key={y}>
+                    <option value={name} key={y}>
                       {label || name}
                     </option>
                   ))}
                 </select>
               ) : type === "boolean" ? (
                 <select {...props}>
-                  <option placeholder="true">{t("Select") + " " + label}</option>
+                  <option value="" disabled>{t("Select") + " " + label}</option>
                   <option value="Yes">{t("Yes")}</option>
                   <option value="No">{t("No")}</option>
                 </select>
@@ -105,7 +108,7 @@ const FormComp = ({
                 <input {...props} />
               )}
 
-              {note && <div className="input-group-text">{note}</div>}
+              {note && <div className="field-note" id={`${formId}-${name}-note`}>{note}</div>}
             </div>
           );
         }

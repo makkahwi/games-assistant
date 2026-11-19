@@ -44,7 +44,8 @@ const App = () => {
         <BrowserRouter>
           <Navbar />
 
-          <main className="app-main">
+          <a className="skip-link" href="#main-content">{i18n.t("Skip to content")}</a>
+          <main id="main-content" className="app-main" tabIndex={-1}>
             <div className="container my-auto">
               <Routes>
                 <Route path="/" exact element={<Landing />} />

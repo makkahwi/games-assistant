@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-19T12:10:45.543142+00:00",
+  "title": "Design System: Yalla Break",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Primary",
+        "tonalRamp": [
+          "oklch(15% 0.03304 264.98)",
+          "oklch(27% 0.08810 264.98)",
+          "oklch(39% 0.15418 264.98)",
+          "oklch(51% 0.22025 264.98)",
+          "oklch(63% 0.19823 264.98)",
+          "oklch(75% 0.14316 264.98)",
+          "oklch(87% 0.06608 264.98)",
+          "oklch(95% 0.01762 264.98)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Primary Hover",
+        "tonalRamp": [
+          "oklch(15% 0.02886 264.92)",
+          "oklch(27% 0.07695 264.92)",
+          "oklch(39% 0.13466 264.92)",
+          "oklch(51% 0.19237 264.92)",
+          "oklch(63% 0.17313 264.92)",
+          "oklch(75% 0.12504 264.92)",
+          "oklch(87% 0.05771 264.92)",
+          "oklch(95% 0.01539 264.92)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.01025 264.74)",
+          "oklch(27% 0.02734 264.74)",
+          "oklch(39% 0.04785 264.74)",
+          "oklch(51% 0.06836 264.74)",
+          "oklch(63% 0.06152 264.74)",
+          "oklch(75% 0.04443 264.74)",
+          "oklch(87% 0.02051 264.74)",
+          "oklch(95% 0.00547 264.74)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15% 0.00747 264.57)",
+          "oklch(27% 0.01993 264.57)",
+          "oklch(39% 0.03488 264.57)",
+          "oklch(51% 0.04983 264.57)",
+          "oklch(63% 0.04485 264.57)",
+          "oklch(75% 0.03239 264.57)",
+          "oklch(87% 0.01495 264.57)",
+          "oklch(95% 0.00399 264.57)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.00249 271.24)",
+          "oklch(27% 0.00665 271.24)",
+          "oklch(39% 0.01164 271.24)",
+          "oklch(51% 0.01662 271.24)",
+          "oklch(63% 0.01496 271.24)",
+          "oklch(75% 0.01080 271.24)",
+          "oklch(87% 0.00499 271.24)",
+          "oklch(95% 0.00133 271.24)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "tonalRamp": [
+          "oklch(15% 0.00000 0.00)",
+          "oklch(27% 0.00000 0.00)",
+          "oklch(39% 0.00000 0.00)",
+          "oklch(51% 0.00000 0.00)",
+          "oklch(63% 0.00000 0.00)",
+          "oklch(75% 0.00000 0.00)",
+          "oklch(87% 0.00000 0.00)",
+          "oklch(95% 0.00000 0.00)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15% 0.00563 268.87)",
+          "oklch(27% 0.01502 268.87)",
+          "oklch(39% 0.02629 268.87)",
+          "oklch(51% 0.03756 268.87)",
+          "oklch(63% 0.03380 268.87)",
+          "oklch(75% 0.02441 268.87)",
+          "oklch(87% 0.01127 268.87)",
+          "oklch(95% 0.00300 268.87)"
+        ]
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "Soft",
+        "tonalRamp": [
+          "oklch(15% 0.00461 271.71)",
+          "oklch(27% 0.01229 271.71)",
+          "oklch(39% 0.02151 271.71)",
+          "oklch(51% 0.03073 271.71)",
+          "oklch(63% 0.02766 271.71)",
+          "oklch(75% 0.01998 271.71)",
+          "oklch(87% 0.00922 271.71)",
+          "oklch(95% 0.00246 271.71)"
+        ]
+      },
+      "selected": {
+        "role": "secondary",
+        "displayName": "Selected",
+        "tonalRamp": [
+          "oklch(15% 0.01935 111.98)",
+          "oklch(27% 0.05159 111.98)",
+          "oklch(39% 0.09028 111.98)",
+          "oklch(51% 0.12897 111.98)",
+          "oklch(63% 0.11607 111.98)",
+          "oklch(75% 0.08383 111.98)",
+          "oklch(87% 0.03869 111.98)",
+          "oklch(95% 0.01032 111.98)"
+        ]
+      },
+      "selected-ink": {
+        "role": "secondary",
+        "displayName": "Selected Ink",
+        "tonalRamp": [
+          "oklch(15% 0.00857 119.21)",
+          "oklch(27% 0.02286 119.21)",
+          "oklch(39% 0.04000 119.21)",
+          "oklch(51% 0.05714 119.21)",
+          "oklch(63% 0.05143 119.21)",
+          "oklch(75% 0.03714 119.21)",
+          "oklch(87% 0.01714 119.21)",
+          "oklch(95% 0.00457 119.21)"
+        ]
+      },
+      "success": {
+        "role": "neutral",
+        "displayName": "Success",
+        "tonalRamp": [
+          "oklch(15% 0.01362 158.58)",
+          "oklch(27% 0.03632 158.58)",
+          "oklch(39% 0.06356 158.58)",
+          "oklch(51% 0.09081 158.58)",
+          "oklch(63% 0.08172 158.58)",
+          "oklch(75% 0.05902 158.58)",
+          "oklch(87% 0.02724 158.58)",
+          "oklch(95% 0.00726 158.58)"
+        ]
+      },
+      "danger": {
+        "role": "neutral",
+        "displayName": "Danger",
+        "tonalRamp": [
+          "oklch(15% 0.02361 18.24)",
+          "oklch(27% 0.06297 18.24)",
+          "oklch(39% 0.11020 18.24)",
+          "oklch(51% 0.15743 18.24)",
+          "oklch(63% 0.14168 18.24)",
+          "oklch(75% 0.10233 18.24)",
+          "oklch(87% 0.04723 18.24)",
+          "oklch(95% 0.01259 18.24)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus",
+        "tonalRamp": [
+          "oklch(15% 0.01920 52.53)",
+          "oklch(27% 0.05119 52.53)",
+          "oklch(39% 0.08958 52.53)",
+          "oklch(51% 0.12797 52.53)",
+          "oklch(63% 0.11517 52.53)",
+          "oklch(75% 0.08318 52.53)",
+          "oklch(87% 0.03839 52.53)",
+          "oklch(95% 0.01024 52.53)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Library welcome",
+        "purpose": "Largest library heading; Arabic overrides tracking and line-height."
+      },
+      "body": {
+        "displayName": "Bilingual body",
+        "purpose": "Rubik Latin and Noto Sans Arabic with locale-specific priority."
+      }
+    },
+    "shadows": [
+      {
+        "name": "flat-card",
+        "value": "none",
+        "purpose": "Shared cards use tonal backgrounds and borders."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background-color .15s, border-color .15s",
+        "purpose": "Shared button feedback; disabled under reduced motion."
+      },
+      {
+        "name": "game-reveal",
+        "value": ".25s cubic-bezier(.16,1,.3,1)",
+        "purpose": "8px game-list reveal; disabled under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow-phone-max",
+        "value": "360px"
+      },
+      {
+        "name": "phone-max",
+        "value": "767px"
+      },
+      {
+        "name": "library-tight-max",
+        "value": "1000px"
+      },
+      {
+        "name": "table-desktop",
+        "value": "(min-width:768px) and (hover:hover) and (pointer:fine), (min-width:1024px)"
+      },
+      {
+        "name": "short-screen-max",
+        "value": "670px height"
+      },
+      {
+        "name": "short-landscape",
+        "value": "(orientation:landscape) and (max-height:500px)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Yalla, let’s play",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Labeled shared action.",
+      "html": "<button class=\"ds-button-primary\" type=\"button\">Yalla, let’s play</button>",
+      "css": ".ds-button-primary{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);min-height:44px;padding:11px 18px;border:1px solid transparent;border-radius:8px;font-size:14px;font-weight:700;line-height:1.4;background:var(--primary,#163fcc);color:var(--surface,#fff);cursor:pointer;transition:background-color .15s}.ds-button-primary:hover,.ds-button-primary:active{background:var(--primary-hover,#1033aa)}.ds-button-primary:focus-visible{outline:3px solid var(--focus,#9a4a00);outline-offset:4px}.ds-button-primary:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none}}"
+    },
+    {
+      "name": "Change format",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Labeled shared action.",
+      "html": "<button class=\"ds-button-secondary\" type=\"button\">Change format</button>",
+      "css": ".ds-button-secondary{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);min-height:44px;padding:11px 18px;border:1px solid transparent;border-radius:8px;font-size:14px;font-weight:700;line-height:1.4;background:var(--soft,#e2e9ff);color:var(--primary,#163fcc);cursor:pointer;transition:background-color .15s}.ds-button-secondary:hover,.ds-button-secondary:active{background:var(--line,#cbd5ef)}.ds-button-secondary:focus-visible{outline:3px solid var(--focus,#9a4a00);outline-offset:4px}.ds-button-secondary:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition:none}}"
+    },
+    {
+      "name": "Player name",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Explicit native field label.",
+      "html": "<label class=\"ds-field\">Player 1 name<input class=\"ds-input\" placeholder=\"Enter a name\" required /></label>",
+      "css": ".ds-field{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);display:grid;gap:8px;color:var(--ink,#152447);font-size:14px}.ds-input{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);padding:12px 14px;min-height:48px;border:1px solid #a8b8da;border-radius:8px;background:var(--surface,#fff);color:var(--ink,#152447);font-size:16px}.ds-input::placeholder{color:#637191}.ds-input:focus{border-color:var(--primary,#163fcc)}.ds-input:hover{border-color:var(--primary,#163fcc)}.ds-input:focus-visible{outline:3px solid var(--focus,#9a4a00);outline-offset:4px}"
+    },
+    {
+      "name": "Roster selection",
+      "kind": "custom",
+      "refersTo": "format-selected",
+      "description": "Selected native format button.",
+      "html": "<button type=\"button\" class=\"ds-format\" aria-pressed=\"true\"><strong>2v2</strong><span>Two players per team</span></button>",
+      "css": ".ds-format{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);display:flex;flex-direction:column;align-items:start;gap:14px;padding:18px 14px;border:1px solid #68741b;border-radius:12px;background:var(--selected,#eaf188);color:var(--ink,#152447);cursor:pointer}.ds-format strong{font-size:20px}.ds-format span{font-size:12px;color:#475019}.ds-format:hover,.ds-format:active{background:#e2ea75}.ds-format:focus-visible{outline:3px solid var(--focus,#9a4a00);outline-offset:4px}"
+    },
+    {
+      "name": "Roster badge",
+      "kind": "chip",
+      "refersTo": "format-selected",
+      "description": "Noninteractive label repeating the chosen roster.",
+      "html": "<span class=\"ds-badge\">2v2 · Two players per team</span>",
+      "css": ".ds-badge{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);display:inline-flex;align-items:center;padding:6px 12px;border-radius:6px;background:var(--selected,#eaf188);color:var(--selected-ink,#29300b);font-size:13px;font-weight:700}"
+    },
+    {
+      "name": "Work surface",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat bordered shared panel.",
+      "html": "<section class=\"ds-card\"><h2>Meet your break crew</h2><p>Your host keeps things fair.</p></section>",
+      "css": ".ds-card{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);padding:24px;border:1px solid var(--line,#cbd5ef);border-radius:14px;background:var(--surface,#fff);color:var(--ink,#152447);box-shadow:none}.ds-card h2{font-size:28px;line-height:1.2;margin:0 0 16px;font-weight:700}.ds-card p{color:var(--muted,#53617e);line-height:1.65;margin:0}"
+    },
+    {
+      "name": "Game tabs",
+      "kind": "nav",
+      "refersTo": "card",
+      "description": "Visual state sample; application supplies RTL-aware keyboard behavior.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"Game\"><button type=\"button\" role=\"tab\" aria-selected=\"true\">Play</button><button type=\"button\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">Scores</button><button type=\"button\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">Rules</button></div>",
+      "css": ".ds-tabs{display:flex;gap:6px;padding:4px;background:var(--soft,#e2e9ff);border-radius:10px;overflow-x:auto}.ds-tabs button{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);flex:1;border:0;border-radius:7px;min-height:46px;padding:10px 18px;font-weight:700;color:var(--primary,#163fcc);background:transparent;cursor:pointer}.ds-tabs button[aria-selected=true]{background:var(--primary,#163fcc);color:white}.ds-tabs button:hover{background:#cbd7ff;color:var(--ink,#152447)}.ds-tabs button[aria-selected=true]:hover,.ds-tabs button[aria-selected=true]:active{background:var(--primary-hover,#1033aa);color:white}.ds-tabs button:focus-visible{outline:3px solid var(--focus,#9a4a00);outline-offset:4px}"
+    },
+    {
+      "name": "Score table",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Readable striped rows and tabular numeric scores.",
+      "html": "<table class=\"ds-table\"><caption>Scores</caption><thead><tr><th scope=\"col\">Team</th><th scope=\"col\">Score</th></tr></thead><tbody><tr><th scope=\"row\">Team A</th><td>2</td></tr><tr><th scope=\"row\">Team B</th><td>1</td></tr></tbody></table>",
+      "css": ".ds-table{font-family:var(--font,Rubik,'Noto Sans Arabic',sans-serif);width:100%;border-collapse:collapse;text-align:start;color:var(--ink,#152447);font-size:15px;background:var(--surface,#fff)}.ds-table caption{text-align:start;font-weight:700;padding:8px 0}.ds-table th,.ds-table td{padding:16px 12px;border-bottom:1px solid var(--line,#cbd5ef)}.ds-table tbody tr:nth-child(odd){background:var(--paper,#eff3ff)}.ds-table td:last-child{font-variant-numeric:tabular-nums}@media(max-width:767px){.ds-table th,.ds-table td{padding:12px 8px;font-size:13px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Break Club",
+    "overview": "The Break Club is a bright, practical place for colleagues to organize a shared break. Cobalt provides orientation and action, pale blue provides daylight ground, and citron makes a selected roster format easy to recognize. White surfaces, navy text, and explicit labels keep the interface usable during play.\n\nThe system supports light and dark appearances, is bilingual, and is designed for phones and office PCs. Flat tonal surfaces carry hierarchy; controls remain recognizable native buttons, inputs, and selects. Rubik and Noto Sans Arabic share the same functional hierarchy while Arabic receives its own line-height and direction treatment.",
+    "keyCharacteristics": [
+      "Cobalt actions and navigation; citron roster selection.",
+      "Flat pale blue and white work surfaces.",
+      "Self-hosted bilingual typography and explicit roster labels.",
+      "Visible keyboard focus and responsive shared-screen play."
+    ],
+    "rules": [
+      {
+        "name": "Selection Has a Label",
+        "body": "Keep roster formats and active teams explicit in text; color supports the label rather than replacing it.",
+        "section": "colors"
+      },
+      {
+        "name": "Flat Work Surfaces",
+        "body": "Use tonal backgrounds and borders for grouping; shared cards have no shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use native labeled controls and a visible focus outline.",
+      "Do retain Arabic RTL layout, Arabic font priority, and direction-aware keyboard tabs.",
+      "Do preserve the selected roster label through setup and play.",
+      "Do remove animation and transitions when reduced motion is requested."
+    ],
+    "donts": [
+      "Don't hard-code light surfaces into theme-aware components.",
+      "Don't replace explicit player, host, or team labels with color alone.",
+      "Don't use elevated shadows on shared cards.",
+      "Don't rotate the desktop PassWord team panels; opposing orientation belongs to phone table mode."
+    ]
+  }
+}

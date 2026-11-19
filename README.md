@@ -2,13 +2,17 @@
 
 Arabic and English games for workday breaks with colleagues in Jordan, built with React and Vite.
 
-Choose 1 vs 1, 2 vs 2, or team vs team before choosing a game. PassWord and
-Pictionary support all three formats, with a separate host. Teams can have 2–8
-players per side. Mafia remains a group role game. ListWords and CatchPhrase
-remain marked as coming soon.
+PassWord and Pictionary are 2 vs 2 games with two named players per team and a
+separate host. Turns alternate A1 → B1 → A2 → B2, swapping clue-giver/artist
+and guesser roles within each team after both teams have played. PassWord wrong
+answers pass the current word to the other team and reduce available points.
+Pictionary allows only the active team to score; a correct guess or Pass turn
+advances the round.
 
-Each game saves its own format, players, and scores locally. Existing PassWord
-sessions keep their history; legacy sessions default to team vs team.
+Mafia is a separate multiplayer group game with no configured upper player limit.
+The host selects role counts directly; it does not use fixed teams. ListWords
+and CatchPhrase remain coming soon. Older saved game formats remain resumable.
+Each game keeps its own players and scores locally.
 
 ## Development
 

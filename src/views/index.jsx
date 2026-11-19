@@ -1,11 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import FormatPicker from "components/Competition/FormatPicker";
-import { isFormat, formatLabel } from "../utils/competition";
-import cardBackground0 from "assets/img/card-bg/3.svg";
-import cardBackground1 from "assets/img/card-bg/5.svg";
-import cardBackground2 from "assets/img/card-bg/6.svg";
-import cardBackground3 from "assets/img/card-bg/2.svg";
-import cardBackground4 from "assets/img/card-bg/8.svg";
+import { gameGroups } from "../utils/competition";
 import { useTranslation } from "react-i18next";
 
 import WhiteCard from "components/cards/WhiteCard";
@@ -13,8 +8,8 @@ import WhiteCard from "components/cards/WhiteCard";
 const Landing = () => {
   const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
-  const format = params.get("format");
-  const selected = isFormat(format);
+  const format = ["group", "teams"].includes(params.get("format")) ? "group" : "2v2";
+  const group = gameGroups.find(({ id }) => id === format);
 
   const games = [
     {
@@ -22,7 +17,6 @@ const Landing = () => {
       desc: t(
         "This is the game of guessing 1 given word by 1-word hints passed by teammate"
       ),
-      img: cardBackground0,
       url: "/password",
       rulesUrl: "/password-rules",
     },
@@ -31,7 +25,6 @@ const Landing = () => {
       desc: t(
         "This is the game of guessing 1 given word by drawing hints passed by teammate"
       ),
-      img: cardBackground1,
       url: "/pictionary",
       rulesUrl: "/pictionary-rules",
     },
@@ -40,7 +33,6 @@ const Landing = () => {
       desc: t(
         "This is the game of mafia, with killers, citizens, judges, nurses, and drowner."
       ),
-      img: cardBackground2,
       url: "/mafia",
       rulesUrl: "/mafia-rules",
     },
@@ -50,7 +42,6 @@ const Landing = () => {
         "Time-limited challenge to list highest number of words follow given category"
       ),
       comingSoon: true,
-      img: cardBackground3,
       url: "/listwords",
       rulesUrl: "/listwords-rules",
     },
@@ -58,7 +49,6 @@ const Landing = () => {
       title: "CatchPhrase",
       desc: t("Time-limited challenge to give hints & guess given phrases"),
       comingSoon: true,
-      img: cardBackground4,
       url: "/catchphrase",
       rulesUrl: "/catchphrase-rules",
     },
@@ -66,16 +56,16 @@ const Landing = () => {
 
   return (
     <div className="game-library">
-      <section className="library-hero break-hero">
-        <div><span className="eyebrow">{t("MADE FOR JORDAN’S WORKDAY")}</span><h1>{t("Close the laptop.")}<br /><em>{t("Open the fun.")}</em></h1><p>{t("From the first coffee to the lunch-hour laugh. Bring your colleagues together for a little friendly competition.")}</p><a className="btn btn-primary" href="#formats">{t("Let’s take a break")} <span aria-hidden="true">↗</span></a><div className="break-perks"><span><i className="fas fa-mug-hot" aria-hidden="true" /> {t("Office-friendly fun")}</span><span>{t("بالعربي أو بالإنجليزي")}</span></div></div>
-        <div className="hero-art break-art" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><div className="play-tile tile-back">☕</div><div className="play-tile tile-front"><i className="fas fa-dice-five" /></div><span className="spark">✳</span><span className="hero-caption">{t("Same colleagues. New inside jokes.")}</span></div>
+      <div className="library-intro">
+        <section className="library-welcome"><h1>{t("Your people.")}<br /><span>{t("Your break.")}</span></h1><p>{t("From the first coffee to the lunch-hour laugh. Bring your colleagues together for a little friendly competition.")}</p><div className="break-perks"><span><i className="fas fa-mug-hot" aria-hidden="true" /> {t("Office-friendly fun")}</span><span lang="ar" dir="rtl">بالعربي أو بالإنجليزي</span></div></section>
+        <FormatPicker selected={format} onSelect={(value) => setParams({ format: value }, { preventScrollReset: true })} />
+      </div>
+      <section id="games" className="selected-games" aria-labelledby="games-heading">
+        <div className="section-heading"><div><h2 id="games-heading">{t("What’s the break plan?")}</h2></div><span className="format-pill">{t(group.label)}</span></div>
+        <p className="lineup-note">{t(format === "group" ? "Mafia is a group role game with no player limit." : "Two teams of two. Take turns between teams and swap roles within each team.")}</p>
+        <div className="game-list">{games.filter(({ url }) => format === "group" ? url === "/mafia" : ["/password", "/pictionary"].includes(url)).map(({ url, ...rest }) => <div key={url}><WhiteCard gameUrl={url} format={format} {...rest} /></div>)}</div>
       </section>
-      <FormatPicker selected={format} onSelect={(value) => setParams({ format: value }, { preventScrollReset: true })} />
-      {selected ? <section id="games" className="selected-games" aria-labelledby="games-heading">
-        <div className="section-heading"><div><span className="eyebrow">{t("STEP 02 · YOUR GAME")}</span><h2 id="games-heading">{t("What’s the break plan?")}</h2></div><span className="format-pill">{t(formatLabel(format))}</span></div>
-        <p className="lineup-note">{t(format === "1v1" ? "Two players, one neutral host. Let the friendly rivalry begin." : "Pick a game and bring your crew. Your next meeting can wait until break is over.")}</p>
-        <div className="row g-4">{games.map(({ img, url, ...rest }) => <div className="col-md-6 col-xl-4" key={url}><WhiteCard bg={img} gameUrl={url} format={format} groupOnly={url === "/mafia"} {...rest} /></div>)}</div>
-      </section> : <p className="format-prompt"><i className="fas fa-arrow-up" aria-hidden="true" /> {t("Your break starts with your people. Choose a format above to see the games.")}</p>}
+      <section className="selected-games" aria-labelledby="upcoming-heading"><h2 id="upcoming-heading">{t("Coming Soon")}</h2><div className="game-list mt-4">{games.filter(({ comingSoon }) => comingSoon).map(({ url, ...rest }) => <WhiteCard key={url} gameUrl={url} {...rest} />)}</div></section>
     </div>
   );
 };

@@ -17,6 +17,8 @@ export const catchphraseSlice = createSlice({
     setNames: (state, action) => {
       state.master = action.payload?.master;
       state.members = [action.payload?.member1, action.payload?.member2];
+      state.history = [];
+      localStorage.setItem("catchphrase-history", "[]");
 
       localStorage.setItem("catchphrase-master", state.master);
       localStorage.setItem(
@@ -36,7 +38,9 @@ export const catchphraseSlice = createSlice({
       localStorage.removeItem("catchphrase-master");
       localStorage.removeItem("catchphrase-members");
       localStorage.removeItem("catchphrase-history");
-      state = initValues;
+      state.master = "";
+      state.members = ["", ""];
+      state.history = [];
     },
   },
 });

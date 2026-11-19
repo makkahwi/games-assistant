@@ -4,14 +4,16 @@ const ScoresTableView = ({ wordType, members, history, labels }) => {
   const { t } = useTranslation();
 
   return (
+    <div className="scores-view">
+    {!history?.length && <div className="empty-state" role="status"><i className="fas fa-flag-checkered" aria-hidden="true" />{t("No rounds yet. Play your first round to see scores here.")}</div>}
     <table className="table table-striped table-responsive w-100">
       <thead>
         <tr className="text-primary">
-          <th>{t(labels ? "Player" : "Team")}</th>
+          <th scope="col">{t(labels ? "Player" : "Team")}</th>
 
-          <th>{wordType}</th>
+          <th scope="col">{wordType}</th>
 
-          <th>{t("Score")}</th>
+          <th scope="col">{t("Score")}</th>
         </tr>
       </thead>
 
@@ -55,6 +57,7 @@ const ScoresTableView = ({ wordType, members, history, labels }) => {
         </tr>
       </tbody>
     </table>
+    </div>
   );
 };
 

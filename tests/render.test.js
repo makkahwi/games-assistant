@@ -24,32 +24,32 @@ const render = (component, url, session = { master: "" }) => {
   const store = configureStore({ reducer: { password: () => session } });
   return renderToStaticMarkup(createElement(I18nextProvider, { i18n }, createElement(Provider, { store }, createElement(MemoryRouter, { initialEntries: [url] }, component))));
 };
-test("home requires a format before showing game actions", () => {
+test("library groups pairs separately from uncapped Mafia", () => {
   const home = render(createElement(Landing), "/");
-  assert.match(home, /Who’s taking a break/);
-  assert.doesNotMatch(home, /Start Game/);
-  for (const format of ["1v1", "2v2", "teams"]) {
-    const selected = render(createElement(Landing), `/?format=${format}`);
-    assert.match(selected, /Start Game/);
-    assert.match(selected, /What’s the break plan/);
-    assert.equal(selected.includes("Mafia needs a group"), format !== "teams");
+  assert.match(home, /PassWord/);
+  assert.match(home, /Pictionary/);
+  assert.doesNotMatch(home, /game-mafia/);
+  assert.match(home, /password\?format=2v2/);
+  const group = render(createElement(Landing), "/?format=group");
+  assert.match(group, /game-mafia/);
+  assert.doesNotMatch(group, /game-password/);
+  assert.doesNotMatch(group, /game-pictionary/);
+  assert.match(group, /No player limit/);
+});
+test("new pair setups always ask for a host and exactly two players per team", () => {
+  for (const game of ["PassWord", "Pictionary"]) {
+    for (const query of ["", "?format=1v1", "?format=2v2", "?format=teams"]) {
+      const html = render(createElement(Setup, { game }), `/password${query}`);
+      assert.equal((html.match(/<input /g) || []).length, 5);
+      assert.doesNotMatch(html, /id="team-size"/);
+    }
   }
 });
-test("setup asks for a host and exactly the chosen number of players", () => {
-  for (const [format, count] of [["1v1", 3], ["2v2", 5], ["teams", 7]]) {
-    const html = render(createElement(Setup, { game: "PassWord", setNames: () => ({ type: "setup" }) }), `/password?format=${format}`);
-    assert.equal((html.match(/<input /g) || []).length, count);
-    assert.equal(html.includes('id="team-size"'), format === "teams");
-  }
-  const direct = render(createElement(Setup, { game: "PassWord" }), "/password");
-  assert.match(direct, /Who’s taking a break/);
-  assert.doesNotMatch(direct, /<form/);
-});
-test("Arabic home and setup include translated format labels and player fields", async () => {
+test("Arabic setup includes both named team members", async () => {
   await i18n.changeLanguage("ar");
-  assert.match(render(createElement(Landing), "/"), /مين معنا بالبريك/);
-  const html = render(createElement(Setup, { game: "PassWord" }), "/password?format=1v1");
+  const html = render(createElement(Setup, { game: "PassWord" }), "/password");
   assert.match(html, /اسم اللاعب 1/);
+  assert.match(html, /اسم اللاعب 2/);
   assert.match(html, /اسم مقدّم البريك/);
   await i18n.changeLanguage("en");
 });
@@ -59,4 +59,21 @@ test("a saved game cannot silently open in a different format", () => {
   assert.match(render(component, "/password?format=1v1", session), /Resume saved game/);
   assert.match(render(component, "/password?format=teams", session), /Saved game/);
   assert.match(render(component, "/password?format=1v1"), /New setup/);
+});
+
+test("rules show their first section even when it is not Introduction", async () => {
+  const Rules = (await server.ssrLoadModule("/src/views/Common/GameRules.jsx")).default;
+  const html = render(createElement(Rules, { gameName: "PassWord", rules: [{ title: "How To Play", rules: ["Keep the word private."] }, { title: "Scores", rules: ["Win points."] }] }), "/password-rules");
+  assert.match(html, /aria-selected="true"/);
+  assert.match(html, /role="tabpanel"[^>]*class="club-panel">/);
+  assert.match(html, /Keep the word private/);
+  assert.match(html, /hidden=""/);
+});
+
+test("setup connects visible field labels to inputs and preserves required validation", () => {
+  const html = render(createElement(Setup, { game: "PassWord" }), "/password?format=1v1");
+  const ids = [...html.matchAll(/<input[^>]*id="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(ids.length, 5);
+  for (const id of ids) assert.ok(html.includes(`for="${id}"`));
+  assert.equal((html.match(/required=""/g) || []).length, 5);
 });

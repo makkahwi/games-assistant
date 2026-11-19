@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { isFormat, rosterFromValues, roundRoles } from "../src/utils/competition.js";
+import { isFormat, rosterFromValues, roundRoles, pairedTurn } from "../src/utils/competition.js";
 
 const names = (count) => Object.fromEntries(["A", "B"].flatMap((side) => Array.from({ length: count }, (_, index) => [`team${side}member${index + 1}`, ` ${side}${index + 1} `])));
 
@@ -40,4 +40,40 @@ test("Pictionary persists its format and roster without changing PassWord; reset
   assert.equal(data.has("pictionary-format"), false);
   assert.equal(data.has("pictionary-members"), false);
   assert.equal(data.get("password-master"), "Existing host");
+});
+
+test("paired rounds alternate teams and give each teammate a full turn", () => {
+  const teams = [["A1", "A2"], ["B1", "B2"]];
+  const turns = Array.from({ length: 8 }, (_, round) => {
+    const { teamIndex, roleRound } = pairedTurn(round);
+    return roundRoles(teams[teamIndex], roleRound, "Host").clueGiver;
+  });
+  assert.deepEqual(turns, ["A1", "B1", "A2", "B2", "A1", "B1", "A2", "B2"]);
+});
+
+test("legacy game restart clears scores and reset clears active state without touching another game", async () => {
+  const data = new Map([["password-master", "Unchanged"]]);
+  globalThis.localStorage = { getItem: (key) => data.get(key) ?? null, setItem: (key, value) => data.set(key, String(value)), removeItem: (key) => data.delete(key) };
+  for (const name of ["listwords", "catchphrase"]) {
+    const { default: reducer, setNames, addScores, reset } = await import(`../src/redux/${name}.js`);
+    const setup = { master: "Host", member1: "Lina", member2: "Omar" };
+    let state = reducer(undefined, setNames(setup));
+    state = reducer(state, addScores({ team: "Lina", point: 1 }));
+    state = reducer(state, setNames(setup));
+    assert.equal(state.master, "Host");
+    assert.deepEqual(state.members, ["Lina", "Omar"]);
+    assert.deepEqual(state.history, []);
+    assert.equal(data.get(`${name}-history`), "[]");
+    state = reducer(state, reset());
+    assert.equal(state.master, "");
+    assert.deepEqual(state.members, ["", ""]);
+    assert.deepEqual(state.history, []);
+    assert.equal(data.has(`${name}-master`), false);
+  }
+  const { default: reducer, setRoles, reset } = await import("../src/redux/mafia.js");
+  const state = reducer(reducer(undefined, setRoles({ master: "Host", killers: 2, citizens: 8, drowner: "No" })), reset());
+  assert.equal(state.master, "");
+  assert.deepEqual(state.roles, {});
+  assert.equal(data.has("mafia-master"), false);
+  assert.equal(data.get("password-master"), "Unchanged");
 });

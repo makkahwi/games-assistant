@@ -1,126 +1,15 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import GameActions from "../../components/GameActions";
+import Tabs from "../../components/Tabs";
 
-const GameView = ({ header, game, teams, scores, reset }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+export default function GameView({ header, game, teams, scores }) {
   const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState("game");
+  const tabs = [{ id: "game", label: t("Game"), content: game }, ...(teams ? [{ id: "teams", label: t("Teams"), content: teams }] : []), ...(scores ? [{ id: "scores", label: t("Scores"), content: scores }] : [])];
+  return <div className="game-workspace">
+    <header className="game-heading"><div>{header}</div><GameActions /></header>
+    <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} label={t("Game menu")} />
 
-  const [activeTab, setActiveTab] = useState("gameTab");
-
-  return (
-    <div className="row text-center">
-      <div className="col-lg-7 mx-auto text-white">{header}</div>
-
-      <div className="col-lg-7 mx-auto text-white" lg="7">
-        <ul className="nav nav-tabs nav-fill" role="tablist">
-          <div className="nav-item">
-            <div
-              className={
-                "nav-link " +
-                (activeTab === "gameTab" ? "active" : "text-white bg-primary")
-              }
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveTab("gameTab");
-              }}
-            >
-              {t("Game")}
-            </div>
-          </div>
-
-          {teams && (
-            <div className="nav-item">
-              <div
-                className={
-                  "nav-link " +
-                  (activeTab === "teamsTab"
-                    ? "active"
-                    : "text-white bg-primary")
-                }
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveTab("teamsTab");
-                }}
-              >
-                {t("Teams")}
-              </div>
-            </div>
-          )}
-
-          {scores && (
-            <div className="nav-item">
-              <div
-                className={
-                  "nav-link " +
-                  (activeTab === "scoresTab"
-                    ? "active"
-                    : "text-white bg-primary")
-                }
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveTab("scoresTab");
-                }}
-              >
-                {t("Scores")}
-              </div>
-            </div>
-          )}
-        </ul>
-
-        <div className="card shadow bg-primary">
-          <div className="card-body">
-            <div className="tab-content">
-              <div
-                className={`tab-pane p-5 ${
-                  activeTab === "gameTab" ? "active" : ""
-                }`}
-                tabId="gameTab"
-              >
-                {game}
-              </div>
-
-              {teams && (
-                <div
-                  teams
-                  className={`tab-pane p-5 ${
-                    activeTab === "teamsTab" ? "active" : ""
-                  }`}
-                  tabId="teamsTab"
-                >
-                  {teams}
-                </div>
-              )}
-
-              {scores && (
-                <div
-                  className={`tab-pane p-5 ${
-                    activeTab === "scoresTab" ? "active" : ""
-                  }`}
-                  tabId="scoresTab"
-                >
-                  {scores}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <button
-          className="btn btn-danger text-white mt-4 btn-sm float-end w-100"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(reset());
-            navigate(0);
-          }}
-        >
-          {t("Create New Game")}
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default GameView;
+  </div>;
+}

@@ -72,7 +72,7 @@ const Game = () => {
 
   return (
     <Fragment>
-      <div className="row my-3">
+      <div className="row my-3 mafia-game">
         <div className="col-md-12 mt-4 mb-2">
           <h4 className="text-white">
             {t("Total Number of Players")} {availableRoles.length}
@@ -81,22 +81,11 @@ const Game = () => {
             {t("Available roles are")}
             <br />
             <br />
-            <pre>
-              {JSON.stringify(
-                availableRoles.reduce((final, current) => {
-                  if (final[t(current)]) {
-                    return { ...final, [t(current)]: final[t(current)] + 1 };
-                  }
-                  return { ...final, [t(current)]: 1 };
-                }, {}),
-                null,
-                2
-              )}
-            </pre>
+            <span className="mafia-summary">{Object.entries(availableRoles.reduce((counts, role) => ({ ...counts, [role]: (counts[role] || 0) + 1 }), {})).map(([role, count]) => <span className="role-count" key={role}>{t(role)} <strong>{count}</strong></span>)}</span>
           </h4>
         </div>
 
-        <div className="col-md-12 mt-4 mb-2">
+        <div className="col-md-12 role-reveal">
           <h4 className="text-white">
             {t("Your role is")}
             <br />
@@ -109,7 +98,7 @@ const Game = () => {
                 {t("Show")}
               </button>
             ) : (
-              <span className="h6">
+              <span className="h3" role="status">
                 {availableRoles[randomNumber] ? t(availableRoles[randomNumber]) : t("All roles have been shown.")}
                 <br />
                 <button
@@ -123,17 +112,7 @@ const Game = () => {
           </h4>
         </div>
 
-        <div className="col-md-12 mt-4 mb-2">
-          <h4 className="text-white">
-            <button
-              className="btn btn-success text-white my-2"
-              onClick={() => window.location.reload()}
-            >
-              {t("New Game With Same Roles & Same Number Of People")}{" "}
-              {availableRoles.length}
-            </button>
-          </h4>
-        </div>
+
       </div>
     </Fragment>
   );

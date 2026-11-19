@@ -1,45 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon, format, groupOnly }) => {
-  const navigate = useNavigate();
+const icons = { password: "fa-comment-dots", pictionary: "fa-pencil", mafia: "fa-user-secret", listwords: "fa-list", catchphrase: "fa-comments" };
+export default function WhiteCard({ title, desc, gameUrl, rulesUrl, comingSoon, format, groupOnly }) {
   const { t } = useTranslation();
-
-  return (
-    <div className={`card card-blog game-card game-${gameUrl.slice(1)}`}>
-      <div className="game-art">
-        <img alt="" className="img pattern rounded" src={bg} width="100%" />
-      </div>
-
-      <div className="card-body">
-        <div className="card-title h5 mb-0">{t(title)}</div>
-
-        <div className="card-text mt-2 mb-4">{desc}</div>
-
-        {groupOnly && format !== "teams" ? <p className="group-only-note">{t("Mafia needs a group. Choose Team vs team to play.")}</p> : comingSoon ? (
-          <button className="btn btn-danger rounded-2" disabled>
-            {t("Coming Soon")}
-          </button>
-        ) : (
-          <div className="btn-group">
-            <button
-              className="btn btn-primary rounded-start"
-              onClick={() => navigate(`${gameUrl}?format=${format}`)}
-            >
-              {t("Start Game")}
-            </button>
-
-            <button
-              className="btn btn-light text-dark rounded-end"
-              onClick={() => navigate(`${rulesUrl}?format=${format}`)}
-            >
-              {t("Game Rules")}
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default WhiteCard;
+  const needsGroup = groupOnly && format !== "teams";
+  return <article className={`game-card game-${gameUrl.slice(1)} ${comingSoon || needsGroup ? "game-unavailable" : ""}`}>
+    <div className="game-symbol" aria-hidden="true"><i className={`fas ${icons[gameUrl.slice(1)]}`} /></div>
+    <div className="game-description"><div className="game-title-line"><h3>{t(title)}</h3>{comingSoon && <span className="availability">{t("Coming Soon")}</span>}</div><p>{desc}</p>{needsGroup && <p className="group-only-note">{t("Mafia needs a group. Choose Team vs team to play.")}</p>}</div>
+    {!comingSoon && <div className="game-actions">{!needsGroup && <Link className="btn btn-primary" to={`${gameUrl}?format=${format}`}>{t("Start Game")}<i className="fas fa-arrow-right" aria-hidden="true" /></Link>}<Link className="rules-link" to={`${rulesUrl}?format=${format}`}>{t("Game Rules")}</Link></div>}
+  </article>;
+}
