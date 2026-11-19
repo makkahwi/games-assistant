@@ -67,6 +67,8 @@ const FooterComp = () => {
               rel="noreferrer"
               className="mx-2 text-primary"
               key={i}
+              title={tooltip}
+              aria-label={tooltip}
             >
               <i className={icon} />
             </a>

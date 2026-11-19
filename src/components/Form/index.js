@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import BackButton from "components/Buttons/BackButton";
 
@@ -9,6 +10,7 @@ const FormComp = ({
   submitLabel = "Submit",
   light,
 }) => {
+  const { t } = useTranslation();
   const [inputFocuses, setInputFocuses] = useState({});
   const [inputValues, setInputValues] = useState(
     inputs.reduce((final, current) => {
@@ -53,7 +55,8 @@ const FormComp = ({
         ) => {
           const props = {
             placeholder: label + (required ? " *" : ""),
-            value: inputValues[name],
+            value: inputValues[name] || "",
+            "aria-label": label,
             onChange: (e) =>
               setInputValues((current) => ({
                 ...current,
@@ -84,7 +87,7 @@ const FormComp = ({
 
               {type === "select" ? (
                 <select {...props}>
-                  <option placeholder="true">{"Select " + label}</option>
+                  <option placeholder="true">{t("Select") + " " + label}</option>
                   {options?.map(({ name, label }, y) => (
                     <option defaultValue={name} key={y}>
                       {label || name}
@@ -93,9 +96,9 @@ const FormComp = ({
                 </select>
               ) : type === "boolean" ? (
                 <select {...props}>
-                  <option placeholder="true">{"Select " + label}</option>
-                  <option defaultValue="Yes">Yes</option>
-                  <option defaultValue="No">No</option>
+                  <option placeholder="true">{t("Select") + " " + label}</option>
+                  <option value="Yes">{t("Yes")}</option>
+                  <option value="No">{t("No")}</option>
                 </select>
               ) : (
                 <input {...props} />

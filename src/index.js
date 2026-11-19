@@ -27,7 +27,7 @@ import store from "./redux/store";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.rtl.min.css";
+import "./styles.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -43,14 +43,7 @@ const App = () => {
         <BrowserRouter>
           <Navbar />
 
-          <div
-            className="py-5 mt-5 bg-primary"
-            style={{
-              backgroundImage: "url(" + require("assets/img/bg.png") + ")",
-              backgroundSize: "100% auto",
-              minHeight: "90vh",
-            }}
-          >
+          <main className="app-main">
             <div className="container my-auto">
               <Routes>
                 <Route path="/" exact element={<Landing />} />
@@ -129,7 +122,7 @@ const App = () => {
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>
-          </div>
+          </main>
 
           <Footer />
         </BrowserRouter>

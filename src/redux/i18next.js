@@ -1,9 +1,22 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-// don't want to use this?
-// have a look at the Quick start guide
-// for passing in lng and translations on init
+export const languageStorageKey = "app-language";
+const normalizeLanguage = (language) => language?.split("-")[0] === "ar" ? "ar" : "en";
+const readLanguage = () => {
+  try { return normalizeLanguage(localStorage.getItem(languageStorageKey) || localStorage.getItem("i18nextLng") || "en"); }
+  catch { return "en"; }
+};
+const applyLanguage = (language) => {
+  const selected = normalizeLanguage(language);
+  document.documentElement.lang = selected;
+  document.documentElement.dir = selected === "ar" ? "rtl" : "ltr";
+  try { localStorage.setItem(languageStorageKey, selected); } catch { /* Storage may be unavailable. */ }
+};
+i18n.on("languageChanged", applyLanguage);
+window.addEventListener("storage", (event) => {
+  if (event.key === languageStorageKey) i18n.changeLanguage(normalizeLanguage(event.newValue));
+});
 
 i18n
   // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
@@ -15,6 +28,8 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
+    lng: readLanguage(),
+    supportedLngs: ["en", "ar"],
     resources: {
       en: {
         translations: require("../assets/locales/en.json"),

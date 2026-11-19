@@ -6,13 +6,13 @@ const WhiteCard = ({ title, desc, bg, gameUrl, rulesUrl, comingSoon }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="card card-blog">
-      <div style={{ height: "30vh", overflowY: "hidden" }}>
-        <img alt="..." className="img pattern rounded" src={bg} width="100%" />
+    <div className={`card card-blog game-card game-${gameUrl.slice(1)}`}>
+      <div className="game-art">
+        <img alt="" className="img pattern rounded" src={bg} width="100%" />
       </div>
 
       <div className="card-body">
-        <div className="card-title h5 mb-0">{title}</div>
+        <div className="card-title h5 mb-0">{t(title)}</div>
 
         <div className="card-text mt-2 mb-4">{desc}</div>
 

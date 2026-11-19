@@ -54,13 +54,15 @@ const Landing = () => {
   ];
 
   return (
-    <div className="row g-5">
+    <div className="game-library">
+      <section className="library-hero"><div><span className="eyebrow">{t("GOOD COMPANY. GREAT GAMES.")}</span><h1>{t("Make room for") }<br /><em>{t("a little play.")}</em></h1><p>{t("Bring your people together. Pick a game, split into teams, and let the good times begin.")}</p><a className="btn btn-primary" href="#games">{t("Find your next game")} <span aria-hidden="true">↗</span></a></div><div className="hero-art" aria-hidden="true"><span className="orbit orbit-one" /><span className="orbit orbit-two" /><div className="play-tile tile-back">✦</div><div className="play-tile tile-front"><i className="fas fa-dice-five" /></div><span className="spark">✳</span><span className="hero-caption">{t("Less scrolling. More playing.")}</span></div></section>
+      <section id="games"><div className="section-heading"><div><span className="eyebrow">{t("THE LINEUP")}</span><h2>{t("Pick your kind of fun")}</h2></div><span className="game-count">{t("5 games. Endless good times.")}</span></div><div className="row g-4">
       {games.map(({ img, url, ...rest }, i) => (
-        <div className="col-md-6" key={i}>
+        <div className="col-md-6 col-xl-4" key={i}>
           <WhiteCard bg={img} gameUrl={url} {...rest} />
         </div>
       ))}
-    </div>
+    </div></section></div>
   );
 };
 
